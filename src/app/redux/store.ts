@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import authReducer from "entities/Auth/redux/authSlice";
+import userReducer from "entities/User/redux/userSlice";
 import { api } from "./api";
 import {
-  persistReducer,
-  persistStore,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -11,21 +11,12 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-
-// const authPersistConfig = {
-//   key: "authReducer",
-//   storage,
-//   whitelist: ["token"],
-// };
-
-// const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
-    // auth: persistedAuthReducer,
-    // request: requestReducer,
+    auth: authReducer,
+    user: userReducer,
     // patients: patientsReducer,
     // services: servicesReducer,
   },
@@ -39,8 +30,6 @@ export const store = configureStore({
   ],
   devTools: process.env.NODE_ENV !== "production",
 });
-
-export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
