@@ -16,9 +16,7 @@ export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     auth: authReducer,
-    user: userReducer,
-    // patients: patientsReducer,
-    // services: servicesReducer,
+    users: userReducer,
   },
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware({
