@@ -2,7 +2,7 @@ import { Outlet, Link } from "react-router-dom";
 import { useSignOutMutation, logoutSuccess } from "entities/Auth";
 import { useAppDispatch, useAppSelector } from "shared";
 
-import { Header, Body, Footer } from "./Layout.styled";
+import { Header, Container, Body, Footer } from "./Layout.styled";
 
 export const Layout: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -23,30 +23,36 @@ export const Layout: React.FC = () => {
   return (
     <>
       <Header>
-        <h1>Header</h1>
+        <Container>
+          <h1>Header</h1>
 
-        {!isLoggedIn && (
-          <>
-            <Link to={"/sing-in"}>Login</Link>
-            <Link to={"/sing-up"}>Registration</Link>
-          </>
-        )}
+          {!isLoggedIn && (
+            <>
+              <Link to={"/sing-in"}>Login</Link>
+              <Link to={"/sing-up"}>Registration</Link>
+            </>
+          )}
 
-        {isLoggedIn && (
-          <>
-            <button type="button" onClick={handleSignOut}>
-              LogOut
-            </button>
-          </>
-        )}
+          {isLoggedIn && (
+            <>
+              <button type="button" onClick={handleSignOut}>
+                LogOut
+              </button>
+            </>
+          )}
+        </Container>
       </Header>
 
       <Body>
-        <Outlet />
+        <Container>
+          <Outlet />
+        </Container>
       </Body>
 
       <Footer>
-        <h1>Footer</h1>
+        <Container>
+          <h1>Footer</h1>
+        </Container>
       </Footer>
     </>
   );
