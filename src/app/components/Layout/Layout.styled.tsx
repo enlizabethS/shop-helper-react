@@ -13,10 +13,10 @@ export const Container = styled.section`
   margin-left: auto;
 `;
 
-export const Body = styled.section`
+export const Body = styled.div`
   width: 100%;
 `;
 
-export const Footer = styled.div`
+export const Footer = styled.footer`
   width: 100%;
 `;

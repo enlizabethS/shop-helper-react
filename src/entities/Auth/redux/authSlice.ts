@@ -1,21 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IAuthState {
-  user: {
-    id: number;
-    username: string;
-    email: string;
-  };
   status: number;
   isLoggedIn: boolean;
 }
 
 const initialState: IAuthState = {
-  user: {
-    id: 0,
-    username: "",
-    email: "",
-  },
   status: 0,
   isLoggedIn: false,
 };
@@ -35,9 +25,6 @@ const authSlice = createSlice({
     refreshUser: (state, action) => {
       state.status = action.payload.status;
       state.isLoggedIn = true;
-    },
-    registrationSuccess: (state, action) => {
-      state.user = action.payload;
     },
   },
 });
