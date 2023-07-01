@@ -4,6 +4,7 @@ import SingInPage from "pages/SignInPage";
 import SingUpPage from "pages/SignUpPage";
 import MyProfilePage from "pages/MyProfilePage";
 import MyProductsPage from "pages/MyProductsPage";
+import MyPurchasesPage from "pages/MyPurchasesPage";
 import { MyAuctionsPage } from "pages/MyAuctionsPage";
 import { Layout, PrivateRoute, PublicRoute } from "app";
 
@@ -60,6 +61,14 @@ export const App: React.FC = () => {
             element={
               <PrivateRoute redirectTo="/sign-in">
                 <MyAuctionsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/my-purchases"
+            element={
+              <PrivateRoute redirectTo="/sign-in">
+                <MyPurchasesPage />
               </PrivateRoute>
             }
           />
