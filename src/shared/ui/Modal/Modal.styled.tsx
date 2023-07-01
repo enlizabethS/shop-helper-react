@@ -24,7 +24,7 @@ export const Backdrop = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: transparent;
-  backdrop-filter: blur(3px);
+  /* backdrop-filter: blur(1px); */
   animation: ${openingBackdrop} 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
 `;
 
@@ -41,7 +41,7 @@ export const Content = styled.div`
   transform: translate(-50%, -50%);
   background-color: #fff;
   border-radius: ${props => props.theme.borderRadius};
-  box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.06);
+  box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.3);
 
   animation: ${openingModal} 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
 
