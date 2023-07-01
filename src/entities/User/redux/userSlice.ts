@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IUser } from "entities/User";
 
 interface IUserState {
-  user: IUser;
+  currentUser: IUser;
 }
 
 const initialState: IUserState = {
-  user: {
+  currentUser: {
     id: 0,
     username: "",
     firstName: "",
@@ -26,10 +26,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     saveCurrentUser: (state, action) => {
-      state.user = action.payload;
+      state.currentUser = action.payload;
     },
     resetCurrentUser: state => {
-      state.user = initialState.user;
+      state.currentUser = initialState.currentUser;
     },
   },
 });

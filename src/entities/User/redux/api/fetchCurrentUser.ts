@@ -1,5 +1,4 @@
 import { api } from "app/redux";
-// import { IUser } from "entities/User";
 
 const currentUserApi = api.injectEndpoints({
   endpoints: builder => ({
@@ -9,7 +8,6 @@ const currentUserApi = api.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["User"],
-      transformResponse: response => console.log(response),
     }),
   }),
 });

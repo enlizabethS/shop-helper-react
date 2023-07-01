@@ -15,11 +15,15 @@ interface IRegistrationResponse {
 const signUpApi = api.injectEndpoints({
   endpoints: builder => ({
     signUp: builder.mutation<IRegistrationResponse, IRegistrationRequest>({
-      query: user => ({
+      query: ({ username, email, password }) => ({
         url: "/api/auth/sign-up",
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: user,
+        body: {
+          username,
+          email,
+          password,
+        },
       }),
       invalidatesTags: ["Auth"],
       transformResponse: (response: IRegistrationResponse) => response,

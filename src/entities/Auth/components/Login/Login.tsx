@@ -34,6 +34,9 @@ export const Login: React.FC = () => {
     }
   };
 
+  const handleSubmitButtonDisabled =
+    formState.username.length === 0 || formState.password.length === 0;
+
   return (
     <form onSubmit={handleSubmit}>
       <h2>Login</h2>
@@ -61,7 +64,10 @@ export const Login: React.FC = () => {
           onChange={handleFormChange}
         />
       </label>
-      <button type="submit">{isLoading ? <Spinner /> : "Login"}</button>
+
+      <button type="submit" disabled={handleSubmitButtonDisabled}>
+        {isLoading ? <Spinner /> : "Login"}
+      </button>
     </form>
   );
 };

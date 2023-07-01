@@ -4,10 +4,18 @@ import { useSignUpMutation, loginSuccess } from "entities/Auth";
 
 import {} from "./Registration.styled";
 
-const initialRegistrationState = {
+interface IRegState {
+  username: string;
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
+const initialRegistrationState: IRegState = {
   username: "",
   email: "",
   password: "",
+  passwordConfirmation: "",
 };
 
 export const Registration: React.FC = () => {
@@ -35,9 +43,16 @@ export const Registration: React.FC = () => {
     }
   };
 
+  const handleSubmitButtonDisabled =
+    formState.password !== formState.passwordConfirmation ||
+    formState.email.length === 0 ||
+    formState.username.length === 0 ||
+    formState.password.length === 0 ||
+    formState.passwordConfirmation.length === 0;
+
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
+      <h2>Registration</h2>
 
       {isError && <div>`Registration is not correct`</div>}
 
@@ -73,7 +88,21 @@ export const Registration: React.FC = () => {
           onChange={handleFormChange}
         />
       </label>
-      <button type="submit">{isLoading ? <Spinner /> : "Login"}</button>
+
+      <label>
+        Password Confirmation
+        <input
+          type="password"
+          name="passwordConfirmation"
+          value={formState.passwordConfirmation}
+          placeholder="Password Confirmation"
+          onChange={handleFormChange}
+        />
+      </label>
+
+      <button type="submit" disabled={handleSubmitButtonDisabled}>
+        {isLoading ? <Spinner /> : "Registration"}
+      </button>
     </form>
   );
 };

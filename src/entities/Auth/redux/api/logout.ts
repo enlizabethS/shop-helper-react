@@ -8,7 +8,7 @@ const signOutApi = api.injectEndpoints({
         method: "POST",
       }),
       invalidatesTags: ["Auth"],
-      transformResponse: response => console.log("logOutResp: ", response),
+      // transformResponse: response => response,
     }),
   }),
 });
