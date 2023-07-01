@@ -8,14 +8,9 @@ import {
 } from "entities/User";
 import { useAppDispatch, useAppSelector, Modal } from "shared";
 
-import {
-  HeaderStyle,
-  Container,
-  MenuButton,
-  CloseButton,
-} from "./Header.styled";
+import { MenuButton, CloseButton } from "./Header.styled";
 
-export const Header = () => {
+export const HeaderEl = () => {
   const dispatch = useAppDispatch();
   const [signOut] = useSignOutMutation();
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
@@ -48,50 +43,55 @@ export const Header = () => {
   };
 
   return (
-    <HeaderStyle>
-      <Container>
-        <h1>Header</h1>
+    <>
+      <h1>Header</h1>
 
-        {!isLoggedIn && (
-          <>
-            <Link to={"/sign-in"}>Login</Link>
-            <Link to={"/sign-up"}>Registration</Link>
-          </>
-        )}
+      {!isLoggedIn && (
+        <>
+          <Link to={"/sign-in"}>Login</Link>
+          <Link to={"/sign-up"}>Registration</Link>
+        </>
+      )}
 
-        {isLoggedIn && (
-          <>
-            <span>{currentUser.username}</span>
-            <button type="button" onClick={handleSignOut}>
-              LogOut
-            </button>
-            <button type="button" onClick={toggleMenuModal}>
-              <MenuButton />
-            </button>
-          </>
-        )}
+      {isLoggedIn && (
+        <>
+          <span>{currentUser.username}</span>
 
-        {showMenuModal && (
-          <Modal width="460px" height="752px" onClose={toggleMenuModal}>
-            <button type="button" onClick={toggleMenuModal}>
-              <CloseButton />
-            </button>
-            <span>{currentUser.username}</span>
-            <Link to={"my-profile"} onClick={toggleMenuModal}>
-              My profile
-            </Link>
-            <Link to={"my-products"} onClick={toggleMenuModal}>
-              My products
-            </Link>
-            <Link to={"my-auctions"} onClick={toggleMenuModal}>
-              My auctions
-            </Link>
-            <Link to={"my-purchases"} onClick={toggleMenuModal}>
-              My purchases
-            </Link>
-          </Modal>
-        )}
-      </Container>
-    </HeaderStyle>
+          <button type="button" onClick={handleSignOut}>
+            LogOut
+          </button>
+
+          <button type="button" onClick={toggleMenuModal}>
+            <MenuButton />
+          </button>
+        </>
+      )}
+
+      {showMenuModal && (
+        <Modal width="460px" height="752px" onClose={toggleMenuModal}>
+          <button type="button" onClick={toggleMenuModal}>
+            <CloseButton />
+          </button>
+
+          <span>{currentUser.username}</span>
+
+          <Link to={"my-profile"} onClick={toggleMenuModal}>
+            My profile
+          </Link>
+
+          <Link to={"my-products"} onClick={toggleMenuModal}>
+            My products
+          </Link>
+
+          <Link to={"my-auctions"} onClick={toggleMenuModal}>
+            My auctions
+          </Link>
+
+          <Link to={"my-purchases"} onClick={toggleMenuModal}>
+            My purchases
+          </Link>
+        </Modal>
+      )}
+    </>
   );
 };

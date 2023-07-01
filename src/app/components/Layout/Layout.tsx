@@ -1,12 +1,16 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "app";
+import { HeaderEl, FooterEl } from "app";
 
-import { Container, Body, Footer } from "./Layout.styled";
+import { Header, Container, Body, Footer } from "./Layout.styled";
 
 export const Layout: React.FC = () => {
   return (
     <>
-      <Header />
+      <Header>
+        <Container>
+          <HeaderEl />
+        </Container>
+      </Header>
 
       <Body>
         <Container>
@@ -16,7 +20,7 @@ export const Layout: React.FC = () => {
 
       <Footer>
         <Container>
-          <h1>Footer</h1>
+          <FooterEl />
         </Container>
       </Footer>
     </>
