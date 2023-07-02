@@ -1,21 +1,26 @@
-import { useAppSelector } from "shared";
+import { useEffect } from "react";
+import { useFetchAddressQuery, saveAddress } from "entities/User";
+import { useAppDispatch, useAppSelector } from "shared";
 
-import {} from "./MyProfile.styled";
+import { Title } from "./MyProfile.styled";
 
 export const MyProfile: React.FC = () => {
+  const dispatch = useAppDispatch();
   const currentUser = useAppSelector(state => state.users.currentUser);
+  const { data } = useFetchAddressQuery(currentUser.addressId, {
+    skip: currentUser.addressId === null,
+  });
+  const address = useAppSelector(state => state.users.address);
 
-  const address = {
-    street: "",
-    houseNumber: 0,
-    city: "",
-    postalCode: 0,
-    country: "",
-  };
+  useEffect(() => {
+    if (data !== undefined) {
+      dispatch(saveAddress(data));
+    }
+  }, [dispatch, data]);
 
   return (
     <>
-      <h3>User</h3>
+      <Title>User</Title>
       <div>
         <span>Username: </span>
         <span>{currentUser.username}</span>
