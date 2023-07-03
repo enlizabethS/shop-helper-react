@@ -1,23 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IUser } from "entities/User";
+import { IUser, IAddress } from "entities/User";
 
 interface IUserState {
   currentUser: IUser;
+  address: IAddress;
 }
 
 const initialState: IUserState = {
   currentUser: {
-    id: 0,
-    username: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    createdDate: "",
-    role: "",
-    addressId: 0,
-    productsId: [],
-    purchasesId: [],
+    id: null,
+    username: null,
+    firstName: null,
+    lastName: null,
+    email: null,
+    phone: null,
+    createdDate: null,
+    role: null,
+    addressId: null,
+    productsId: null,
+    purchasesId: null,
+  },
+  address: {
+    id: null,
+    street: null,
+    houseNumber: null,
+    city: null,
+    postalCode: null,
+    country: null,
+    createdDate: null,
   },
 };
 
@@ -31,9 +41,16 @@ const userSlice = createSlice({
     resetCurrentUser: state => {
       state.currentUser = initialState.currentUser;
     },
+    saveAddress: (state, action) => {
+      state.address = action.payload;
+    },
+    resetAddress: state => {
+      state.address = initialState.address;
+    },
   },
 });
 
-export const { saveCurrentUser, resetCurrentUser } = userSlice.actions;
+export const { saveCurrentUser, resetCurrentUser, saveAddress, resetAddress } =
+  userSlice.actions;
 
 export default userSlice.reducer;

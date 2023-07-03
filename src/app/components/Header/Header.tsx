@@ -8,7 +8,15 @@ import {
 } from "entities/User";
 import { useAppDispatch, useAppSelector, Modal } from "shared";
 
-import { MenuButton, CloseButton, Title, HederContainer } from "./Header.styled";
+import {
+  IsLogged,
+  AuthButton,
+  NotIsLogged,
+  MenuButton,
+  CloseButton,
+  Title,
+  HederContainer,
+} from "./Header.styled";
 
 export const HeaderEl = () => {
   const dispatch = useAppDispatch();
@@ -47,14 +55,14 @@ export const HeaderEl = () => {
       <Title>Shop-helper</Title>
 
       {!isLoggedIn && (
-        <>
-          <Link to={"/sign-in"}>Login</Link>
-          <Link to={"/sign-up"}>Registration</Link>
-        </>
+        <NotIsLogged>
+          <AuthButton to={"/sign-in"}>Login</AuthButton>
+          <AuthButton to={"/sign-up"}>Registration</AuthButton>
+        </NotIsLogged>
       )}
-      
+
       {isLoggedIn && (
-        <>
+        <IsLogged>
           <span>{currentUser.username}</span>
 
           <button type="button" onClick={handleSignOut}>
@@ -64,7 +72,7 @@ export const HeaderEl = () => {
           <button type="button" onClick={toggleMenuModal}>
             <MenuButton />
           </button>
-        </>
+        </IsLogged>
       )}
 
       {showMenuModal && (

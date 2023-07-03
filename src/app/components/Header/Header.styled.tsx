@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { CgMenu, CgClose } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 export const MenuButton = styled(CgMenu)`
   width: 48px;
@@ -12,29 +13,27 @@ export const CloseButton = styled(CgClose)`
   background-color: white;
   color: #4f145e;
 `;
+
 export const Title = styled.h1`
-color: white;
-`;
-export const HederContainer = styled.div`
-margin:0;
-margin-right: auto;
-margin-left: auto;
-width: 100%;
-max-width: 1440px;
-hight:500px;
-color: white;
-background-color: #4f145e;
-padding: 30px;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-flex-grow:1;
-position: fixed; 
-top:0;
-z-index:1;
-text-decoration: none;
-// width:1450px;
-}
+  color: white;
 `;
 
+export const IsLogged = styled.div``;
+
+export const AuthButton = styled(Link)`
+  text-decoration: none;
+
+  :not(:last-child) {
+    margin-right: 12px;
+  }
+`;
+
+export const NotIsLogged = styled.div``;
+
+export const HederContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 30px 0;
+`;
