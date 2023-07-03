@@ -7,6 +7,14 @@ export const api = createApi({
     baseUrl: "http://localhost:8080",
     credentials: "include",
   }),
-  tagTypes: ["Auth", "User"],
+  tagTypes: [
+    "Auth",
+    "User",
+    "Address",
+    "Auction",
+    "Bid",
+    "Purchase",
+    "Shipper",
+  ],
   endpoints: () => ({}),
 });

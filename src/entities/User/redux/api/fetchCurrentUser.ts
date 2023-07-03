@@ -4,7 +4,7 @@ const currentUserApi = api.injectEndpoints({
   endpoints: builder => ({
     fetchCurrentUser: builder.query({
       query: () => ({
-        url: "/api/users/profile",
+        url: "/api/users/my/profile",
         method: "GET",
       }),
       providesTags: ["User"],
