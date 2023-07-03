@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import { useFetchAddressQuery, saveAddress } from "entities/User";
 import { useAppDispatch, useAppSelector } from "shared";
 
@@ -21,34 +22,11 @@ export const MyProfile: React.FC = () => {
   return (
     <>
       <Title>User</Title>
-      <div>
-        <span>Username: </span>
-        <span>{currentUser.username}</span>
-      </div>
-
-      <div>
-        <span>First name: </span>
-        <span>{currentUser.firstName}</span>
-      </div>
-
-      <div>
-        <span>Last name: </span>
-        <span>{currentUser.lastName}</span>
-      </div>
-
-      <div>
-        <span>Email: </span>
-        <span>{currentUser.email}</span>
-      </div>
-
-      <div>
-        <span>Phone: </span>
-        <span>{currentUser.phone}</span>
-      </div>
+      <Outlet />
 
       {currentUser.addressId && (
         <>
-          <h3>Address</h3>
+          <Title>Address</Title>
           <div>
             <span>Street: </span>
             <span>{address.street}</span>
