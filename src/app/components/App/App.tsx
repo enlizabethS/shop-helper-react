@@ -8,11 +8,11 @@ import MyPurchasesPage from "pages/MyPurchasesPage";
 import { MyAuctionsPage } from "pages/MyAuctionsPage";
 import { Layout, PrivateRoute, PublicRoute } from "app";
 
-import {} from "./App.styled";
+import {Container} from "./App.styled";
 
 export const App: React.FC = () => {
   return (
-    <>
+    <Container>
       <Routes>
         <Route element={<Layout />}>
           <Route
@@ -74,6 +74,6 @@ export const App: React.FC = () => {
           />
         </Route>
       </Routes>
-    </>
+    </Container>
   );
 };

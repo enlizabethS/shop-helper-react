@@ -8,7 +8,7 @@ import {
 } from "entities/User";
 import { useAppDispatch, useAppSelector, Modal } from "shared";
 
-import { MenuButton, CloseButton } from "./Header.styled";
+import { MenuButton, CloseButton, Title, HederContainer } from "./Header.styled";
 
 export const HeaderEl = () => {
   const dispatch = useAppDispatch();
@@ -43,8 +43,8 @@ export const HeaderEl = () => {
   };
 
   return (
-    <>
-      <h1>Header</h1>
+    <HederContainer>
+      <Title>Shop-helper</Title>
 
       {!isLoggedIn && (
         <>
@@ -52,7 +52,7 @@ export const HeaderEl = () => {
           <Link to={"/sign-up"}>Registration</Link>
         </>
       )}
-
+      
       {isLoggedIn && (
         <>
           <span>{currentUser.username}</span>
@@ -92,6 +92,6 @@ export const HeaderEl = () => {
           </Link>
         </Modal>
       )}
-    </>
+    </HederContainer>
   );
 };
