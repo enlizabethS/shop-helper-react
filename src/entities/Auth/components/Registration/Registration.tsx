@@ -7,6 +7,7 @@ import {
   RegistrConteiner,
   TextReg,
   Text,
+  TextErr,
   UserNameReg,
   UserNameInputReg,
   EmailReg,
@@ -69,7 +70,7 @@ export const Registration: React.FC = () => {
       <Title>Registration</Title>
       <TextReg>By creating an account you agree to our Terms of Use and Privacy Policy</TextReg>
       <RegistrConteiner>
-      {isError && <div>`Registration is not correct`</div>}
+      {isError && <TextErr>`Registration is not correct`</TextErr>}
 
       <UserNameReg>
        <Text>Username</Text> 

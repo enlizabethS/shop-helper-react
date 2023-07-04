@@ -18,6 +18,12 @@ padding: 15px 0 15px 0;
 text-align: left;
 `;
 
+export const TextErr = styled.div`
+font-size: 20px;
+padding: 15px 0 15px 0;
+text-align: left;
+`;
+
 export const RegistrConteiner = styled.div`
   position: relative;
   display: flex;
