@@ -1,79 +1,41 @@
-import { useEffect } from "react";
-import { useFetchAddressQuery, saveAddress } from "entities/User";
-import { useAppDispatch, useAppSelector } from "shared";
+import { useState } from "react";
+import {
+  MyProfileUser,
+  MyProfileUserUpdate,
+  MyProfileAddress,
+  MyProfileAddressUpdate,
+} from "entities/User";
 
-import { Title } from "./MyProfile.styled";
+import {} from "./MyProfile.styled";
 
 export const MyProfile: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const currentUser = useAppSelector(state => state.users.currentUser);
-  const { data } = useFetchAddressQuery(currentUser.addressId, {
-    skip: currentUser.addressId === null,
-  });
-  const address = useAppSelector(state => state.users.address);
+  const [showData, setShowData] = useState(true);
+  const [showAddress, setShowAddress] = useState(true);
 
-  useEffect(() => {
-    if (data !== undefined) {
-      dispatch(saveAddress(data));
-    }
-  }, [dispatch, data]);
+  const handleUserUpdate = () => {
+    setShowData(!showData);
+  };
+
+  const handleAddressUpdate = () => {
+    setShowAddress(!showAddress);
+  };
 
   return (
     <>
-      <Title>User</Title>
-      <div>
-        <span>Username: </span>
-        <span>{currentUser.username}</span>
-      </div>
+      <h3>User</h3>
 
-      <div>
-        <span>First name: </span>
-        <span>{currentUser.firstName}</span>
-      </div>
+      {showData ? (
+        <MyProfileUser handleUserUpdate={handleUserUpdate} />
+      ) : (
+        <MyProfileUserUpdate handleUserUpdate={handleUserUpdate} />
+      )}
 
-      <div>
-        <span>Last name: </span>
-        <span>{currentUser.lastName}</span>
-      </div>
+      <h3>Address</h3>
 
-      <div>
-        <span>Email: </span>
-        <span>{currentUser.email}</span>
-      </div>
-
-      <div>
-        <span>Phone: </span>
-        <span>{currentUser.phone}</span>
-      </div>
-
-      {currentUser.addressId && (
-        <>
-          <h3>Address</h3>
-          <div>
-            <span>Street: </span>
-            <span>{address.street}</span>
-          </div>
-
-          <div>
-            <span>House number: </span>
-            <span>{address.houseNumber}</span>
-          </div>
-
-          <div>
-            <span>City: </span>
-            <span>{address.city}</span>
-          </div>
-
-          <div>
-            <span>Postal code: </span>
-            <span>{address.postalCode}</span>
-          </div>
-
-          <div>
-            <span>Country: </span>
-            <span>{address.country}</span>
-          </div>
-        </>
+      {showAddress ? (
+        <MyProfileAddress handleAddressUpdate={handleAddressUpdate} />
+      ) : (
+        <MyProfileAddressUpdate handleAddressUpdate={handleAddressUpdate} />
       )}
     </>
   );

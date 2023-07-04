@@ -8,7 +8,7 @@ import MyPurchasesPage from "pages/MyPurchasesPage";
 import { MyAuctionsPage } from "pages/MyAuctionsPage";
 import { Layout, PrivateRoute, PublicRoute } from "app";
 
-import {Container} from "./App.styled";
+import { Container } from "./App.styled";
 
 export const App: React.FC = () => {
   return (
