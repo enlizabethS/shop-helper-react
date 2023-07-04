@@ -16,7 +16,7 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
   const [user, setUser] = useState(currentUser);
   const [updateUser, { isLoading }] = useUpdateCurrentUserMutation();
 
-  const handleChange = ({
+  const handleInputChange = ({
     target: { name, value },
   }: {
     target: { name: string; value: string };
@@ -42,7 +42,7 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
           name="firstName"
           value={user.firstName ? user.firstName : ""}
           placeholder="First name"
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
       </label>
 
@@ -52,7 +52,7 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
           name="lastName"
           value={user.lastName ? user.lastName : ""}
           placeholder="Last name"
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
       </label>
 
@@ -62,7 +62,7 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
           name="email"
           value={user.email ? user.email : ""}
           placeholder="Email"
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
       </label>
 
@@ -72,7 +72,7 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
           name="phone"
           value={user.phone ? user.phone : ""}
           placeholder="Phone"
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
       </label>
 

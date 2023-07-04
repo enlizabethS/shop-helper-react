@@ -1,5 +1,7 @@
 import { MyAuctions } from "entities/User";
 
-export const MyAuctionsPage: React.FC = () => {
+const MyAuctionsPage: React.FC = () => {
   return <MyAuctions />;
 };
+
+export default MyAuctionsPage;

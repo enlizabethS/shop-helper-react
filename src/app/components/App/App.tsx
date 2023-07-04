@@ -5,7 +5,7 @@ import SingUpPage from "pages/SignUpPage";
 import MyProfilePage from "pages/MyProfilePage";
 import MyProductsPage from "pages/MyProductsPage";
 import MyPurchasesPage from "pages/MyPurchasesPage";
-import { MyAuctionsPage } from "pages/MyAuctionsPage";
+import MyAuctionsPage from "pages/MyAuctionsPage";
 import { Layout, PrivateRoute, PublicRoute } from "app";
 
 import { Container } from "./App.styled";
