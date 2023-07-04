@@ -23,25 +23,24 @@ export const Backdrop = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: transparent;
-  /* backdrop-filter: blur(1px); */
+  background-color: rgba(230, 230, 230, 0.5);
+  backdrop-filter: blur(1px);
   animation: ${openingBackdrop} 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
 `;
 
 export const Content = styled.div`
   position: absolute;
-  top:18%;
-  left: 90%;
+  top: 50%;
+  left: 50%;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
 
-  transform: translate(-30%, -30%);
-  background-color: rgba(226, 198, 198, 0.50);
-  border-radius: ${props => props.theme.borderRadius};
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 16px;
   box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.3);
 
   animation: ${openingModal} 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
