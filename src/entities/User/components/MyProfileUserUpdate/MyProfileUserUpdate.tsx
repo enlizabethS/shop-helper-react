@@ -1,13 +1,35 @@
-import { useState } from "react";
-import { useUpdateCurrentUserMutation, saveCurrentUser } from "entities/User";
-import { useAppDispatch, useAppSelector, useAppNavigate } from "shared";
+import { useEffect, useState } from "react";
+import {
+  useFetchAddressQuery,
+  saveAddress,
+  useUpdateCurrentUserMutation,
+  saveCurrentUser,
+} from "entities/User";
+import { useAppDispatch, useAppSelector, Spinner } from "shared";
 
-export const MyProfileUserUpdate: React.FC = () => {
+import { Form, UpdateButton } from "./MyProfileUserUpdate.styled";
+
+interface IMyProfileUserUpdate {
+  handleUserUpdate: () => void;
+}
+
+export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
+  handleUserUpdate,
+}) => {
   const dispatch = useAppDispatch();
-  const [navigate] = useAppNavigate();
   const currentUser = useAppSelector(state => state.users.currentUser);
   const [user, setUser] = useState(currentUser);
-  const [updateUser] = useUpdateCurrentUserMutation();
+  const [updateUser, { isLoading }] = useUpdateCurrentUserMutation();
+
+  const { data } = useFetchAddressQuery(currentUser.addressId, {
+    skip: currentUser.addressId === null,
+  });
+
+  useEffect(() => {
+    if (data !== undefined) {
+      dispatch(saveAddress(data));
+    }
+  }, [dispatch, data]);
 
   const handleChange = ({
     target: { name, value },
@@ -21,14 +43,14 @@ export const MyProfileUserUpdate: React.FC = () => {
     try {
       const updatedUser = await updateUser(user).unwrap();
       dispatch(saveCurrentUser(updatedUser));
-      navigate("/my-profile");
+      handleUserUpdate();
     } catch (error) {
       console.log("ERROR updateUser");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <label>
         <input
           name="firstName"
@@ -65,7 +87,9 @@ export const MyProfileUserUpdate: React.FC = () => {
         />
       </label>
 
-      <button type="submit">Update</button>
-    </form>
+      <UpdateButton type="submit">
+        {isLoading ? <Spinner /> : "Update"}
+      </UpdateButton>
+    </Form>
   );
 };

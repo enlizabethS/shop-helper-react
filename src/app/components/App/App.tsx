@@ -7,7 +7,6 @@ import MyProductsPage from "pages/MyProductsPage";
 import MyPurchasesPage from "pages/MyPurchasesPage";
 import { MyAuctionsPage } from "pages/MyAuctionsPage";
 import { Layout, PrivateRoute, PublicRoute } from "app";
-import { MyProfileUser, MyProfileUserUpdate } from "entities/User";
 
 import { Container } from "./App.styled";
 
@@ -41,24 +40,14 @@ export const App: React.FC = () => {
               </PublicRoute>
             }
           />
-          <Route element={<MyProfilePage />}>
-            <Route
-              path="/my-profile"
-              element={
-                <PrivateRoute redirectTo="/sign-in">
-                  <MyProfileUser />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/my-profile-update"
-              element={
-                <PrivateRoute redirectTo="/sign-in">
-                  <MyProfileUserUpdate />
-                </PrivateRoute>
-              }
-            />
-          </Route>
+          <Route
+            path="/my-profile"
+            element={
+              <PrivateRoute redirectTo="/sign-in">
+                <MyProfilePage />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/my-products"
             element={

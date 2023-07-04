@@ -1,13 +1,18 @@
-import { Link } from "react-router-dom";
 import { useAppSelector } from "shared";
 
-import {} from "./MyProfileUser.styled";
+import { UserBlock, UpdateButton } from "./MyProfileUser.styled";
 
-export const MyProfileUser: React.FC = () => {
+interface IMyProfileUserOrigin {
+  handleUserUpdate: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export const MyProfileUser: React.FC<IMyProfileUserOrigin> = ({
+  handleUserUpdate,
+}) => {
   const currentUser = useAppSelector(state => state.users.currentUser);
 
   return (
-    <>
+    <UserBlock>
       <div>
         <span>Username: </span>
         <span>{currentUser.username}</span>
@@ -33,7 +38,9 @@ export const MyProfileUser: React.FC = () => {
         <span>{currentUser.phone}</span>
       </div>
 
-      <Link to={"/my-profile-update"}>Update</Link>
-    </>
+      <UpdateButton type="button" onClick={handleUserUpdate}>
+        UpdateUser
+      </UpdateButton>
+    </UserBlock>
   );
 };
