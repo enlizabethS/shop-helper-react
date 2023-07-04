@@ -29,7 +29,7 @@ export const HeaderEl = () => {
     skip: !isLoggedIn,
   });
   const { data: addressData } = useFetchAddressQuery(currentUser.addressId, {
-    skip: !isLoggedIn,
+    skip: currentUser.addressId === null,
   });
   const [showMenuModal, setShowMenuModal] = useState(false);
 
@@ -40,7 +40,7 @@ export const HeaderEl = () => {
     if (addressData !== undefined) {
       dispatch(saveAddress(addressData));
     }
-  }, [addressData, dispatch, userData]);
+  }, [dispatch, userData, addressData]);
 
   const handleSignOut: React.MouseEventHandler<
     HTMLButtonElement
