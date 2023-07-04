@@ -66,10 +66,11 @@ export const HeaderEl = () => {
   return (
     <HederContainer>
 
-      <Logo src="/shop-helper-react/shop-helper 2.svg"></Logo>
+      <Logo>logo</Logo>
 
       <Title>Shop-helper</Title>
-      <AnimText>  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale   Sale  Sale  Sale  Sale  Sale  Sale  Sale 
+      <AnimText>  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  
+        Sale  Sale  Sale  Sale   Sale  Sale  Sale  Sale  Sale  Sale  Sale 
          Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale 
          Sale  Sale  Sale  Sale  Sale  </AnimText>
 
