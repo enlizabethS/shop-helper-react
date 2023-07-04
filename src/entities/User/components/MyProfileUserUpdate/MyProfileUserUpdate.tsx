@@ -1,10 +1,5 @@
-import { useEffect, useState } from "react";
-import {
-  useFetchAddressQuery,
-  saveAddress,
-  useUpdateCurrentUserMutation,
-  saveCurrentUser,
-} from "entities/User";
+import { useState } from "react";
+import { useUpdateCurrentUserMutation, saveCurrentUser } from "entities/User";
 import { useAppDispatch, useAppSelector, Spinner } from "shared";
 
 import { Form, UpdateButton } from "./MyProfileUserUpdate.styled";
@@ -20,16 +15,6 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
   const currentUser = useAppSelector(state => state.users.currentUser);
   const [user, setUser] = useState(currentUser);
   const [updateUser, { isLoading }] = useUpdateCurrentUserMutation();
-
-  const { data } = useFetchAddressQuery(currentUser.addressId, {
-    skip: currentUser.addressId === null,
-  });
-
-  useEffect(() => {
-    if (data !== undefined) {
-      dispatch(saveAddress(data));
-    }
-  }, [dispatch, data]);
 
   const handleChange = ({
     target: { name, value },
@@ -52,6 +37,7 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
   return (
     <Form onSubmit={handleSubmit}>
       <label>
+        First name
         <input
           name="firstName"
           value={user.firstName ? user.firstName : ""}
@@ -61,6 +47,7 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
       </label>
 
       <label>
+        Last name
         <input
           name="lastName"
           value={user.lastName ? user.lastName : ""}
@@ -70,6 +57,7 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
       </label>
 
       <label>
+        Email
         <input
           name="email"
           value={user.email ? user.email : ""}
@@ -79,6 +67,7 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
       </label>
 
       <label>
+        Phone
         <input
           name="phone"
           value={user.phone ? user.phone : ""}

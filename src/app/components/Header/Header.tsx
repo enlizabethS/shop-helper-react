@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { useSignOutMutation, logoutSuccess } from "entities/Auth";
 import {
   useFetchCurrentUserQuery,
+  useFetchAddressQuery,
   saveCurrentUser,
+  saveAddress,
   resetCurrentUser,
 } from "entities/User";
 import { useAppDispatch, useAppSelector, Modal } from "shared";
@@ -23,16 +25,22 @@ export const HeaderEl = () => {
   const [signOut] = useSignOutMutation();
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   const currentUser = useAppSelector(state => state.users.currentUser);
-  const { data } = useFetchCurrentUserQuery(null, {
+  const { data: userData } = useFetchCurrentUserQuery(null, {
+    skip: !isLoggedIn,
+  });
+  const { data: addressData } = useFetchAddressQuery(currentUser.addressId, {
     skip: !isLoggedIn,
   });
   const [showMenuModal, setShowMenuModal] = useState(false);
 
   useEffect(() => {
-    if (data !== undefined) {
-      dispatch(saveCurrentUser(data));
+    if (userData !== undefined) {
+      dispatch(saveCurrentUser(userData));
     }
-  }, [dispatch, data]);
+    if (addressData !== undefined) {
+      dispatch(saveAddress(addressData));
+    }
+  }, [addressData, dispatch, userData]);
 
   const handleSignOut: React.MouseEventHandler<
     HTMLButtonElement

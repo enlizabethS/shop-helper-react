@@ -1,7 +1,14 @@
 import { api } from "app/redux";
 
-const updateUserApi = api.injectEndpoints({
+const currentUserApi = api.injectEndpoints({
   endpoints: builder => ({
+    fetchCurrentUser: builder.query({
+      query: () => ({
+        url: "/api/users/my/profile",
+        method: "GET",
+      }),
+      providesTags: ["User"],
+    }),
     updateCurrentUser: builder.mutation({
       query: user => ({
         url: `/api/users/${user.id}`,
@@ -18,4 +25,5 @@ const updateUserApi = api.injectEndpoints({
   }),
 });
 
-export const { useUpdateCurrentUserMutation } = updateUserApi;
+export const { useFetchCurrentUserQuery, useUpdateCurrentUserMutation } =
+  currentUserApi;
