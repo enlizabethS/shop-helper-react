@@ -2,7 +2,22 @@ import { useState } from "react";
 import { useAppDispatch, useAppNavigate, Spinner } from "shared";
 import { useSignUpMutation, loginSuccess } from "entities/Auth";
 
-import {} from "./Registration.styled";
+import {
+  Title,
+  RegistrConteiner,
+  TextReg,
+  Text,
+  TextErr,
+  UserNameReg,
+  UserNameInputReg,
+  EmailReg,
+  EmailInputReg,
+  PasswordReg,
+  PasswordInputReg,
+  PasswordConfReg,
+  PasswordConfInputReg,
+  SubmitButRegistr
+} from "./Registration.styled";
 
 interface IRegState {
   username: string;
@@ -52,57 +67,59 @@ export const Registration: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Registration</h2>
+      <Title>Registration</Title>
+      <TextReg>By creating an account you agree to our Terms of Use and Privacy Policy</TextReg>
+      <RegistrConteiner>
+      {isError && <TextErr>`Registration is not correct`</TextErr>}
 
-      {isError && <div>`Registration is not correct`</div>}
-
-      <label>
-        Username
-        <input
+      <UserNameReg>
+       <Text>Username</Text> 
+        <UserNameInputReg
           type="text"
           name="username"
           value={formState.username}
           placeholder="Username"
           onChange={handleFormChange}
         />
-      </label>
+      </UserNameReg>
 
-      <label>
-        Email
-        <input
+      <EmailReg>
+        <Text>Email</Text>
+        <EmailInputReg 
           type="text"
           name="email"
           value={formState.email}
           placeholder="Username"
           onChange={handleFormChange}
         />
-      </label>
+      </EmailReg>
 
-      <label>
-        Password
-        <input
+      <PasswordReg>
+       <Text>Password</Text> 
+        <PasswordInputReg
           type="password"
           name="password"
           value={formState.password}
           placeholder="Password"
           onChange={handleFormChange}
         />
-      </label>
+      </PasswordReg>
 
-      <label>
-        Password Confirmation
-        <input
+      <PasswordConfReg>
+       <Text>Password Confirmation</Text> 
+        <PasswordConfInputReg
           type="password"
           name="passwordConfirmation"
           value={formState.passwordConfirmation}
           placeholder="Password Confirmation"
           onChange={handleFormChange}
         />
-      </label>
+      </PasswordConfReg>
 
-      <button type="submit" disabled={handleSubmitButtonDisabled}>
+      <SubmitButRegistr type="submit" disabled={handleSubmitButtonDisabled}>
         {isLoading ? <Spinner /> : "Registration"}
-      </button>
+      </SubmitButRegistr>
+      </RegistrConteiner>
     </form>
   );
 };

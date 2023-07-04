@@ -6,7 +6,12 @@ import {
   MyProfileAddressUpdate,
 } from "entities/User";
 
-import {} from "./MyProfile.styled";
+import {
+  Title,
+  MyProfConteiner,
+  TextProfile,
+  AdressCount
+} from "./MyProfile.styled";
 
 export const MyProfile: React.FC = () => {
   const [showData, setShowData] = useState(true);
@@ -21,22 +26,24 @@ export const MyProfile: React.FC = () => {
   };
 
   return (
-    <>
-      <h3>User</h3>
+    
+    <MyProfConteiner>
+      <Title>Your profile</Title>
 
+      <TextProfile>You can view or change information about yourself</TextProfile>
       {showData ? (
         <MyProfileUser handleUserUpdate={handleUserUpdate} />
       ) : (
         <MyProfileUserUpdate handleUserUpdate={handleUserUpdate} />
       )}
 
-      <h3>Address</h3>
+      <AdressCount>Address</AdressCount>
 
       {showAddress ? (
         <MyProfileAddress handleAddressUpdate={handleAddressUpdate} />
       ) : (
         <MyProfileAddressUpdate handleAddressUpdate={handleAddressUpdate} />
       )}
-    </>
+    </MyProfConteiner>
   );
 };

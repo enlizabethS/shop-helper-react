@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useSignOutMutation, logoutSuccess } from "entities/Auth";
 import {
   useFetchCurrentUserQuery,
@@ -10,6 +9,7 @@ import {
 } from "entities/User";
 import { useAppDispatch, useAppSelector, Modal } from "shared";
 
+
 import {
   IsLogged,
   AuthButton,
@@ -18,6 +18,13 @@ import {
   CloseButton,
   Title,
   HederContainer,
+  Logo,
+  UserName,
+  LogOutButton,
+  Menu,
+  AnimText,
+  CrossButton,
+  MenuItems
 } from "./Header.styled";
 
 export const HeaderEl = () => {
@@ -60,52 +67,65 @@ export const HeaderEl = () => {
 
   return (
     <HederContainer>
-      <Title>Shop-helper</Title>
+
+      <Logo></Logo>
+
+      {!isLoggedIn &&(
+        <Title>Be a Winner! Buy our products at auction for unbeatable prices!</Title>
+      )}
+
+      {isLoggedIn &&(
+        <Title>Hello! It seems like the time has come for victory</Title>
+      )}
+
+      <AnimText>  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  
+        Sale  Sale  Sale  Sale   Sale  Sale  Sale  Sale  Sale  Sale  Sale 
+         Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale 
+         Sale  Sale  Sale  Sale  Sale  </AnimText>
 
       {!isLoggedIn && (
         <NotIsLogged>
-          <AuthButton to={"/sign-in"}>Login</AuthButton>
+          <AuthButton to={"/sign-in"}>LogIn</AuthButton>
           <AuthButton to={"/sign-up"}>Registration</AuthButton>
         </NotIsLogged>
       )}
 
       {isLoggedIn && (
-        <IsLogged>
-          <span>{currentUser.username}</span>
+       <IsLogged>
+          <UserName>{currentUser.username}</UserName>
 
-          <button type="button" onClick={handleSignOut}>
+          <LogOutButton type="button" onClick={handleSignOut}>
             LogOut
-          </button>
+          </LogOutButton>
 
-          <button type="button" onClick={toggleMenuModal}>
+          <Menu type="button" onClick={toggleMenuModal}>
             <MenuButton />
-          </button>
+          </Menu>
         </IsLogged>
       )}
-
       {showMenuModal && (
-        <Modal width="460px" height="752px" onClose={toggleMenuModal}>
-          <button type="button" onClick={toggleMenuModal}>
+        <Modal width="190px" height="200px" onClose={toggleMenuModal}>
+          <CrossButton  type="button" onClick={toggleMenuModal}>
             <CloseButton />
-          </button>
+          </CrossButton>
 
-          <span>{currentUser.username}</span>
+          {/* <span>{currentUser.username}</span> */}
 
-          <Link to={"my-profile"} onClick={toggleMenuModal}>
+          <MenuItems to={"my-profile"} onClick={toggleMenuModal}>
             My profile
-          </Link>
+          </MenuItems>
 
-          <Link to={"my-products"} onClick={toggleMenuModal}>
+          <MenuItems to={"my-products"} onClick={toggleMenuModal}>
             My products
-          </Link>
+          </MenuItems>
 
-          <Link to={"my-auctions"} onClick={toggleMenuModal}>
+          <MenuItems to={"my-auctions"} onClick={toggleMenuModal}>
             My auctions
-          </Link>
+          </MenuItems>
 
-          <Link to={"my-purchases"} onClick={toggleMenuModal}>
+          <MenuItems to={"my-purchases"} onClick={toggleMenuModal}>
             My purchases
-          </Link>
+          </MenuItems>
         </Modal>
       )}
     </HederContainer>

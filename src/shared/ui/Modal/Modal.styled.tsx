@@ -30,16 +30,17 @@ export const Backdrop = styled.div`
 
 export const Content = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top:18%;
+  left: 90%;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 
-  transform: translate(-50%, -50%);
-  background-color: #fff;
+  transform: translate(-30%, -30%);
+  background-color: rgba(226, 198, 198, 0.50);
   border-radius: ${props => props.theme.borderRadius};
   box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.3);
 
