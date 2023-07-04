@@ -10,6 +10,7 @@ import {
 } from "entities/User";
 import { useAppDispatch, useAppSelector, Modal } from "shared";
 
+
 import {
   IsLogged,
   AuthButton,
@@ -22,7 +23,9 @@ import {
   UserName,
   LogOutButton,
   Menu,
-  AnimText
+  AnimText,
+  CrossButton,
+  MenuItems
 } from "./Header.styled";
 
 export const HeaderEl = () => {
@@ -66,9 +69,16 @@ export const HeaderEl = () => {
   return (
     <HederContainer>
 
-      <Logo>logo</Logo>
+      <Logo></Logo>
 
-      <Title>Shop-helper</Title>
+      {!isLoggedIn &&(
+        <Title>Be a Winner! Buy our products at auction for unbeatable prices!</Title>
+      )}
+
+      {isLoggedIn &&(
+        <Title>Hello! It seems like the time has come for victory</Title>
+      )}
+
       <AnimText>  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  
         Sale  Sale  Sale  Sale   Sale  Sale  Sale  Sale  Sale  Sale  Sale 
          Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale 
@@ -82,7 +92,7 @@ export const HeaderEl = () => {
       )}
 
       {isLoggedIn && (
-        <IsLogged>
+       <IsLogged>
           <UserName>{currentUser.username}</UserName>
 
           <LogOutButton type="button" onClick={handleSignOut}>
@@ -94,30 +104,29 @@ export const HeaderEl = () => {
           </Menu>
         </IsLogged>
       )}
-
       {showMenuModal && (
-        <Modal width="460px" height="752px" onClose={toggleMenuModal}>
-          <button type="button" onClick={toggleMenuModal}>
+        <Modal width="190px" height="200px" onClose={toggleMenuModal}>
+          <CrossButton  type="button" onClick={toggleMenuModal}>
             <CloseButton />
-          </button>
+          </CrossButton>
 
-          <span>{currentUser.username}</span>
+          {/* <span>{currentUser.username}</span> */}
 
-          <Link to={"my-profile"} onClick={toggleMenuModal}>
+          <MenuItems to={"my-profile"} onClick={toggleMenuModal}>
             My profile
-          </Link>
+          </MenuItems>
 
-          <Link to={"my-products"} onClick={toggleMenuModal}>
+          <MenuItems to={"my-products"} onClick={toggleMenuModal}>
             My products
-          </Link>
+          </MenuItems>
 
-          <Link to={"my-auctions"} onClick={toggleMenuModal}>
+          <MenuItems to={"my-auctions"} onClick={toggleMenuModal}>
             My auctions
-          </Link>
+          </MenuItems>
 
-          <Link to={"my-purchases"} onClick={toggleMenuModal}>
+          <MenuItems to={"my-purchases"} onClick={toggleMenuModal}>
             My purchases
-          </Link>
+          </MenuItems>
         </Modal>
       )}
     </HederContainer>
