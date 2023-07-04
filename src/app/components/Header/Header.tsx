@@ -18,6 +18,11 @@ import {
   CloseButton,
   Title,
   HederContainer,
+  Logo,
+  UserName,
+  LogOutButton,
+  Menu,
+  AnimText
 } from "./Header.styled";
 
 export const HeaderEl = () => {
@@ -60,26 +65,32 @@ export const HeaderEl = () => {
 
   return (
     <HederContainer>
+
+      <Logo src="/shop-helper-react/shop-helper 2.svg"></Logo>
+
       <Title>Shop-helper</Title>
+      <AnimText>  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale   Sale  Sale  Sale  Sale  Sale  Sale  Sale 
+         Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale 
+         Sale  Sale  Sale  Sale  Sale  </AnimText>
 
       {!isLoggedIn && (
         <NotIsLogged>
-          <AuthButton to={"/sign-in"}>Login</AuthButton>
+          <AuthButton to={"/sign-in"}>LogIn</AuthButton>
           <AuthButton to={"/sign-up"}>Registration</AuthButton>
         </NotIsLogged>
       )}
 
       {isLoggedIn && (
         <IsLogged>
-          <span>{currentUser.username}</span>
+          <UserName>{currentUser.username}</UserName>
 
-          <button type="button" onClick={handleSignOut}>
+          <LogOutButton type="button" onClick={handleSignOut}>
             LogOut
-          </button>
+          </LogOutButton>
 
-          <button type="button" onClick={toggleMenuModal}>
+          <Menu type="button" onClick={toggleMenuModal}>
             <MenuButton />
-          </button>
+          </Menu>
         </IsLogged>
       )}
 
