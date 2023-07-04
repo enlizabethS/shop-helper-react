@@ -3,6 +3,7 @@ import { HeaderEl, FooterEl } from "app";
 
 import { Header, Container, Body, Footer } from "./Layout.styled";
 
+
 export const Layout: React.FC = () => {
   return (
     <>
