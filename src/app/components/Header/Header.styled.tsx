@@ -1,29 +1,48 @@
 import styled from "@emotion/styled";
 import { CgMenu, CgClose } from "react-icons/cg";
 import { Link } from "react-router-dom";
+import { ReactComponent as shopHelperLogo } from "icons/shop-helper.svg";
 
 export const MenuButton = styled(CgMenu)`
-  width: 48px;
+  width: 28px;
   color: #4f145e;
 `;
 
 export const CloseButton = styled(CgClose)`
-  width: 48px;
-  background-color: white;
-  color: #4f145e;
+  width: 28px;
+  // background-color: #4f145e;
+  // color: #fff;
+  // border: none;
+`;
+
+export const CrossButton = styled.button`
+font-family: 'Josefin Sans', sans-serif;
+font-size: 17px;
+color:#4f145e;
+
+border: none;
+border-radius: 5px;
+padding: 4px;
+
+:not(:last-child) {
+  margin-right: 12px;
+}
+
+:hover{
+  background-color: #4f145e;
+  color: white;
+}
 `;
 
 export const Title = styled.h1`
-  color: white;
-
+  color: #4f145e;
+  font-size: 25px;
 `;
-
-export const Logo = styled.img`
-width: 150px;
-hight: 140px
-border-radius: 10px;
-border:n one;
-z-index: 2;
+export const Logo = styled(shopHelperLogo)`
+  width: 150px;
+  height: 100px;
+  margin: 0;
+  fill: white;
 `;
 
 export const IsLogged = styled.div``;
@@ -37,11 +56,12 @@ padding: 9px;
 
 export const LogOutButton = styled.button`
 font-family: 'Josefin Sans', sans-serif;
-font-size: 19px;
+font-size: 17px;
+color:#4f145e;
 
 border: none;
 border-radius: 5px;
-padding: 5px;
+padding: 4px;
 
 :not(:last-child) {
   margin-right: 12px;
@@ -55,12 +75,12 @@ padding: 5px;
 
 export const Menu = styled.button`
 font-family: 'Josefin Sans', sans-serif;
-font-size: 19px;
+font-size: 17px;
 
 
 border: none;
 border-radius: 5px;
-padding: 5px;
+padding: 1px;
 
 :not(:last-child) {
   margin-right: 12px;
@@ -99,8 +119,10 @@ export const HederContainer = styled.div`
   align-items: center;
 
   overflow: hidden;
-  padding: 30px 0;
+  padding: 15px 0;
 `;
+
+
 export const AnimText = styled.div`
 font-size: 18px;
 
@@ -128,4 +150,17 @@ animation: text-animation 15s linear infinite;
   }
 }
 
+`;
+
+export const MenuItems = styled(Link)`
+text-decoration: none;
+  font-size: 20px;
+
+  border-radius: 5px;
+  padding: 4px;
+
+  :hover{
+    background-color: #4f145e;;
+    color: white;
+  }
 `;
