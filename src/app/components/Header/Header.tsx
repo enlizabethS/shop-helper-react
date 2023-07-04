@@ -8,23 +8,22 @@ import {
   resetCurrentUser,
 } from "entities/User";
 import { useAppDispatch, useAppSelector, Modal } from "shared";
-
+import icons from "icons/svgSprite.svg";
 
 import {
-  IsLogged,
-  AuthButton,
-  NotIsLogged,
-  MenuButton,
-  CloseButton,
-  Title,
   HederContainer,
+  // MenuModal,
   Logo,
-  UserName,
-  LogOutButton,
-  Menu,
+  Title,
   AnimText,
-  CrossButton,
-  MenuItems
+  NotIsLogged,
+  AuthButton,
+  IsLogged,
+  UserName,
+  Button,
+  SVG,
+  MenuItems,
+  LogOutButton,
 } from "./Header.styled";
 
 export const HeaderEl = () => {
@@ -67,21 +66,24 @@ export const HeaderEl = () => {
 
   return (
     <HederContainer>
+      <Logo />
 
-      <Logo></Logo>
-
-      {!isLoggedIn &&(
-        <Title>Be a Winner! Buy our products at auction for unbeatable prices!</Title>
+      {!isLoggedIn && (
+        <Title>
+          Be a Winner! Buy our products at auction for unbeatable prices!
+        </Title>
       )}
 
-      {isLoggedIn &&(
+      {isLoggedIn && (
         <Title>Hello! It seems like the time has come for victory</Title>
       )}
 
-      <AnimText>  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale  
-        Sale  Sale  Sale  Sale   Sale  Sale  Sale  Sale  Sale  Sale  Sale 
-         Sale  Sale  Sale  Sale  Sale  Sale  Sale  Sale 
-         Sale  Sale  Sale  Sale  Sale  </AnimText>
+      <AnimText>
+        {" "}
+        Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale
+        Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale
+        Sale Sale Sale Sale Sale{" "}
+      </AnimText>
 
       {!isLoggedIn && (
         <NotIsLogged>
@@ -91,25 +93,24 @@ export const HeaderEl = () => {
       )}
 
       {isLoggedIn && (
-       <IsLogged>
+        <IsLogged>
           <UserName>{currentUser.username}</UserName>
 
-          <LogOutButton type="button" onClick={handleSignOut}>
-            LogOut
-          </LogOutButton>
-
-          <Menu type="button" onClick={toggleMenuModal}>
-            <MenuButton />
-          </Menu>
+          <Button type="button" onClick={toggleMenuModal}>
+            <SVG>
+              <use href={`${icons}#menu`} />
+            </SVG>
+          </Button>
         </IsLogged>
       )}
+
       {showMenuModal && (
         <Modal width="190px" height="200px" onClose={toggleMenuModal}>
-          <CrossButton  type="button" onClick={toggleMenuModal}>
-            <CloseButton />
-          </CrossButton>
-
-          {/* <span>{currentUser.username}</span> */}
+          <Button type="button" onClick={toggleMenuModal}>
+            <SVG>
+              <use href={`${icons}#cross`} />
+            </SVG>
+          </Button>
 
           <MenuItems to={"my-profile"} onClick={toggleMenuModal}>
             My profile
@@ -126,6 +127,10 @@ export const HeaderEl = () => {
           <MenuItems to={"my-purchases"} onClick={toggleMenuModal}>
             My purchases
           </MenuItems>
+
+          <LogOutButton type="button" onClick={handleSignOut}>
+            LogOut
+          </LogOutButton>
         </Modal>
       )}
     </HederContainer>

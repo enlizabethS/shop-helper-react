@@ -1,127 +1,71 @@
 import styled from "@emotion/styled";
 
 export const Form = styled.form`
-position: relative;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-overflow: hidden;
-padding: 15px;
+  margin-bottom: 30px;
 `;
 
-export const UserUpDFirstNname = styled.div`
-width: 380px;
-height: 40px;
+export const FieldsBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
 
-margin: 7px;
-padding: 5px;
-
-color: #4f145e;
-background-color: rgba(226, 198, 198, 0.50);
-
-border: none;
-border-radius: 7px;
+  margin-bottom: 8px;
 `;
 
-export const UserUpDFirstNameInput = styled.input`
-margin: 0 0 0 20px;
+export const Label = styled.div`
+  display: flex;
+  align-items: center;
 
-color: #4f145e;
-background-color: rgba(226, 198, 198, 0.50);
-
-border-color: #4f145e;
-border-radius: 7px;
+  :not(:last-child) {
+    margin-bottom: 8px;
+  }
 `;
 
-export const UserUpDLastNname = styled.div`
-width: 380px;
-height: 40px;
+export const Input = styled.input`
+  font-size: inherit;
 
-margin: 7px;
-padding: 5px;
+  display: flex;
+  align-items: center;
 
-color: #4f145e;
-background-color: rgba(226, 198, 198, 0.50);
+  width: 280px;
+  height: 40px;
 
-border: none;
-border-radius: 7px;
+  padding: 0 8px;
+  margin-left: 4px;
+
+  color: #4f145e;
+  background-color: rgba(226, 198, 198, 0.5);
+
+  border: none;
+  border-radius: 7px;
+  outline-color: #4f145e;
 `;
 
-export const UserUpDLastNameInput = styled.input`
-margin: 0 0 0 20px;
+export const ButtonsBlock = styled.div``;
 
-color: #4f145e;
-background-color: rgba(226, 198, 198, 0.50);
+export const Button = styled.button`
+  width: 150px;
+  height: 40px;
 
-border-color: #4f145e;
-border-radius: 7px;
-`;
+  background-color: rgba(226, 198, 198, 0.5);
+  color: #4f145e;
 
-export const UserUpDEmail = styled.div`
-width: 380px;
-height: 40px;
+  border-color: #4f145e;
+  border-radius: 7px;
 
-margin: 7px;
-padding: 5px;
+  padding: 8px 0;
 
-color: #4f145e;
-background-color: rgba(226, 198, 198, 0.50);
-
-border: none;
-border-radius: 7px;
-`;
-
-export const UserUpDEmailInput = styled.input`
-margin: 0 0 0 20px;
-
-color: #4f145e;
-background-color: rgba(226, 198, 198, 0.50);
-
-border-color: #4f145e;
-border-radius: 7px;
-`;
-
-export const UserUpDPhone = styled.div`
-width: 380px;
-height: 40px;
-
-margin: 7px;
-padding: 5px;
-
-color: #4f145e;
-background-color: rgba(226, 198, 198, 0.50);
-
-border: none;
-border-radius: 7px;
-`;
-
-export const UserUpDPhoneInput = styled.input`
-margin: 0 0 0 20px;
-
-color: #4f145e;
-background-color: rgba(226, 198, 198, 0.50);
-
-border-color: #4f145e;
-border-radius: 7px;
-`;
-
-export const UpdateButton = styled.button`
-width: 200px;
-height: 30px;
-margin: 5px;
-
-background-color: rgba(226, 198, 198, 0.50);
-color: #4f145e; 
-
-border-color: #4f145e; 
-border-radius: 7px;
-
-padding: 5px;
-
-:hover{
+  :hover {
     background-color: #4f145e;
     color: white;
+  }
+
+  :not(:last-child) {
+    margin-right: 12px;
   }
 `;

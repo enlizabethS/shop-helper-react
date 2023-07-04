@@ -4,13 +4,11 @@ import { useSignInMutation, loginSuccess } from "entities/Auth";
 
 import {
   Title,
-  LoginConteiner,
-  UserNameLog,
   TextLog,
-  UserNameInput,
-  UserPassLog,
-  UserPassInput,
-  SubmitButLog
+  LoginContainer,
+  Label,
+  Input,
+  SubmitButLog,
 } from "./Login.styled";
 
 const initialLoginState = {
@@ -50,34 +48,37 @@ export const Login: React.FC = () => {
     <form onSubmit={handleSubmit}>
       <Title>LogIn</Title>
       <TextLog>Please, enter your username and password</TextLog>
-      <LoginConteiner>
-      {isError && <div>`Username or password is not correct`</div>}
+      <LoginContainer>
+        {isError && <div>`Username or password is not correct`</div>}
 
-      <UserNameLog>
-        <UserNameInput
-          type="text"
-          name="username"
-          value={formState.username}
-          placeholder="Username"
-          onChange={handleFormChange}
-        />
-      </UserNameLog>
+        <Label>
+          <Input
+            type="text"
+            name="username"
+            value={formState.username}
+            placeholder="Username"
+            onChange={handleFormChange}
+          />
+        </Label>
 
-      <UserPassLog>
-        <UserPassInput
-          type="password"
-          name="password"
-          value={formState.password}
-          placeholder="Password"
-          onChange={handleFormChange}
-        />
-      </UserPassLog>
+        <Label>
+          <Input
+            type="password"
+            name="password"
+            value={formState.password}
+            placeholder="Password"
+            onChange={handleFormChange}
+          />
+        </Label>
 
-      <SubmitButLog type="submit" disabled={handleSubmitButtonDisabled}>
-        {isLoading ? <Spinner /> : "Login"}
-      </SubmitButLog>
-    </LoginConteiner>
-    <TextLog>If you haven't signed up yet, please don't miss out on this great bargain and join us.</TextLog>
+        <SubmitButLog type="submit" disabled={handleSubmitButtonDisabled}>
+          {isLoading ? <Spinner /> : "Login"}
+        </SubmitButLog>
+      </LoginContainer>
+      <TextLog>
+        If you haven't signed up yet, please don't miss out on this great
+        bargain and join us.
+      </TextLog>
     </form>
   );
 };
