@@ -1,2 +1,2 @@
-export * from "./fetchCurrentUser";
-export * from "./fetchAddress";
+export * from "./currentUserApi";
+export * from "./addressApi";
