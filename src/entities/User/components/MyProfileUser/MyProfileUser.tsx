@@ -1,6 +1,14 @@
 import { useAppSelector } from "shared";
 
-import { UserBlock, UpdateButton } from "./MyProfileUser.styled";
+import { 
+  UserBlock, 
+  UpdateButton,
+  UserNameCount,
+  FirstNameCount,
+  LastNameCount,
+  EmailNameCount,
+  PhoneNameCount
+ } from "./MyProfileUser.styled";
 
 interface IMyProfileUserOrigin {
   handleUserUpdate: React.MouseEventHandler<HTMLButtonElement>;
@@ -13,34 +21,35 @@ export const MyProfileUser: React.FC<IMyProfileUserOrigin> = ({
 
   return (
     <UserBlock>
-      <div>
+      <UserNameCount>
         <span>Username: </span>
         <span>{currentUser.username}</span>
-      </div>
+      </UserNameCount>
 
-      <div>
+      <FirstNameCount>
         <span>First name: </span>
         <span>{currentUser.firstName}</span>
-      </div>
+      </FirstNameCount>
 
-      <div>
+      <LastNameCount>
         <span>Last name: </span>
         <span>{currentUser.lastName}</span>
-      </div>
+      </LastNameCount>
 
-      <div>
+      <EmailNameCount>
         <span>Email: </span>
         <span>{currentUser.email}</span>
-      </div>
+      </EmailNameCount>
 
-      <div>
+      <PhoneNameCount>
         <span>Phone: </span>
         <span>{currentUser.phone}</span>
-      </div>
+      </PhoneNameCount>
 
       <UpdateButton type="button" onClick={handleUserUpdate}>
         UpdateUser
       </UpdateButton>
+      
     </UserBlock>
   );
 };

@@ -2,7 +2,18 @@ import { useState } from "react";
 import { useUpdateCurrentUserMutation, saveCurrentUser } from "entities/User";
 import { useAppDispatch, useAppSelector, Spinner } from "shared";
 
-import { Form, UpdateButton } from "./MyProfileUserUpdate.styled";
+import { 
+  Form, 
+  UpdateButton,
+  UserUpDFirstNname,
+  UserUpDFirstNameInput,
+  UserUpDLastNname,
+  UserUpDLastNameInput,
+  UserUpDEmail,
+  UserUpDEmailInput,
+  UserUpDPhone,
+  UserUpDPhoneInput
+ } from "./MyProfileUserUpdate.styled";
 
 interface IMyProfileUserUpdate {
   handleUserUpdate: () => void;
@@ -36,45 +47,45 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
 
   return (
     <Form onSubmit={handleSubmit}>
-      <label>
+      <UserUpDFirstNname >
         First name
-        <input
+        <UserUpDFirstNameInput
           name="firstName"
           value={user.firstName ? user.firstName : ""}
           placeholder="First name"
           onChange={handleChange}
         />
-      </label>
+      </UserUpDFirstNname>
 
-      <label>
+      <UserUpDLastNname>
         Last name
-        <input
+        <UserUpDLastNameInput 
           name="lastName"
           value={user.lastName ? user.lastName : ""}
           placeholder="Last name"
           onChange={handleChange}
         />
-      </label>
+      </UserUpDLastNname>
 
-      <label>
+      <UserUpDEmail>
         Email
-        <input
+        <UserUpDEmailInput
           name="email"
           value={user.email ? user.email : ""}
           placeholder="Email"
           onChange={handleChange}
         />
-      </label>
+      </UserUpDEmail>
 
-      <label>
+      <UserUpDPhone>
         Phone
-        <input
+        <UserUpDPhoneInput
           name="phone"
           value={user.phone ? user.phone : ""}
           placeholder="Phone"
           onChange={handleChange}
         />
-      </label>
+      </UserUpDPhone>
 
       <UpdateButton type="submit">
         {isLoading ? <Spinner /> : "Update"}

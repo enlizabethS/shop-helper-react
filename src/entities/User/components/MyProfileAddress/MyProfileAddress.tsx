@@ -1,6 +1,10 @@
 import { useAppSelector } from "shared";
 
-import { AddressBlock, UpdateButton } from "./MyProfileAddress.styled";
+import { 
+  AddressBlock, 
+  UpdateButton,
+  AdressNotAddCount
+} from "./MyProfileAddress.styled";
 
 interface IMyProfileAddress {
   handleAddressUpdate: React.MouseEventHandler<HTMLButtonElement>;
@@ -14,7 +18,7 @@ export const MyProfileAddress: React.FC<IMyProfileAddress> = ({
   return (
     <>
       {!address.id ? (
-        <h3>Address not added</h3>
+        <AdressNotAddCount>Address not added</AdressNotAddCount>
       ) : (
         <AddressBlock>
           <div>
