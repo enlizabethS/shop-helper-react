@@ -2,7 +2,16 @@ import { useState } from "react";
 import { useAppDispatch, useAppNavigate, Spinner } from "shared";
 import { useSignInMutation, loginSuccess } from "entities/Auth";
 
-import {} from "./Login.styled";
+import {
+  Title,
+  LoginConteiner,
+  UserNameLog,
+  TextLog,
+  UserNameInput,
+  UserPassLog,
+  UserPassInput,
+  SubmitButLog
+} from "./Login.styled";
 
 const initialLoginState = {
   username: "",
@@ -39,35 +48,36 @@ export const Login: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
-
+      <Title>LogIn</Title>
+      <TextLog>Please, enter your username and password</TextLog>
+      <LoginConteiner>
       {isError && <div>`Username or password is not correct`</div>}
 
-      <label>
-        Name
-        <input
+      <UserNameLog>
+        <UserNameInput
           type="text"
           name="username"
           value={formState.username}
           placeholder="Username"
           onChange={handleFormChange}
         />
-      </label>
+      </UserNameLog>
 
-      <label>
-        Password
-        <input
+      <UserPassLog>
+        <UserPassInput
           type="password"
           name="password"
           value={formState.password}
           placeholder="Password"
           onChange={handleFormChange}
         />
-      </label>
+      </UserPassLog>
 
-      <button type="submit" disabled={handleSubmitButtonDisabled}>
+      <SubmitButLog type="submit" disabled={handleSubmitButtonDisabled}>
         {isLoading ? <Spinner /> : "Login"}
-      </button>
+      </SubmitButLog>
+    </LoginConteiner>
+    <TextLog>If you haven't signed up yet, please don't miss out on this great bargain and join us.</TextLog>
     </form>
   );
 };
