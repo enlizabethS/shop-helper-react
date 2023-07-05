@@ -1,15 +1,16 @@
 import { api } from "app/redux";
+import { IUser } from "entities/User";
 
 const currentUserApi = api.injectEndpoints({
   endpoints: builder => ({
-    fetchCurrentUser: builder.query({
+    fetchCurrentUser: builder.query<IUser, null>({
       query: () => ({
         url: "/api/users/my/profile",
         method: "GET",
       }),
       providesTags: ["User"],
     }),
-    updateCurrentUser: builder.mutation({
+    updateCurrentUser: builder.mutation<IUser, IUser>({
       query: user => ({
         url: `/api/users/${user.id}`,
         method: "PUT",

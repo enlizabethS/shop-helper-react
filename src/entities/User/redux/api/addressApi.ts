@@ -1,15 +1,16 @@
 import { api } from "app/redux";
+import { IAddress } from "entities/User";
 
 const addressApi = api.injectEndpoints({
   endpoints: builder => ({
-    fetchAddress: builder.query({
+    fetchAddress: builder.query<IAddress, number>({
       query: id => ({
         url: `/api/addresses/${id}`,
         method: "GET",
       }),
       providesTags: ["Address"],
     }),
-    updateAddress: builder.mutation({
+    updateAddress: builder.mutation<IAddress, IAddress>({
       query: address => ({
         url: `/api/addresses/${address.id}`,
         method: "PUT",
@@ -23,7 +24,7 @@ const addressApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Address"],
     }),
-    addAddress: builder.mutation({
+    addAddress: builder.mutation<IAddress, IAddress>({
       query: newAddress => ({
         url: "/api/addresses",
         method: "POST",
