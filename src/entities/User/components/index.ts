@@ -5,4 +5,5 @@ export * from "./MyProfileAddress";
 export * from "./MyProfileAddressUpdate";
 export * from "./MyProducts";
 export * from "./MyAuctions";
+export * from "./MyAuctionsCard";
 export * from "./MyPurchases";
