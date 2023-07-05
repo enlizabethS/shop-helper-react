@@ -35,7 +35,6 @@ export const Login: React.FC = () => {
       const loginRequest = await login(formState).unwrap();
       navigate("/");
       dispatch(loginSuccess(loginRequest));
-      setFormState(initialLoginState);
     } catch (error) {
       console.log("ERROR loginFormSubmit");
     }

@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { useSignOutMutation, logoutSuccess } from "entities/Auth";
 import {
   useFetchCurrentUserQuery,
-  useFetchAddressQuery,
+  useFetchAddressByIdQuery,
   saveCurrentUser,
   saveAddress,
   resetCurrentUser,
+  resetAddress,
 } from "entities/User";
 import { useAppDispatch, useAppSelector } from "shared";
 import icons from "icons/svgSprite.svg";
@@ -32,34 +33,50 @@ export const HeaderEl = () => {
   const [signOut] = useSignOutMutation();
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   const currentUser = useAppSelector(state => state.users.currentUser);
-  const { data: userData } = useFetchCurrentUserQuery(null, {
-    skip: !isLoggedIn,
-  });
-  const { data: addressData } = useFetchAddressQuery(currentUser.addressId, {
-    skip: currentUser.addressId === null,
-  });
+  const { data: userData, isLoading: isLoadingUser } = useFetchCurrentUserQuery(
+    null,
+    {
+      skip: !isLoggedIn,
+    }
+  );
+  const { data: addressData, isLoading: isLoadingAddress } =
+    useFetchAddressByIdQuery(currentUser.addressId, {
+      skip: currentUser.addressId === 0 || currentUser.addressId === null,
+    });
   const [showMenuModal, setShowMenuModal] = useState(false);
 
   useEffect(() => {
-    if (userData !== undefined) {
+    if (isLoggedIn && !isLoadingUser) {
+      console.log(userData);
       dispatch(saveCurrentUser(userData));
     }
-    if (addressData !== undefined) {
+    if (isLoggedIn && !isLoadingAddress && addressData !== undefined) {
       dispatch(saveAddress(addressData));
     }
-  }, [dispatch, userData, addressData]);
+  }, [
+    dispatch,
+    userData,
+    isLoggedIn,
+    isLoadingUser,
+    addressData,
+    isLoadingAddress,
+  ]);
 
   const handleSignOut: React.MouseEventHandler<
     HTMLButtonElement
   > = async () => {
     try {
       const signOutReq = await signOut(null).unwrap();
+
       dispatch(logoutSuccess(signOutReq));
-      dispatch(resetCurrentUser());
+
       toggleMenuModal();
     } catch (error) {
       console.log("ERROR signOut");
     }
+
+    dispatch(resetCurrentUser());
+    dispatch(resetAddress());
   };
 
   const toggleMenuModal = () => {
@@ -80,12 +97,7 @@ export const HeaderEl = () => {
         <Title>Hello! It seems like the time has come for victory</Title>
       )}
 
-      <AnimText>
-        {" "}
-        Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale
-        Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale
-        Sale Sale Sale Sale Sale{" "}
-      </AnimText>
+      <AnimText>{"Sale ".repeat(34)}</AnimText>
 
       {!isLoggedIn && (
         <NotIsLogged>
