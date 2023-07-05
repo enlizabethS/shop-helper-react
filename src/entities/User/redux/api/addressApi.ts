@@ -23,7 +23,19 @@ const addressApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Address"],
     }),
+    addAddress: builder.mutation({
+      query: newAddress => ({
+        url: "/api/addresses",
+        method: "POST",
+        body: newAddress,
+      }),
+      invalidatesTags: ["Address"],
+    }),
   }),
 });
 
-export const { useFetchAddressQuery, useUpdateAddressMutation } = addressApi;
+export const {
+  useFetchAddressQuery,
+  useUpdateAddressMutation,
+  useAddAddressMutation,
+} = addressApi;
