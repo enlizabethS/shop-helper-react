@@ -93,7 +93,7 @@ export const Button = styled.button`
   border: none;
 
   :hover {
-    background-color: #4f145e;
+    background-color: rgba(226, 198, 198, 0.5);
     fill: white;
   }
 `;

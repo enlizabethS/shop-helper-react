@@ -2,7 +2,10 @@ import { useState } from "react";
 import { IProduct } from "entities/User";
 import { useAppSelector, Modal } from "shared";
 
-import {} from "./Home.styled";
+import {
+  HomeContainer,
+  HomeButton 
+} from "./Home.styled";
 
 const initProductState: IProduct = {
   id: null,
@@ -25,15 +28,15 @@ export const Home: React.FC = () => {
   }) => setNewProduct(prev => ({ ...prev, [name]: value }));
 
   return (
-    <>
+    <HomeContainer>
       {isLoggedIn && (
         <div>
-          <button type="button" onClick={() => setShowProductModal(true)}>
+          <HomeButton  type="button" onClick={() => setShowProductModal(true)}>
             Add new product
-          </button>
-          <button type="button" onClick={() => setShowAuctionModal(true)}>
+          </HomeButton>
+          <HomeButton  type="button" onClick={() => setShowAuctionModal(true)}>
             Create new auction
-          </button>
+          </HomeButton>
         </div>
       )}
 
@@ -56,6 +59,6 @@ export const Home: React.FC = () => {
           </form>
         </Modal>
       )}
-    </>
+    </HomeContainer>
   );
 };
