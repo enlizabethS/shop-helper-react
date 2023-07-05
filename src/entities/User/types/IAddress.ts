@@ -1,9 +1,9 @@
 export interface IAddress {
-  id: number | null;
-  street: string | null;
-  houseNumber: number | null;
-  city: string | null;
-  postalCode: number | null;
-  country: string | null;
-  createdDate: string | null;
+  id: number;
+  street: string;
+  houseNumber: number;
+  city: string;
+  postalCode: number;
+  country: string;
+  createdDate: string;
 }
