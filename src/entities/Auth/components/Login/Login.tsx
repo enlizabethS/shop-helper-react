@@ -34,7 +34,7 @@ export const Login: React.FC = () => {
     try {
       const loginRequest = await login(formState).unwrap();
       navigate("/");
-      dispatch(loginSuccess(loginRequest)); // диспатчим форму через authSlice в api
+      dispatch(loginSuccess(loginRequest));
       setFormState(initialLoginState);
     } catch (error) {
       console.log("ERROR loginFormSubmit");

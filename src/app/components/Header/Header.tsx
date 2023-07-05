@@ -7,12 +7,11 @@ import {
   saveAddress,
   resetCurrentUser,
 } from "entities/User";
-import { useAppDispatch, useAppSelector, Modal } from "shared";
+import { useAppDispatch, useAppSelector } from "shared";
 import icons from "icons/svgSprite.svg";
 
 import {
   HederContainer,
-  // MenuModal,
   Logo,
   Title,
   AnimText,
@@ -21,8 +20,10 @@ import {
   IsLogged,
   UserName,
   Button,
+  MenuModal,
   SVG,
-  MenuItems,
+  ItemsBlock,
+  MenuItem,
   LogOutButton,
 } from "./Header.styled";
 
@@ -55,6 +56,7 @@ export const HeaderEl = () => {
       const signOutReq = await signOut(null).unwrap();
       dispatch(logoutSuccess(signOutReq));
       dispatch(resetCurrentUser());
+      toggleMenuModal();
     } catch (error) {
       console.log("ERROR signOut");
     }
@@ -105,33 +107,35 @@ export const HeaderEl = () => {
       )}
 
       {showMenuModal && (
-        <Modal width="190px" height="200px" onClose={toggleMenuModal}>
+        <MenuModal>
           <Button type="button" onClick={toggleMenuModal}>
             <SVG>
               <use href={`${icons}#cross`} />
             </SVG>
           </Button>
 
-          <MenuItems to={"my-profile"} onClick={toggleMenuModal}>
-            My profile
-          </MenuItems>
+          <ItemsBlock>
+            <MenuItem to={"my-profile"} onClick={toggleMenuModal}>
+              My profile
+            </MenuItem>
 
-          <MenuItems to={"my-products"} onClick={toggleMenuModal}>
-            My products
-          </MenuItems>
+            <MenuItem to={"my-products"} onClick={toggleMenuModal}>
+              My products
+            </MenuItem>
 
-          <MenuItems to={"my-auctions"} onClick={toggleMenuModal}>
-            My auctions
-          </MenuItems>
+            <MenuItem to={"my-auctions"} onClick={toggleMenuModal}>
+              My auctions
+            </MenuItem>
 
-          <MenuItems to={"my-purchases"} onClick={toggleMenuModal}>
-            My purchases
-          </MenuItems>
+            <MenuItem to={"my-purchases"} onClick={toggleMenuModal}>
+              My purchases
+            </MenuItem>
+          </ItemsBlock>
 
           <LogOutButton type="button" onClick={handleSignOut}>
             LogOut
           </LogOutButton>
-        </Modal>
+        </MenuModal>
       )}
     </HederContainer>
   );
