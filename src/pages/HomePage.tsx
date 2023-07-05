@@ -1,5 +1,7 @@
+import { Home } from "entities/Home";
+
 const HomePage: React.FC = () => {
-  return <h1>HomePage</h1>;
+  return <Home />;
 };
 
 export default HomePage;

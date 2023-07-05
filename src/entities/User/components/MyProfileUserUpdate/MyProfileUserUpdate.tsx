@@ -2,18 +2,14 @@ import { useState } from "react";
 import { useUpdateCurrentUserMutation, saveCurrentUser } from "entities/User";
 import { useAppDispatch, useAppSelector, Spinner } from "shared";
 
-import { 
-  Form, 
-  UpdateButton,
-  UserUpDFirstNname,
-  UserUpDFirstNameInput,
-  UserUpDLastNname,
-  UserUpDLastNameInput,
-  UserUpDEmail,
-  UserUpDEmailInput,
-  UserUpDPhone,
-  UserUpDPhoneInput
- } from "./MyProfileUserUpdate.styled";
+import {
+  Form,
+  FieldsBlock,
+  Label,
+  Input,
+  ButtonsBlock,
+  Button,
+} from "./MyProfileUserUpdate.styled";
 
 interface IMyProfileUserUpdate {
   handleUserUpdate: () => void;
@@ -27,7 +23,7 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
   const [user, setUser] = useState(currentUser);
   const [updateUser, { isLoading }] = useUpdateCurrentUserMutation();
 
-  const handleChange = ({
+  const handleInputChange = ({
     target: { name, value },
   }: {
     target: { name: string; value: string };
@@ -47,49 +43,54 @@ export const MyProfileUserUpdate: React.FC<IMyProfileUserUpdate> = ({
 
   return (
     <Form onSubmit={handleSubmit}>
-      <UserUpDFirstNname >
-        First name
-        <UserUpDFirstNameInput
-          name="firstName"
-          value={user.firstName ? user.firstName : ""}
-          placeholder="First name"
-          onChange={handleChange}
-        />
-      </UserUpDFirstNname>
+      <FieldsBlock>
+        <Label>
+          First name:
+          <Input
+            name="firstName"
+            value={user.firstName ? user.firstName : ""}
+            placeholder="First name"
+            onChange={handleInputChange}
+          />
+        </Label>
 
-      <UserUpDLastNname>
-        Last name
-        <UserUpDLastNameInput 
-          name="lastName"
-          value={user.lastName ? user.lastName : ""}
-          placeholder="Last name"
-          onChange={handleChange}
-        />
-      </UserUpDLastNname>
+        <Label>
+          Last name:
+          <Input
+            name="lastName"
+            value={user.lastName ? user.lastName : ""}
+            placeholder="Last name"
+            onChange={handleInputChange}
+          />
+        </Label>
 
-      <UserUpDEmail>
-        Email
-        <UserUpDEmailInput
-          name="email"
-          value={user.email ? user.email : ""}
-          placeholder="Email"
-          onChange={handleChange}
-        />
-      </UserUpDEmail>
+        <Label>
+          Email:
+          <Input
+            name="email"
+            value={user.email ? user.email : ""}
+            placeholder="Email"
+            onChange={handleInputChange}
+          />
+        </Label>
 
-      <UserUpDPhone>
-        Phone
-        <UserUpDPhoneInput
-          name="phone"
-          value={user.phone ? user.phone : ""}
-          placeholder="Phone"
-          onChange={handleChange}
-        />
-      </UserUpDPhone>
+        <Label>
+          Phone:
+          <Input
+            name="phone"
+            value={user.phone ? user.phone : ""}
+            placeholder="Phone"
+            onChange={handleInputChange}
+          />
+        </Label>
+      </FieldsBlock>
 
-      <UpdateButton type="submit">
-        {isLoading ? <Spinner /> : "Update"}
-      </UpdateButton>
+      <ButtonsBlock>
+        <Button type="submit">{isLoading ? <Spinner /> : "Update"}</Button>
+        <Button type="button" onClick={() => handleUserUpdate()}>
+          Cancel
+        </Button>
+      </ButtonsBlock>
     </Form>
   );
 };

@@ -1,9 +1,13 @@
 import { useAppSelector } from "shared";
 
-import { 
-  AddressBlock, 
-  UpdateButton,
-  AdressNotAddCount
+import {
+  Block,
+  AdressNotAddCount,
+  FieldsBlock,
+  Field,
+  FieldName,
+  FieldValue,
+  Button,
 } from "./MyProfileAddress.styled";
 
 interface IMyProfileAddress {
@@ -20,37 +24,39 @@ export const MyProfileAddress: React.FC<IMyProfileAddress> = ({
       {!address.id ? (
         <AdressNotAddCount>Address not added</AdressNotAddCount>
       ) : (
-        <AddressBlock>
-          <div>
-            <span>Street: </span>
-            <span>{address.street}</span>
-          </div>
+        <Block>
+          <FieldsBlock>
+            <Field>
+              <FieldName>Street:</FieldName>
+              <FieldValue>{address.street}</FieldValue>
+            </Field>
 
-          <div>
-            <span>House number: </span>
-            <span>{address.houseNumber}</span>
-          </div>
+            <Field>
+              <FieldName>House number:</FieldName>
+              <FieldValue>{address.houseNumber}</FieldValue>
+            </Field>
 
-          <div>
-            <span>City: </span>
-            <span>{address.city}</span>
-          </div>
+            <Field>
+              <FieldName>City:</FieldName>
+              <FieldValue>{address.city}</FieldValue>
+            </Field>
 
-          <div>
-            <span>Postal code: </span>
-            <span>{address.postalCode}</span>
-          </div>
+            <Field>
+              <FieldName>Postal code:</FieldName>
+              <FieldValue>{address.postalCode}</FieldValue>
+            </Field>
 
-          <div>
-            <span>Country: </span>
-            <span>{address.country}</span>
-          </div>
-        </AddressBlock>
+            <Field>
+              <FieldName>Country:</FieldName>
+              <FieldValue>{address.country}</FieldValue>
+            </Field>
+          </FieldsBlock>
+
+          <Button type="button" onClick={handleAddressUpdate}>
+            Update
+          </Button>
+        </Block>
       )}
-
-      <UpdateButton type="button" onClick={handleAddressUpdate}>
-        UpdateAddress
-      </UpdateButton>
     </>
   );
 };

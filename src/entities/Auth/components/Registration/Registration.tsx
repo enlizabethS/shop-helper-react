@@ -4,19 +4,13 @@ import { useSignUpMutation, loginSuccess } from "entities/Auth";
 
 import {
   Title,
-  RegistrConteiner,
+  RegistrContainer,
   TextReg,
-  Text,
   TextErr,
-  UserNameReg,
-  UserNameInputReg,
-  EmailReg,
-  EmailInputReg,
-  PasswordReg,
-  PasswordInputReg,
-  PasswordConfReg,
-  PasswordConfInputReg,
-  SubmitButRegistr
+  Label,
+  LabelText,
+  Input,
+  SubmitButRegistr,
 } from "./Registration.styled";
 
 interface IRegState {
@@ -68,58 +62,60 @@ export const Registration: React.FC = () => {
   return (
     <form onSubmit={handleSubmit}>
       <Title>Registration</Title>
-      <TextReg>By creating an account you agree to our Terms of Use and Privacy Policy</TextReg>
-      <RegistrConteiner>
-      {isError && <TextErr>`Registration is not correct`</TextErr>}
+      <TextReg>
+        By creating an account you agree to our Terms of Use and Privacy Policy
+      </TextReg>
+      <RegistrContainer>
+        {isError && <TextErr>`Registration is not correct`</TextErr>}
 
-      <UserNameReg>
-       <Text>Username</Text> 
-        <UserNameInputReg
-          type="text"
-          name="username"
-          value={formState.username}
-          placeholder="Username"
-          onChange={handleFormChange}
-        />
-      </UserNameReg>
+        <Label>
+          <LabelText>Username</LabelText>
+          <Input
+            type="text"
+            name="username"
+            value={formState.username}
+            placeholder="Username"
+            onChange={handleFormChange}
+          />
+        </Label>
 
-      <EmailReg>
-        <Text>Email</Text>
-        <EmailInputReg 
-          type="text"
-          name="email"
-          value={formState.email}
-          placeholder="Username"
-          onChange={handleFormChange}
-        />
-      </EmailReg>
+        <Label>
+          <LabelText>Email</LabelText>
+          <Input
+            type="text"
+            name="email"
+            value={formState.email}
+            placeholder="Username"
+            onChange={handleFormChange}
+          />
+        </Label>
 
-      <PasswordReg>
-       <Text>Password</Text> 
-        <PasswordInputReg
-          type="password"
-          name="password"
-          value={formState.password}
-          placeholder="Password"
-          onChange={handleFormChange}
-        />
-      </PasswordReg>
+        <Label>
+          <LabelText>Password</LabelText>
+          <Input
+            type="password"
+            name="password"
+            value={formState.password}
+            placeholder="Password"
+            onChange={handleFormChange}
+          />
+        </Label>
 
-      <PasswordConfReg>
-       <Text>Password Confirmation</Text> 
-        <PasswordConfInputReg
-          type="password"
-          name="passwordConfirmation"
-          value={formState.passwordConfirmation}
-          placeholder="Password Confirmation"
-          onChange={handleFormChange}
-        />
-      </PasswordConfReg>
+        <Label>
+          <LabelText>Password Confirmation</LabelText>
+          <Input
+            type="password"
+            name="passwordConfirmation"
+            value={formState.passwordConfirmation}
+            placeholder="Password Confirmation"
+            onChange={handleFormChange}
+          />
+        </Label>
 
-      <SubmitButRegistr type="submit" disabled={handleSubmitButtonDisabled}>
-        {isLoading ? <Spinner /> : "Registration"}
-      </SubmitButRegistr>
-      </RegistrConteiner>
+        <SubmitButRegistr type="submit" disabled={handleSubmitButtonDisabled}>
+          {isLoading ? <Spinner /> : "Registration"}
+        </SubmitButRegistr>
+      </RegistrContainer>
     </form>
   );
 };

@@ -1,14 +1,13 @@
 import { useAppSelector } from "shared";
 
-import { 
-  UserBlock, 
-  UpdateButton,
-  UserNameCount,
-  FirstNameCount,
-  LastNameCount,
-  EmailNameCount,
-  PhoneNameCount
- } from "./MyProfileUser.styled";
+import {
+  Block,
+  FieldsBlock,
+  Field,
+  FieldName,
+  FieldValue,
+  Button,
+} from "./MyProfileUser.styled";
 
 interface IMyProfileUserOrigin {
   handleUserUpdate: React.MouseEventHandler<HTMLButtonElement>;
@@ -20,36 +19,37 @@ export const MyProfileUser: React.FC<IMyProfileUserOrigin> = ({
   const currentUser = useAppSelector(state => state.users.currentUser);
 
   return (
-    <UserBlock>
-      <UserNameCount>
-        <span>Username: </span>
-        <span>{currentUser.username}</span>
-      </UserNameCount>
+    <Block>
+      <FieldsBlock>
+        <Field>
+          <FieldName>Username:</FieldName>
+          <FieldValue>{currentUser.username}</FieldValue>
+        </Field>
 
-      <FirstNameCount>
-        <span>First name: </span>
-        <span>{currentUser.firstName}</span>
-      </FirstNameCount>
+        <Field>
+          <FieldName>First name:</FieldName>
+          <FieldValue>{currentUser.firstName}</FieldValue>
+        </Field>
 
-      <LastNameCount>
-        <span>Last name: </span>
-        <span>{currentUser.lastName}</span>
-      </LastNameCount>
+        <Field>
+          <FieldName>Last name:</FieldName>
+          <FieldValue>{currentUser.lastName}</FieldValue>
+        </Field>
 
-      <EmailNameCount>
-        <span>Email: </span>
-        <span>{currentUser.email}</span>
-      </EmailNameCount>
+        <Field>
+          <FieldName>Email:</FieldName>
+          <FieldValue>{currentUser.email}</FieldValue>
+        </Field>
 
-      <PhoneNameCount>
-        <span>Phone: </span>
-        <span>{currentUser.phone}</span>
-      </PhoneNameCount>
+        <Field>
+          <FieldName>Phone:</FieldName>
+          <FieldValue>{currentUser.phone}</FieldValue>
+        </Field>
+      </FieldsBlock>
 
-      <UpdateButton type="button" onClick={handleUserUpdate}>
-        UpdateUser
-      </UpdateButton>
-      
-    </UserBlock>
+      <Button type="button" onClick={handleUserUpdate}>
+        Update
+      </Button>
+    </Block>
   );
 };

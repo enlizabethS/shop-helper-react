@@ -8,9 +8,9 @@ import {
 
 import {
   Title,
-  MyProfConteiner,
+  MyProfContainer,
   TextProfile,
-  AdressCount
+  AddressCount,
 } from "./MyProfile.styled";
 
 export const MyProfile: React.FC = () => {
@@ -26,24 +26,26 @@ export const MyProfile: React.FC = () => {
   };
 
   return (
-    
-    <MyProfConteiner>
+    <MyProfContainer>
       <Title>Your profile</Title>
 
-      <TextProfile>You can view or change information about yourself</TextProfile>
+      <TextProfile>
+        You can view or change information about yourself
+      </TextProfile>
+
       {showData ? (
         <MyProfileUser handleUserUpdate={handleUserUpdate} />
       ) : (
         <MyProfileUserUpdate handleUserUpdate={handleUserUpdate} />
       )}
 
-      <AdressCount>Address</AdressCount>
+      <AddressCount>Address</AddressCount>
 
       {showAddress ? (
         <MyProfileAddress handleAddressUpdate={handleAddressUpdate} />
       ) : (
         <MyProfileAddressUpdate handleAddressUpdate={handleAddressUpdate} />
       )}
-    </MyProfConteiner>
+    </MyProfContainer>
   );
 };

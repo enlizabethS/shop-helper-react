@@ -2,19 +2,13 @@ import { useState } from "react";
 import { useUpdateAddressMutation, saveAddress } from "entities/User";
 import { useAppDispatch, useAppSelector, Spinner } from "shared";
 
-import { 
-  Form, 
-  UpdateButton, 
-  AdressUpDStreet,
-  AdressUpDStreetInput,
-  AdressUpDHouseN,
-  AdressUpDHouseNInput,
-  AdressUpDCity,
-  AdressUpDCityInput,
-  AdressUpDPostC,
-  AdressUpDPostCInput,
-  AdressUpDCountry,
-  AdressUpDCountryInput
+import {
+  Form,
+  FieldsBlock,
+  Label,
+  Input,
+  ButtonsBlock,
+  Button,
 } from "./MyProfileAddressUpdate.styled";
 
 interface IMyProfileAddressUpdate {
@@ -49,59 +43,64 @@ export const MyProfileAddressUpdate: React.FC<IMyProfileAddressUpdate> = ({
 
   return (
     <Form onSubmit={handleSubmit}>
-      <AdressUpDStreet>
-        Street
-        <AdressUpDStreetInput 
-          name="street"
-          value={newAddress.street ? newAddress.street : ""}
-          placeholder="Street"
-          onChange={handleChange}
-        />
-      </AdressUpDStreet>
+      <FieldsBlock>
+        <Label>
+          Street:
+          <Input
+            name="street"
+            value={newAddress.street ? newAddress.street : ""}
+            placeholder="Street"
+            onChange={handleChange}
+          />
+        </Label>
 
-      <AdressUpDHouseN >
-        House number
-        <AdressUpDHouseNInput
-          name="houseNumber"
-          value={newAddress.houseNumber ? newAddress.houseNumber : ""}
-          placeholder="House number"
-          onChange={handleChange}
-        />
-      </AdressUpDHouseN>
+        <Label>
+          House number:
+          <Input
+            name="houseNumber"
+            value={newAddress.houseNumber ? newAddress.houseNumber : ""}
+            placeholder="House number"
+            onChange={handleChange}
+          />
+        </Label>
 
-      <AdressUpDCity>
-        City
-        <AdressUpDCityInput
-          name="city"
-          value={newAddress.city ? newAddress.city : ""}
-          placeholder="City"
-          onChange={handleChange}
-        />
-      </AdressUpDCity>
+        <Label>
+          City:
+          <Input
+            name="city"
+            value={newAddress.city ? newAddress.city : ""}
+            placeholder="City"
+            onChange={handleChange}
+          />
+        </Label>
 
-      <AdressUpDPostC >
-        Postal code
-        <AdressUpDPostCInput
-          name="postalCode"
-          value={newAddress.postalCode ? newAddress.postalCode : ""}
-          placeholder="Postal code"
-          onChange={handleChange}
-        />
-      </AdressUpDPostC>
+        <Label>
+          Postal code:
+          <Input
+            name="postalCode"
+            value={newAddress.postalCode ? newAddress.postalCode : ""}
+            placeholder="Postal code"
+            onChange={handleChange}
+          />
+        </Label>
 
-      <AdressUpDCountry>
-        Country
-        <AdressUpDCountryInput
-          name="country"
-          value={newAddress.country ? newAddress.country : ""}
-          placeholder="Country"
-          onChange={handleChange}
-        />
-      </AdressUpDCountry>
+        <Label>
+          Country:
+          <Input
+            name="country"
+            value={newAddress.country ? newAddress.country : ""}
+            placeholder="Country"
+            onChange={handleChange}
+          />
+        </Label>
+      </FieldsBlock>
 
-      <UpdateButton type="submit">
-        {isLoading ? <Spinner /> : "Update"}
-      </UpdateButton>
+      <ButtonsBlock>
+        <Button type="submit">{isLoading ? <Spinner /> : "Update"}</Button>
+        <Button type="button" onClick={() => handleAddressUpdate()}>
+          Cancel
+        </Button>
+      </ButtonsBlock>
     </Form>
   );
 };
