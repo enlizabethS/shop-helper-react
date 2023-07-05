@@ -21,7 +21,7 @@ export const MyProfileAddress: React.FC<IMyProfileAddress> = ({
 
   return (
     <Block>
-      {!address.id ? (
+      {address.id === 0 ? (
         <AdressNotAddCount>Address not added</AdressNotAddCount>
       ) : (
         <>

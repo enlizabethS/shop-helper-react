@@ -3,7 +3,7 @@ import { IAddress } from "entities/User";
 
 const addressApi = api.injectEndpoints({
   endpoints: builder => ({
-    fetchAddress: builder.query<IAddress, number>({
+    fetchAddressById: builder.query<IAddress, number>({
       query: id => ({
         url: `/api/addresses/${id}`,
         method: "GET",
@@ -36,7 +36,7 @@ const addressApi = api.injectEndpoints({
 });
 
 export const {
-  useFetchAddressQuery,
+  useFetchAddressByIdQuery,
   useUpdateAddressMutation,
   useAddAddressMutation,
 } = addressApi;
