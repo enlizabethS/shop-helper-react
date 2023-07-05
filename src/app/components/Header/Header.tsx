@@ -82,7 +82,7 @@ export const HeaderEl = () => {
         {" "}
         Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale
         Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale
-        Sale Sale Sale Sale Sale{" "}
+        Sale Sale Sale Sale Sale {" "}
       </AnimText>
 
       {!isLoggedIn && (
