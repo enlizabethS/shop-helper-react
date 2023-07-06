@@ -23,7 +23,6 @@ const signInApi = api.injectEndpoints({
         }),
       }),
       invalidatesTags: ["Auth"],
-      transformResponse: (response: ILoginResponse) => response,
     }),
   }),
 });

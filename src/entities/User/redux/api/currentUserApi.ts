@@ -26,5 +26,5 @@ const currentUserApi = api.injectEndpoints({
   }),
 });
 
-export const { useFetchCurrentUserQuery, useUpdateCurrentUserMutation } =
+export const { useLazyFetchCurrentUserQuery, useUpdateCurrentUserMutation } =
   currentUserApi;

@@ -1,13 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSignOutMutation, logoutSuccess } from "entities/Auth";
-import {
-  useFetchCurrentUserQuery,
-  useFetchAddressByIdQuery,
-  saveCurrentUser,
-  saveAddress,
-  resetCurrentUser,
-  resetAddress,
-} from "entities/User";
+import { resetCurrentUser, resetAddress } from "entities/User";
 import { useAppDispatch, useAppSelector } from "shared";
 import icons from "icons/svgSprite.svg";
 
@@ -33,43 +26,14 @@ export const HeaderEl = () => {
   const [signOut] = useSignOutMutation();
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   const currentUser = useAppSelector(state => state.users.currentUser);
-  const { data: userData, isLoading: isLoadingUser } = useFetchCurrentUserQuery(
-    null,
-    {
-      skip: !isLoggedIn,
-    }
-  );
-  const { data: addressData, isLoading: isLoadingAddress } =
-    useFetchAddressByIdQuery(currentUser.addressId, {
-      skip: currentUser.addressId === 0 || currentUser.addressId === null,
-    });
   const [showMenuModal, setShowMenuModal] = useState(false);
-
-  useEffect(() => {
-    if (isLoggedIn && !isLoadingUser) {
-      console.log(userData);
-      dispatch(saveCurrentUser(userData));
-    }
-    if (isLoggedIn && !isLoadingAddress && addressData !== undefined) {
-      dispatch(saveAddress(addressData));
-    }
-  }, [
-    dispatch,
-    userData,
-    isLoggedIn,
-    isLoadingUser,
-    addressData,
-    isLoadingAddress,
-  ]);
 
   const handleSignOut: React.MouseEventHandler<
     HTMLButtonElement
   > = async () => {
     try {
       const signOutReq = await signOut(null).unwrap();
-
       dispatch(logoutSuccess(signOutReq));
-
       toggleMenuModal();
     } catch (error) {
       console.log("ERROR signOut");

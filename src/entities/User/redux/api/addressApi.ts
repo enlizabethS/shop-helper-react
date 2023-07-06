@@ -36,7 +36,7 @@ const addressApi = api.injectEndpoints({
 });
 
 export const {
-  useFetchAddressByIdQuery,
+  useLazyFetchAddressByIdQuery,
   useUpdateAddressMutation,
   useAddAddressMutation,
 } = addressApi;
