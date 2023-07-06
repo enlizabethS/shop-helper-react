@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { useUpdateAddressMutation, saveAddress } from "entities/User";
+import {
+  useUpdateAddressMutation,
+  useAddAddressMutation,
+  saveAddress,
+} from "entities/User";
 import { useAppDispatch, useAppSelector, Spinner } from "shared";
 
 import {
@@ -19,22 +23,31 @@ export const MyProfileAddressUpdate: React.FC<IMyProfileAddressUpdate> = ({
   handleAddressUpdate,
 }) => {
   const dispatch = useAppDispatch();
-  const [updateAddress, { isLoading }] = useUpdateAddressMutation();
+  const [updateAddress, { isLoading: isLoadingUpdate }] =
+    useUpdateAddressMutation();
+  const [addAddress, { isLoading: isLoadingAdd }] = useAddAddressMutation();
   const address = useAppSelector(state => state.users.address);
-  const [newAddress, setNewAddress] = useState(address);
+  const [addressState, setAddressState] = useState(address);
 
   const handleChange = ({
     target: { name, value },
   }: {
     target: { name: string; value: string };
-  }) => setNewAddress(prev => ({ ...prev, [name]: value }));
+  }) => setAddressState(prev => ({ ...prev, [name]: value }));
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     try {
-      const updatedAddress = await updateAddress(newAddress).unwrap();
-      dispatch(saveAddress(updatedAddress));
+      let newAddress;
+
+      if (address.id) {
+        newAddress = await updateAddress(addressState).unwrap();
+      } else {
+        newAddress = await addAddress(addressState).unwrap();
+      }
+
+      dispatch(saveAddress(newAddress));
       handleAddressUpdate();
     } catch (error) {
       console.log("ERROR updateAddress");
@@ -48,9 +61,10 @@ export const MyProfileAddressUpdate: React.FC<IMyProfileAddressUpdate> = ({
           Street:
           <Input
             name="street"
-            value={newAddress.street ? newAddress.street : ""}
+            value={addressState.street ? addressState.street : ""}
             placeholder="Street"
             onChange={handleChange}
+            required
           />
         </Label>
 
@@ -58,9 +72,10 @@ export const MyProfileAddressUpdate: React.FC<IMyProfileAddressUpdate> = ({
           House number:
           <Input
             name="houseNumber"
-            value={newAddress.houseNumber ? newAddress.houseNumber : ""}
+            value={addressState.houseNumber ? addressState.houseNumber : ""}
             placeholder="House number"
             onChange={handleChange}
+            required
           />
         </Label>
 
@@ -68,9 +83,10 @@ export const MyProfileAddressUpdate: React.FC<IMyProfileAddressUpdate> = ({
           City:
           <Input
             name="city"
-            value={newAddress.city ? newAddress.city : ""}
+            value={addressState.city ? addressState.city : ""}
             placeholder="City"
             onChange={handleChange}
+            required
           />
         </Label>
 
@@ -78,9 +94,10 @@ export const MyProfileAddressUpdate: React.FC<IMyProfileAddressUpdate> = ({
           Postal code:
           <Input
             name="postalCode"
-            value={newAddress.postalCode ? newAddress.postalCode : ""}
+            value={addressState.postalCode ? addressState.postalCode : ""}
             placeholder="Postal code"
             onChange={handleChange}
+            required
           />
         </Label>
 
@@ -88,15 +105,28 @@ export const MyProfileAddressUpdate: React.FC<IMyProfileAddressUpdate> = ({
           Country:
           <Input
             name="country"
-            value={newAddress.country ? newAddress.country : ""}
+            value={addressState.country ? addressState.country : ""}
             placeholder="Country"
             onChange={handleChange}
+            required
           />
         </Label>
       </FieldsBlock>
 
       <ButtonsBlock>
-        <Button type="submit">{isLoading ? <Spinner /> : "Update"}</Button>
+        <Button type="submit">
+          {address.id ? (
+            isLoadingUpdate ? (
+              <Spinner />
+            ) : (
+              "Update"
+            )
+          ) : isLoadingAdd ? (
+            <Spinner />
+          ) : (
+            "Add address"
+          )}
+        </Button>
         <Button type="button" onClick={() => handleAddressUpdate()}>
           Cancel
         </Button>

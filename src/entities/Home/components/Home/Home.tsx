@@ -8,11 +8,11 @@ import {
 } from "./Home.styled";
 
 const initProductState: IProduct = {
-  id: null,
-  userId: null,
-  name: null,
-  quantity: null,
-  price: null,
+  id: 0,
+  userId: "",
+  name: "",
+  quantity: 0,
+  price: 0,
 };
 
 export const Home: React.FC = () => {

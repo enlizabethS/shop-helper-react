@@ -1,18 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSignOutMutation, logoutSuccess } from "entities/Auth";
-import {
-  useFetchCurrentUserQuery,
-  useFetchAddressQuery,
-  saveCurrentUser,
-  saveAddress,
-  resetCurrentUser,
-} from "entities/User";
-import { useAppDispatch, useAppSelector, Modal } from "shared";
+import { resetCurrentUser, resetAddress } from "entities/User";
+import { useAppDispatch, useAppSelector } from "shared";
 import icons from "icons/svgSprite.svg";
 
 import {
   HederContainer,
-  // MenuModal,
   Logo,
   Title,
   AnimText,
@@ -21,8 +14,10 @@ import {
   IsLogged,
   UserName,
   Button,
+  MenuModal,
   SVG,
-  MenuItems,
+  ItemsBlock,
+  MenuItem,
   LogOutButton,
 } from "./Header.styled";
 
@@ -31,22 +26,7 @@ export const HeaderEl = () => {
   const [signOut] = useSignOutMutation();
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   const currentUser = useAppSelector(state => state.users.currentUser);
-  const { data: userData } = useFetchCurrentUserQuery(null, {
-    skip: !isLoggedIn,
-  });
-  const { data: addressData } = useFetchAddressQuery(currentUser.addressId, {
-    skip: currentUser.addressId === null,
-  });
   const [showMenuModal, setShowMenuModal] = useState(false);
-
-  useEffect(() => {
-    if (userData !== undefined) {
-      dispatch(saveCurrentUser(userData));
-    }
-    if (addressData !== undefined) {
-      dispatch(saveAddress(addressData));
-    }
-  }, [dispatch, userData, addressData]);
 
   const handleSignOut: React.MouseEventHandler<
     HTMLButtonElement
@@ -54,10 +34,13 @@ export const HeaderEl = () => {
     try {
       const signOutReq = await signOut(null).unwrap();
       dispatch(logoutSuccess(signOutReq));
-      dispatch(resetCurrentUser());
+      toggleMenuModal();
     } catch (error) {
       console.log("ERROR signOut");
     }
+
+    dispatch(resetCurrentUser());
+    dispatch(resetAddress());
   };
 
   const toggleMenuModal = () => {
@@ -78,12 +61,7 @@ export const HeaderEl = () => {
         <Title>Hello! It seems like the time has come for victory</Title>
       )}
 
-      <AnimText>
-        {" "}
-        Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale
-        Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale Sale
-        Sale Sale Sale Sale Sale {" "}
-      </AnimText>
+      <AnimText>{"Sale ".repeat(34)}</AnimText>
 
       {!isLoggedIn && (
         <NotIsLogged>
@@ -105,33 +83,35 @@ export const HeaderEl = () => {
       )}
 
       {showMenuModal && (
-        <Modal width="190px" height="200px" onClose={toggleMenuModal}>
+        <MenuModal>
           <Button type="button" onClick={toggleMenuModal}>
             <SVG>
               <use href={`${icons}#cross`} />
             </SVG>
           </Button>
 
-          <MenuItems to={"my-profile"} onClick={toggleMenuModal}>
-            My profile
-          </MenuItems>
+          <ItemsBlock>
+            <MenuItem to={"my-profile"} onClick={toggleMenuModal}>
+              My profile
+            </MenuItem>
 
-          <MenuItems to={"my-products"} onClick={toggleMenuModal}>
-            My products
-          </MenuItems>
+            <MenuItem to={"my-products"} onClick={toggleMenuModal}>
+              My products
+            </MenuItem>
 
-          <MenuItems to={"my-auctions"} onClick={toggleMenuModal}>
-            My auctions
-          </MenuItems>
+            <MenuItem to={"my-auctions"} onClick={toggleMenuModal}>
+              My auctions
+            </MenuItem>
 
-          <MenuItems to={"my-purchases"} onClick={toggleMenuModal}>
-            My purchases
-          </MenuItems>
+            <MenuItem to={"my-purchases"} onClick={toggleMenuModal}>
+              My purchases
+            </MenuItem>
+          </ItemsBlock>
 
           <LogOutButton type="button" onClick={handleSignOut}>
             LogOut
           </LogOutButton>
-        </Modal>
+        </MenuModal>
       )}
     </HederContainer>
   );

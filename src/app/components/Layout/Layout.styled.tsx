@@ -7,6 +7,7 @@ export const Header = styled.header`
 `;
 
 export const Container = styled.section`
+  position: relative;
   width: 1440px;
 
   padding: 0 30px;
