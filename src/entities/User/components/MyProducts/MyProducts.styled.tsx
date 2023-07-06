@@ -1,7 +1,13 @@
 import styled from "@emotion/styled";
 
 export const ProductsList = styled.ul`
-  display: flex;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
+overflow: hidden;
+padding: 15px;
 `;
 
 export const Card = styled.li`

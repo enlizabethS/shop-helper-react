@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const Title = styled.h2`
   font-size: 45px;
-  padding: 30px;
+  padding: 80px 0 0 0;
   text-align: center;
 `;
 
@@ -20,6 +20,7 @@ export const LoginContainer = styled.div`
 
   overflow: hidden;
   padding: 15px;
+  margin: 10px;
 `;
 
 export const Label = styled.label`
