@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { useAppDispatch, useAppNavigate, Spinner } from "shared";
 import { useSignInMutation, loginSuccess } from "entities/Auth";
+import {
+  useLazyFetchCurrentUserQuery,
+  useLazyFetchAddressByIdQuery,
+  saveCurrentUser,
+  saveAddress,
+} from "entities/User";
 
 import {
   Title,
@@ -20,6 +26,8 @@ export const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const [navigate] = useAppNavigate();
   const [login, { isLoading, isError }] = useSignInMutation();
+  const [getCurrentUser] = useLazyFetchCurrentUserQuery();
+  const [getAddress] = useLazyFetchAddressByIdQuery();
   const [formState, setFormState] = useState(initialLoginState);
 
   const handleFormChange = ({
@@ -34,8 +42,15 @@ export const Login: React.FC = () => {
     try {
       const loginRequest = await login(formState).unwrap();
       navigate("/");
-      dispatch(loginSuccess(loginRequest)); // диспатчим форму через authSlice в api
-      setFormState(initialLoginState);
+      dispatch(loginSuccess(loginRequest));
+
+      const user = await getCurrentUser(null).unwrap();
+      dispatch(saveCurrentUser(user));
+
+      if (user.addressId !== null) {
+        const address = await getAddress(user.addressId).unwrap();
+        dispatch(saveAddress(address));
+      }
     } catch (error) {
       console.log("ERROR loginFormSubmit");
     }

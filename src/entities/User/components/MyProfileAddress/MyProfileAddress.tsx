@@ -20,11 +20,11 @@ export const MyProfileAddress: React.FC<IMyProfileAddress> = ({
   const address = useAppSelector(state => state.users.address);
 
   return (
-    <>
-      {!address.id ? (
+    <Block>
+      {address.id === 0 ? (
         <AdressNotAddCount>Address not added</AdressNotAddCount>
       ) : (
-        <Block>
+        <>
           <FieldsBlock>
             <Field>
               <FieldName>Street:</FieldName>
@@ -51,12 +51,12 @@ export const MyProfileAddress: React.FC<IMyProfileAddress> = ({
               <FieldValue>{address.country}</FieldValue>
             </Field>
           </FieldsBlock>
-
-          <Button type="button" onClick={handleAddressUpdate}>
-            Update
-          </Button>
-        </Block>
+        </>
       )}
-    </>
+
+      <Button type="button" onClick={handleAddressUpdate}>
+        {address.id ? "Update" : "Add address"}
+      </Button>
+    </Block>
   );
 };
