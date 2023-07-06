@@ -4,7 +4,8 @@ import { useAppSelector, Modal } from "shared";
 
 import {
   HomeContainer,
-  HomeButton 
+  HomeButton,
+  Input
 } from "./Home.styled";
 
 const initProductState: IProduct = {
@@ -48,8 +49,8 @@ export const Home: React.FC = () => {
         >
           <form>
             <label>
-              Name
-              <input
+              Name of product: 
+              <Input
                 name="name"
                 value={newProduct.name ? newProduct.name : ""}
                 placeholder="name"

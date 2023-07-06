@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const HomeContainer = styled.div`
 display: flex;
-flex-direction: column;
+flex-direction: row;
 justify-content: center;
 align-items: center;
 
@@ -27,4 +27,24 @@ width: 200px;
     background-color: #4f145e;
     color: white;
   }
+`;
+
+export const Input = styled.input`
+  font-size: inherit;
+
+  display: flex;
+  align-items: center;
+
+  width: 280px;
+  height: 40px;
+
+  padding: 0 8px;
+  margin-left: 4px;
+
+  color: #4f145e;
+  background-color: rgba(226, 198, 198, 0.5);
+
+  border: none;
+  border-radius: 7px;
+  outline-color: #4f145e;
 `;

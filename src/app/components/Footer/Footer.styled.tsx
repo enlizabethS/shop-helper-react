@@ -9,8 +9,8 @@ export const FooterContain = styled.div`
 display: flex;
 justify-content: space-around;
 align-items: center;
-flex-direction:row;
-margin-top: 650px;
+flex-direction: row;
+margin-top: 40%;
 
 position: relative;
 width: 100%;
