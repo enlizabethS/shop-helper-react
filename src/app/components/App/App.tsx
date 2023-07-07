@@ -9,6 +9,7 @@ import MyAuctionsPage from "pages/MyAuctionsPage";
 import { Layout, PrivateRoute, PublicRoute } from "app";
 
 import { Container } from "./App.styled";
+import ProductPage from "pages/ProductPage";
 
 export const App: React.FC = () => {
   return (
@@ -37,6 +38,15 @@ export const App: React.FC = () => {
             element={
               <PublicRoute>
                 <HomePage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            index
+            path="/product"
+            element={
+              <PublicRoute>
+                <ProductPage />
               </PublicRoute>
             }
           />
