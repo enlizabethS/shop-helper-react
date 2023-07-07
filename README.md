@@ -20,7 +20,8 @@ The website allows users to create listings, place bids, and manage their auctio
 
 <p>
 * React <br>
-* Redux  RTK Query <br>
+* Redux  <br>
+* RTK Query <br>
 * TypeScript <br>
 * CSS <br>
 </p>
