@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import authReducer from "entities/Auth/redux/authSlice";
 import userReducer from "entities/User/redux/userSlice";
+import homeReducer from "entities/Home/redux/homeSlice";
 import { api } from "./api";
 import {
   FLUSH,
@@ -17,6 +18,7 @@ export const store = configureStore({
     [api.reducerPath]: api.reducer,
     auth: authReducer,
     users: userReducer,
+    home: homeReducer,
   },
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware({

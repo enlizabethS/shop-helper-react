@@ -11,10 +11,12 @@ export const api = createApi({
     "Auth",
     "User",
     "Address",
+    "Product",
     "Auction",
     "Bid",
     "Purchase",
     "Shipper",
+    "Image",
   ],
   endpoints: () => ({}),
 });
