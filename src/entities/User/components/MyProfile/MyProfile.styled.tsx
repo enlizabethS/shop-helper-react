@@ -4,6 +4,7 @@ export const Title = styled.h3`
   font-size: 45px;
   margin-bottom: 30px;
   text-align: center;
+  padding: 80px 0 0 0;
 `;
 
 export const MyProfContainer = styled.div`
