@@ -17,13 +17,8 @@ export const Container = styled.section`
 
 export const Body = styled.main`
   width: 100%;
-  
 `;
 
 export const Footer = styled.footer`
   width: 100%;
-
-  background-color: #9a6089;
 `;
-
-
