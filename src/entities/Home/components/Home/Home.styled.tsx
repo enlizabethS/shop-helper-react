@@ -1,17 +1,17 @@
 import styled from "@emotion/styled";
 
 export const HomeContainer = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-overflow: hidden;
-padding: 15px;
+  overflow: hidden;
+  padding: 15px;
 `;
 
 export const HomeButton = styled.button`
-width: 200px;
+  width: 200px;
   height: 30px;
   margin: 5px;
 
@@ -27,4 +27,27 @@ width: 200px;
     background-color: #4f145e;
     color: white;
   }
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ImgBlock = styled.div`
+  display: flex;
+
+  height: 75px;
+`;
+
+export const Img = styled.img`
+  width: 75px;
+  height: 75px;
+`;
+
+export const CloseButton = styled.button`
+  width: 36px;
+  height: 36px;
+
+  margin-bottom: 24px;
 `;

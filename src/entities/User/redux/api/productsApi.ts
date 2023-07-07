@@ -5,34 +5,31 @@ const productsApi = api.injectEndpoints({
   endpoints: builder => ({
     fetchProductById: builder.query<IProduct, number>({
       query: id => ({
-        url: `/api/products/${id}`,
+        url: `/api/product/${id}`,
         method: "GET",
       }),
-      providesTags: ["Address"],
+      providesTags: ["Product"],
     }),
     fetchProductCurrentUser: builder.query<IProduct[], null>({
       query: () => ({
         url: "/api/users/my/products",
         method: "GET",
       }),
-      providesTags: ["Address"],
+      providesTags: ["Product"],
     }),
-    // updateAddress: builder.mutation({
-    //   query: address => ({
-    //     url: `/api/addresses/${address.id}`,
-    //     method: "PUT",
-    //     body: {
-    //       street: address.street,
-    //       houseNumber: address.houseNumber,
-    //       city: address.city,
-    //       postalCode: address.postalCode,
-    //       country: address.country,
-    //     },
-    //   }),
-    //   invalidatesTags: ["Address"],
-    // }),
+    addProduct: builder.mutation({
+      query: newProduct => ({
+        url: `/api/product`,
+        method: "POST",
+        body: newProduct,
+      }),
+      invalidatesTags: ["Product"],
+    }),
   }),
 });
 
-export const { useFetchProductByIdQuery, useFetchProductCurrentUserQuery } =
-  productsApi;
+export const {
+  useLazyFetchProductByIdQuery,
+  useFetchProductCurrentUserQuery,
+  useAddProductMutation,
+} = productsApi;

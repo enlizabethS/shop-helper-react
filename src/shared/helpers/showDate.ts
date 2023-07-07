@@ -1,4 +1,4 @@
-export const showDate = (date: string) => {
+export const showDate = (date: string | number) => {
   return `${new Date(date).getDate().toString().padStart(2, "0")}.${new Date(
     date
   )
