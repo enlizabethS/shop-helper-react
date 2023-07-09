@@ -5,7 +5,6 @@ import { useAddProductMutation, saveProducts } from "entities/User";
 import {
   HomeContainer,
   HomeButton,
-
   Form,
   ImgBlock,
   Img,
@@ -92,8 +91,8 @@ export const Home: React.FC = () => {
 
           <Form onSubmit={handleNewProductSubmit}>
             <label>
-              Name of product: 
-              <Input
+              Name of product:
+              <input
                 name="name"
                 value={newProduct.name ? newProduct.name : ""}
                 onChange={handleProductChange}

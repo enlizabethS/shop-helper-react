@@ -17,6 +17,7 @@ export const Container = styled.section`
 
 export const Body = styled.main`
   width: 100%;
+  height: 1000px;
 `;
 
 export const Footer = styled.footer`
