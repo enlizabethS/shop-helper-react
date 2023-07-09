@@ -6,10 +6,10 @@ import MyProfilePage from "pages/MyProfilePage";
 import MyProductsPage from "pages/MyProductsPage";
 import MyPurchasesPage from "pages/MyPurchasesPage";
 import MyAuctionsPage from "pages/MyAuctionsPage";
+import FindProductPage from "pages/FindProductPage";
 import { Layout, PrivateRoute, PublicRoute } from "app";
 
 import { Container } from "./App.styled";
-import ProductPage from "pages/ProductPage";
 
 export const App: React.FC = () => {
   return (
@@ -43,10 +43,10 @@ export const App: React.FC = () => {
           />
           <Route
             index
-            path="/product"
+            path="/fond-product"
             element={
               <PublicRoute>
-                <ProductPage />
+                <FindProductPage />
               </PublicRoute>
             }
           />
