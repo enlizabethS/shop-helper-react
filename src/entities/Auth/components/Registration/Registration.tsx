@@ -1,6 +1,16 @@
 import { useState } from "react";
 import { useAppDispatch, useAppNavigate, Spinner } from "shared";
-import { useSignUpMutation, loginSuccess } from "entities/Auth";
+import {
+  useSignUpMutation,
+  useSignInMutation,
+  loginSuccess,
+} from "entities/Auth";
+import {
+  useLazyFetchCurrentUserQuery,
+  useLazyFetchAddressByIdQuery,
+  saveCurrentUser,
+  saveAddress,
+} from "entities/User";
 
 import {
   Title,
@@ -30,7 +40,11 @@ const initialRegistrationState: IRegState = {
 export const Registration: React.FC = () => {
   const dispatch = useAppDispatch();
   const [navigate] = useAppNavigate();
-  const [signUp, { isLoading, isError }] = useSignUpMutation();
+  const [signUp, { isLoading: isLoadingSignUp, isError: isErrorSignUp }] =
+    useSignUpMutation();
+  const [login] = useSignInMutation();
+  const [getCurrentUser] = useLazyFetchCurrentUserQuery();
+  const [getAddress] = useLazyFetchAddressByIdQuery();
   const [formState, setFormState] = useState(initialRegistrationState);
 
   const handleFormChange = ({
@@ -43,10 +57,19 @@ export const Registration: React.FC = () => {
     event.preventDefault();
 
     try {
-      const registrationRequest = await signUp(formState).unwrap();
+      await signUp(formState).unwrap();
+      const loginResponse = await login(formState).unwrap();
+
       navigate("/");
-      dispatch(loginSuccess(registrationRequest)); // диспатчим форму через authSlice в api
-      setFormState(initialRegistrationState);
+      dispatch(loginSuccess(loginResponse));
+
+      const user = await getCurrentUser(null).unwrap();
+      dispatch(saveCurrentUser(user));
+
+      if (user.addressId !== null) {
+        const address = await getAddress(user.addressId).unwrap();
+        dispatch(saveAddress(address));
+      }
     } catch (error) {
       console.log("ERROR registrationFormSubmit");
     }
@@ -66,7 +89,7 @@ export const Registration: React.FC = () => {
         By creating an account you agree to our Terms of Use and Privacy Policy
       </TextReg>
       <RegistrContainer>
-        {isError && <TextErr>`Registration is not correct`</TextErr>}
+        {isErrorSignUp && <TextErr>`Registration is not correct`</TextErr>}
 
         <Label>
           <LabelText>Username</LabelText>
@@ -113,7 +136,7 @@ export const Registration: React.FC = () => {
         </Label>
 
         <SubmitButRegistr type="submit" disabled={handleSubmitButtonDisabled}>
-          {isLoading ? <Spinner /> : "Registration"}
+          {isLoadingSignUp ? <Spinner /> : "Registration"}
         </SubmitButRegistr>
       </RegistrContainer>
     </form>

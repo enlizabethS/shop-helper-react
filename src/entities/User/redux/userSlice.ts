@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IUser, IAddress, IProduct } from "entities/User";
+import { IUser, IAddress } from "entities/User";
 
 interface IUserState {
   currentUser: IUser;
   address: IAddress;
-  products: IProduct[];
   // auctions: IAuction[];
   // bids: IBid[];
 }
@@ -32,7 +31,6 @@ const initialState: IUserState = {
     country: "",
     createdDate: "",
   },
-  products: [],
   // auctions: [],
   // bids: [],
 };
@@ -52,12 +50,6 @@ const userSlice = createSlice({
     },
     resetAddress: state => {
       state.address = initialState.address;
-    },
-    saveProducts: (state, action) => {
-      state.products.push(action.payload);
-    },
-    resetProducts: state => {
-      state.products = initialState.products;
     },
     // saveAuctions: (state, action) => {
     //   state.auctions = action.payload;
@@ -79,8 +71,6 @@ export const {
   resetCurrentUser,
   saveAddress,
   resetAddress,
-  saveProducts,
-  resetProducts,
   // saveAuctions,
   // resetAuctions,
   // saveBids,

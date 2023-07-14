@@ -40,9 +40,9 @@ export const Login: React.FC = () => {
     event.preventDefault();
 
     try {
-      const loginRequest = await login(formState).unwrap();
+      const loginResponse = await login(formState).unwrap();
       navigate("/");
-      dispatch(loginSuccess(loginRequest));
+      dispatch(loginSuccess(loginResponse));
 
       const user = await getCurrentUser(null).unwrap();
       dispatch(saveCurrentUser(user));

@@ -1,9 +1,9 @@
-import { useFetchProductCurrentUserQuery } from "entities/User";
+import { useFetchProductsCurrentUserQuery } from "entities/Product";
 import { ProductList } from "entities/Product";
 
 const MyProductsPage: React.FC = () => {
   const { data: productsList, isLoading } =
-    useFetchProductCurrentUserQuery(null);
+    useFetchProductsCurrentUserQuery(null);
 
   return (
     <>

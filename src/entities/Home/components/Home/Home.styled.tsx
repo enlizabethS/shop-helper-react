@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 
 export const HomeContainer = styled.div`
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,22 +27,6 @@ export const HomeButton = styled.button`
     background-color: #4f145e;
     color: white;
   }
-`;
-
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const ImgBlock = styled.div`
-  display: flex;
-
-  height: 75px;
-`;
-
-export const Img = styled.img`
-  width: 75px;
-  height: 75px;
 `;
 
 export const CloseButton = styled.button`
