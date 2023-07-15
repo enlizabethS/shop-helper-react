@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch, useAppNavigate, Spinner } from "shared";
 import {
   useSignUpMutation,
@@ -13,14 +14,16 @@ import {
 } from "entities/User";
 
 import {
+  Container,
   Title,
-  RegistrContainer,
   TextReg,
   TextErr,
+  Form,
   Label,
-  LabelText,
   Input,
-  SubmitButRegistr,
+  ErrorMessage,
+  ErrorReplacement,
+  SubmitButton,
 } from "./Registration.styled";
 
 interface IRegState {
@@ -30,36 +33,43 @@ interface IRegState {
   passwordConfirmation: string;
 }
 
-const initialRegistrationState: IRegState = {
-  username: "",
-  email: "",
-  password: "",
-  passwordConfirmation: "",
-};
-
 export const Registration: React.FC = () => {
   const dispatch = useAppDispatch();
   const [navigate] = useAppNavigate();
-  const [signUp, { isLoading: isLoadingSignUp, isError: isErrorSignUp }] =
-    useSignUpMutation();
+  const {
+    register,
+    handleSubmit,
+    formState: { dirtyFields, errors },
+    getValues,
+    reset,
+  } = useForm<IRegState>({
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+    },
+  });
+  const [signUp, { isLoading, isError }] = useSignUpMutation();
   const [login] = useSignInMutation();
   const [getCurrentUser] = useLazyFetchCurrentUserQuery();
   const [getAddress] = useLazyFetchAddressByIdQuery();
-  const [formState, setFormState] = useState(initialRegistrationState);
+  const [comparePasswords, setComparePasswords] = useState(true);
 
-  const handleFormChange = ({
-    target: { name, value },
-  }: {
-    target: { name: string; value: string };
-  }) => setFormState(prev => ({ ...prev, [name]: value }));
+  const handleSignUpSubmit: SubmitHandler<IRegState> = async data => {
+    if (getValues("password") !== getValues("passwordConfirmation")) {
+      setComparePasswords(false);
+      return;
+    }
 
-  const handleSubmit = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
+    const formData = new FormData();
+    formData.append("username", data.username);
+    formData.append("password", data.password);
 
     try {
-      await signUp(formState).unwrap();
-      const loginResponse = await login(formState).unwrap();
+      await signUp(data);
 
+      const loginResponse = await login(formData);
       navigate("/");
       dispatch(loginSuccess(loginResponse));
 
@@ -70,75 +80,128 @@ export const Registration: React.FC = () => {
         const address = await getAddress(user.addressId).unwrap();
         dispatch(saveAddress(address));
       }
+
+      reset();
     } catch (error) {
       console.log("ERROR registrationFormSubmit");
     }
   };
 
   const handleSubmitButtonDisabled =
-    formState.password !== formState.passwordConfirmation ||
-    formState.email.length === 0 ||
-    formState.username.length === 0 ||
-    formState.password.length === 0 ||
-    formState.passwordConfirmation.length === 0;
+    dirtyFields.email === undefined ||
+    dirtyFields.username === undefined ||
+    dirtyFields.password === undefined ||
+    dirtyFields.passwordConfirmation === undefined;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Container>
       <Title>Registration</Title>
       <TextReg>
         By creating an account you agree to our Terms of Use and Privacy Policy
       </TextReg>
-      <RegistrContainer>
-        {isErrorSignUp && <TextErr>`Registration is not correct`</TextErr>}
+
+      <Form onSubmit={handleSubmit(handleSignUpSubmit)}>
+        {isError && <TextErr>`Registration is not correct`</TextErr>}
 
         <Label>
-          <LabelText>Username</LabelText>
           <Input
-            type="text"
-            name="username"
-            value={formState.username}
+            {...register("username", {
+              required: "You did not enter a username",
+              minLength: {
+                value: 3,
+                message: "Minimum 3 characters",
+              },
+            })}
             placeholder="Username"
-            onChange={handleFormChange}
+            aria-invalid="false"
           />
+
+          {errors.username ? (
+            <ErrorMessage role="alert">
+              {errors.username.message || "Error!"}
+            </ErrorMessage>
+          ) : (
+            <ErrorReplacement />
+          )}
         </Label>
 
         <Label>
-          <LabelText>Email</LabelText>
           <Input
-            type="text"
-            name="email"
-            value={formState.email}
-            placeholder="Username"
-            onChange={handleFormChange}
+            type="email"
+            {...register("email", {
+              required: "You did not enter a email",
+              minLength: {
+                value: 3,
+                message: "Minimum 3 characters",
+              },
+            })}
+            placeholder="Email"
+            aria-invalid="false"
           />
+
+          {errors.email ? (
+            <ErrorMessage role="alert">
+              {errors.email.message || "Error!"}
+            </ErrorMessage>
+          ) : (
+            <ErrorReplacement />
+          )}
         </Label>
 
         <Label>
-          <LabelText>Password</LabelText>
           <Input
             type="password"
-            name="password"
-            value={formState.password}
+            {...register("password", {
+              required: "You did not enter a password",
+              minLength: {
+                value: 6,
+                message: "Minimum 6 characters",
+              },
+            })}
             placeholder="Password"
-            onChange={handleFormChange}
+            aria-invalid="false"
           />
+
+          {errors.password ? (
+            <ErrorMessage role="alert">
+              {errors.password.message || "Error!"}
+            </ErrorMessage>
+          ) : (
+            <ErrorReplacement />
+          )}
         </Label>
 
         <Label>
-          <LabelText>Password Confirmation</LabelText>
           <Input
             type="password"
-            name="passwordConfirmation"
-            value={formState.passwordConfirmation}
-            placeholder="Password Confirmation"
-            onChange={handleFormChange}
+            {...register("passwordConfirmation", {
+              required: "You did not enter a password",
+              minLength: {
+                value: 6,
+                message: "Minimum 6 characters",
+              },
+            })}
+            placeholder="Password confirmation"
+            aria-invalid="false"
           />
+
+          {errors.passwordConfirmation ? (
+            <ErrorMessage role="alert">
+              {errors.passwordConfirmation.message || "Error!"}
+            </ErrorMessage>
+          ) : (
+            <ErrorReplacement />
+          )}
+
+          {!comparePasswords && (
+            <ErrorMessage>Password not confirmed</ErrorMessage>
+          )}
         </Label>
 
-        <SubmitButRegistr type="submit" disabled={handleSubmitButtonDisabled}>
-          {isLoadingSignUp ? <Spinner /> : "Registration"}
-        </SubmitButRegistr>
-      </RegistrContainer>
-    </form>
+        <SubmitButton type="submit" disabled={handleSubmitButtonDisabled}>
+          {isLoading ? <Spinner /> : "Registration"}
+        </SubmitButton>
+      </Form>
+    </Container>
   );
 };

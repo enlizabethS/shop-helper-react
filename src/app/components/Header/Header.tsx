@@ -52,67 +52,67 @@ export const HeaderEl = () => {
       <Logo />
 
       {!isLoggedIn && (
-        <Title>
-          Be a Winner! Buy our products at auction for unbeatable prices!
-        </Title>
+        <>
+          <Title>
+            Be a Winner! Buy our products at auction for unbeatable prices!
+          </Title>
+
+          <NotIsLogged>
+            <AuthButton to={"/sign-in"}>LogIn</AuthButton>
+            <AuthButton to={"/sign-up"}>Registration</AuthButton>
+          </NotIsLogged>
+        </>
       )}
 
       {isLoggedIn && (
-        <Title>Hello! It seems like the time has come for victory</Title>
+        <>
+          <Title>Hello! It seems like the time has come for victory</Title>
+
+          <IsLogged>
+            <UserName>{currentUser.username}</UserName>
+
+            <Button type="button" onClick={toggleMenuModal}>
+              <SVG>
+                <use href={`${icons}#menu`} />
+              </SVG>
+            </Button>
+          </IsLogged>
+
+          {showMenuModal && (
+            <MenuModal>
+              <Button type="button" onClick={toggleMenuModal}>
+                <SVG>
+                  <use href={`${icons}#cross`} />
+                </SVG>
+              </Button>
+
+              <ItemsBlock>
+                <MenuItem to={"my-profile"} onClick={toggleMenuModal}>
+                  My profile
+                </MenuItem>
+
+                <MenuItem to={"my-products"} onClick={toggleMenuModal}>
+                  My products
+                </MenuItem>
+
+                <MenuItem to={"my-auctions"} onClick={toggleMenuModal}>
+                  My auctions
+                </MenuItem>
+
+                <MenuItem to={"my-purchases"} onClick={toggleMenuModal}>
+                  My purchases
+                </MenuItem>
+              </ItemsBlock>
+
+              <LogOutButton type="button" onClick={handleSignOut}>
+                LogOut
+              </LogOutButton>
+            </MenuModal>
+          )}
+        </>
       )}
 
       <AnimText>{"Sale ".repeat(34)}</AnimText>
-
-      {!isLoggedIn && (
-        <NotIsLogged>
-          <AuthButton to={"/sign-in"}>LogIn</AuthButton>
-          <AuthButton to={"/sign-up"}>Registration</AuthButton>
-        </NotIsLogged>
-      )}
-
-      {isLoggedIn && (
-        <IsLogged>
-          <UserName>{currentUser.username}</UserName>
-
-          <Button type="button" onClick={toggleMenuModal}>
-            <SVG>
-              <use href={`${icons}#menu`} />
-            </SVG>
-          </Button>
-        </IsLogged>
-      )}
-
-      {showMenuModal && (
-        <MenuModal>
-          <Button type="button" onClick={toggleMenuModal}>
-            <SVG>
-              <use href={`${icons}#cross`} />
-            </SVG>
-          </Button>
-
-          <ItemsBlock>
-            <MenuItem to={"my-profile"} onClick={toggleMenuModal}>
-              My profile
-            </MenuItem>
-
-            <MenuItem to={"my-products"} onClick={toggleMenuModal}>
-              My products
-            </MenuItem>
-
-            <MenuItem to={"my-auctions"} onClick={toggleMenuModal}>
-              My auctions
-            </MenuItem>
-
-            <MenuItem to={"my-purchases"} onClick={toggleMenuModal}>
-              My purchases
-            </MenuItem>
-          </ItemsBlock>
-
-          <LogOutButton type="button" onClick={handleSignOut}>
-            LogOut
-          </LogOutButton>
-        </MenuModal>
-      )}
     </HederContainer>
   );
 };

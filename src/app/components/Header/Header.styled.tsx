@@ -15,20 +15,17 @@ const openingModal = keyframes`
 `;
 
 export const HederContainer = styled.div`
-  /* position: relative; */
+  position: relative;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  overflow: hidden;
-  padding: 15px 0;
+  height: 100%;
 `;
 
 export const Logo = styled(shopHelperLogo)`
-  width: 150px;
-  height: 100px;
-  margin: 0;
-  fill: white;
+  width: 40px;
+  height: 40px;
 `;
 
 export const Title = styled.h1`
@@ -112,7 +109,7 @@ export const Button = styled.button`
 export const MenuModal = styled.div`
   position: absolute;
   z-index: 10;
-  top: 18px;
+  top: 0px;
   right: 0;
 
   display: flex;
@@ -132,7 +129,6 @@ export const MenuModal = styled.div`
 export const SVG = styled("svg")`
   width: 24px;
   height: 24px;
-  /* fill: #4f145e; */
 `;
 
 export const ItemsBlock = styled.div`

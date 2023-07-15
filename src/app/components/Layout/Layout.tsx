@@ -1,8 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { HeaderEl, FooterEl } from "app";
 
-import { Header, Container, Body, Footer } from "./Layout.styled";
-
+import { Header, Container, Main, Footer } from "./Layout.styled";
 
 export const Layout: React.FC = () => {
   return (
@@ -13,11 +12,11 @@ export const Layout: React.FC = () => {
         </Container>
       </Header>
 
-      <Body>
+      <Main>
         <Container>
           <Outlet />
         </Container>
-      </Body>
+      </Main>
 
       <Footer>
         <Container>
