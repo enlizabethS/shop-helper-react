@@ -1,4 +1,4 @@
-import { ProductCard, IProduct } from "entities/Product";
+import { ProductItem, IProduct } from "entities/Product";
 import { Spinner } from "shared";
 
 import { ProductsList } from "./ProductsList.styled";
@@ -18,7 +18,7 @@ export const ProductList: React.FC<IProductsList> = ({
         <Spinner />
       ) : productsList !== undefined && productsList.length > 0 ? (
         productsList.map(product => (
-          <ProductCard key={product.id} product={product} />
+          <ProductItem key={product.id} product={product} />
         ))
       ) : undefined}
     </ProductsList>

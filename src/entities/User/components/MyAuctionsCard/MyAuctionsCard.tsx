@@ -11,7 +11,6 @@ export const MyAuctionsCard: React.FC<IMyAuctionsCard> = ({ auction }) => {
   const { data: bidsList, isLoading } = useFetchBidsByAuctionQuery(auction.id, {
     skip: auction.id === undefined,
   });
-  console.log("bidsList:", bidsList);
 
   return (
     <Card>

@@ -40,7 +40,7 @@ export const Login: React.FC = () => {
   });
   const dispatch = useAppDispatch();
   const [navigate] = useAppNavigate();
-  const [login, { isLoading, isError, error }] = useSignInMutation();
+  const [login, { isLoading, isError }] = useSignInMutation();
   const [getCurrentUser] = useLazyFetchCurrentUserQuery();
   const [getAddress] = useLazyFetchAddressByIdQuery();
 
@@ -54,9 +54,6 @@ export const Login: React.FC = () => {
 
     try {
       const loginResponse = await login(formData);
-      console.log(error);
-      console.log(isError);
-      console.log(loginResponse);
       navigate("/");
       dispatch(loginSuccess(loginResponse));
 

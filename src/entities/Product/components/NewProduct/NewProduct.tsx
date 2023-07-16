@@ -73,7 +73,6 @@ export const NewProduct: React.FC = () => {
   };
 
   const handleDeleteImage = (event: string) => {
-    console.log(event);
     if (event === "img1") {
       setValue("img1", getValues("img2"));
       setValue("img2", getValues("img3"));

@@ -29,20 +29,10 @@ const productsApi = api.injectEndpoints({
       query: formData => ({
         url: "/api/images",
         method: "POST",
-        // headers: {
-        //   "Content-Type": "multipart/form-data; charset=UTF-8",
-        // },
         body: formData,
-        // formData: true,
         credentials: "include",
       }),
       invalidatesTags: ["Image"],
-      transformResponse: res => console.log("addNewImg res: ", res),
-    }),
-    fetchImgById: builder.query({
-      query: id => `/api/images/${id}`,
-      providesTags: ["Image"],
-      transformResponse: res => console.log("fetchImg res: ", res),
     }),
   }),
 });
@@ -52,5 +42,4 @@ export const {
   useFetchProductsCurrentUserQuery,
   useAddProductMutation,
   useAddNewImgMutation,
-  useLazyFetchImgByIdQuery,
 } = productsApi;

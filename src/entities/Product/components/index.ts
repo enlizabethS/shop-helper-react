@@ -1,3 +1,4 @@
 export * from "./ProductsList";
-export * from "./ProductCard";
+export * from "./ProductItem";
+export * from "./ProductImage";
 export * from "./NewProduct";

@@ -1,7 +1,9 @@
 export interface IProduct {
   id?: number;
-  userId?: string;
-  name: string;
+  title: string;
   quantity: number;
   price: number;
+  imagesId: number[];
+  previewImageId?: number;
+  createdDate: Date;
 }
