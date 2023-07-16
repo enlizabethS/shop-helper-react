@@ -5,23 +5,60 @@ export const Form = styled.form`
   flex-direction: column;
 `;
 
-export const InputHidden = styled.input`
-  opacity: 0;
-  height: 0;
-  width: 0;
-  line-height: 0;
-  overflow: hidden;
-  padding: 0;
-  margin: 0;
+export const Label = styled.label`
+  margin-bottom: 16px;
 `;
 
-export const ImgBlock = styled.div`
-  display: flex;
+export const Input = styled.input`
+  width: 380px;
+  height: 40px;
 
-  height: 75px;
+  color: #4f145e;
+  background-color: rgba(226, 198, 198, 0.5);
+
+  padding: 0 8px;
+  border: none;
+  border-radius: 7px;
+  outline-color: #4f145e;
+
+  :invalid {
+    outline-color: red;
+  }
 `;
 
-export const Img = styled.img`
-  width: 75px;
-  height: 75px;
+export const ImageBox = styled.div``;
+
+export const ImagePicker = styled.input``;
+
+export const DeleteImage = styled.button``;
+
+export const ErrorMessage = styled.span`
+  font-size: 16px;
+  color: red;
+`;
+
+export const SubmitButton = styled.button`
+  width: 200px;
+  height: 30px;
+  margin-bottom: 16px;
+
+  background-color: rgba(226, 198, 198, 0.5);
+  color: #4f145e;
+
+  border-color: #4f145e;
+  border-radius: 7px;
+
+  :hover {
+    color: white;
+    background-color: #4f145e;
+  }
+
+  :disabled {
+    color: #be98c8;
+
+    background-color: rgba(205, 199, 199, 0.5);
+    border-color: #be98c8;
+
+    cursor: not-allowed;
+  }
 `;

@@ -1,8 +1,18 @@
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAddProductMutation } from "entities/Product";
 import { Spinner } from "shared";
 
-import { Form } from "./NewProduct.styled";
+import {
+  Form,
+  Label,
+  Input,
+  ImageBox,
+  ImagePicker,
+  DeleteImage,
+  ErrorMessage,
+  SubmitButton,
+} from "./NewProduct.styled";
 
 interface INewProductForm {
   productName: string;
@@ -19,6 +29,9 @@ export const NewProduct: React.FC = () => {
     register,
     handleSubmit,
     formState: { dirtyFields, errors },
+    setValue,
+    getValues,
+    resetField,
     reset,
   } = useForm<INewProductForm>({
     mode: "onBlur",
@@ -31,6 +44,19 @@ export const NewProduct: React.FC = () => {
       img3: undefined,
     },
   });
+
+  // useEffect(() => {
+  //   const { img1, img2, img3 } = dirtyFields;
+
+  //   if (img1 === undefined && img2 !== undefined) {
+  //     setValue("img1", getValues("img2"));
+  //     setValue("img2", undefined);
+  //   }
+  //   if (img2 === undefined && img3 !== undefined) {
+  //     setValue("img2", getValues("img3"));
+  //     setValue("img3", undefined);
+  //   }
+  // }, [dirtyFields, getValues, setValue]);
 
   const handleFormSubmit: SubmitHandler<INewProductForm> = data => {
     const formData = new FormData();
@@ -46,77 +72,119 @@ export const NewProduct: React.FC = () => {
     reset();
   };
 
+  const handleDeleteImage = (event: string) => {
+    console.log(event);
+    if (event === "img1") {
+      setValue("img1", getValues("img2"));
+      setValue("img2", getValues("img3"));
+      setValue("img3", undefined);
+      // resetField("img1");
+      return;
+    }
+    if (event === "img2") {
+      setValue("img2", getValues("img3"));
+      setValue("img3", undefined);
+      // resetField("img2");
+      return;
+    }
+    if (event === "img3") {
+      setValue("img3", undefined);
+      // resetField("img3");
+      return;
+    }
+  };
+
   return (
-    <>
-      <Form onSubmit={handleSubmit(handleFormSubmit)}>
-        <label>
-          Name of product:
-          <input
-            aria-invalid="true"
-            {...register("productName", {
-              required: "Required field",
-              minLength: {
-                value: 3,
-                message: "Minimum 3 characters",
-              },
-            })}
-          />
-        </label>
-        {errors.productName && (
-          <span role="alert">{errors.productName.message || "Error!"}</span>
-        )}
+    <Form onSubmit={handleSubmit(handleFormSubmit)}>
+      <Label>
+        Name of product:
+        <Input
+          aria-invalid={errors.productName ? true : false}
+          {...register("productName", {
+            required: "Required field",
+            minLength: {
+              value: 3,
+              message: "Minimum 3 characters",
+            },
+          })}
+        />
+      </Label>
+      {errors.productName && (
+        <ErrorMessage role="alert">
+          {errors.productName.message || "Error!"}
+        </ErrorMessage>
+      )}
 
-        <label>
-          Quantity
-          <input
-            type="number"
-            {...register("quantity", {
-              required: "Required field",
-              min: 1,
-            })}
-          />
-        </label>
-        <div>
-          {errors.quantity && (
-            <span>{errors.quantity.message || "Error!"}</span>
-          )}
-        </div>
+      <Label>
+        Quantity:
+        <Input
+          type="number"
+          {...register("quantity", {
+            required: "Required field",
+            min: 1,
+            valueAsNumber: true,
+          })}
+          aria-invalid={errors.quantity ? true : false}
+        />
+      </Label>
+      {errors.quantity && (
+        <ErrorMessage>{errors.quantity.message || "Error!"}</ErrorMessage>
+      )}
 
-        <label>
-          Price
-          <input
-            type="number"
-            {...register("price", {
-              required: "Required field",
-              min: 0,
-            })}
-          />
-        </label>
-        <div>
-          {errors.price && <span>{errors.price.message || "Error!"}</span>}
-        </div>
+      <Label>
+        Price:
+        <Input
+          {...register("price", {
+            required: "Required field",
+            min: 0,
+          })}
+          aria-invalid={errors.price ? true : false}
+        />
+      </Label>
+      {errors.price && (
+        <ErrorMessage>{errors.price.message || "Error!"}</ErrorMessage>
+      )}
 
-        <label>
+      <ImageBox>
+        <Label>
           Image 1
-          <input {...register("img1")} type="file" />
-        </label>
+          <ImagePicker {...register("img1")} type="file" />
+        </Label>
 
-        {(dirtyFields.img1 || dirtyFields.img2 !== undefined) && (
-          <label>
+        <DeleteImage type="button" onClick={() => handleDeleteImage("img1")}>
+          Delete
+        </DeleteImage>
+      </ImageBox>
+
+      {(dirtyFields.img1 || dirtyFields.img2 !== undefined) && (
+        <ImageBox>
+          <Label>
             Image 2
-            <input {...register("img2")} type="file" />
-          </label>
-        )}
+            <ImagePicker {...register("img2")} type="file" />
+          </Label>
 
-        {(dirtyFields.img2 || dirtyFields.img3 !== undefined) && (
-          <label>
+          <DeleteImage type="button" onClick={() => handleDeleteImage("img2")}>
+            Delete
+          </DeleteImage>
+        </ImageBox>
+      )}
+
+      {(dirtyFields.img2 || dirtyFields.img3 !== undefined) && (
+        <ImageBox>
+          <Label>
             Image 3
-            <input {...register("img3")} type="file" />
-          </label>
-        )}
+            <ImagePicker {...register("img3")} type="file" />
+          </Label>
 
-        <button type="submit">{isLoading ? <Spinner /> : "Save"}</button>
-      </Form>
-    </>
+          <DeleteImage type="button" onClick={() => handleDeleteImage("img3")}>
+            Delete
+          </DeleteImage>
+        </ImageBox>
+      )}
+
+      <SubmitButton type="submit">
+        {isLoading ? <Spinner /> : "Save"}
+      </SubmitButton>
+    </Form>
   );
 };

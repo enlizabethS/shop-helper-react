@@ -40,7 +40,7 @@ export const Login: React.FC = () => {
   });
   const dispatch = useAppDispatch();
   const [navigate] = useAppNavigate();
-  const [login, { isLoading, isError }] = useSignInMutation();
+  const [login, { isLoading, isError, error }] = useSignInMutation();
   const [getCurrentUser] = useLazyFetchCurrentUserQuery();
   const [getAddress] = useLazyFetchAddressByIdQuery();
 
@@ -54,6 +54,9 @@ export const Login: React.FC = () => {
 
     try {
       const loginResponse = await login(formData);
+      console.log(error);
+      console.log(isError);
+      console.log(loginResponse);
       navigate("/");
       dispatch(loginSuccess(loginResponse));
 
@@ -89,7 +92,7 @@ export const Login: React.FC = () => {
               },
             })}
             placeholder="Username"
-            aria-invalid="false"
+            aria-invalid={errors.username ? true : false}
           />
 
           {errors.username ? (
@@ -112,7 +115,7 @@ export const Login: React.FC = () => {
               },
             })}
             placeholder="Password"
-            aria-invalid="false"
+            aria-invalid={errors.password ? true : false}
           />
 
           {errors.password ? (

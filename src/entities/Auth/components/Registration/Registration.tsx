@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch, useAppNavigate, Spinner } from "shared";
 import {
@@ -54,14 +53,8 @@ export const Registration: React.FC = () => {
   const [login] = useSignInMutation();
   const [getCurrentUser] = useLazyFetchCurrentUserQuery();
   const [getAddress] = useLazyFetchAddressByIdQuery();
-  const [comparePasswords, setComparePasswords] = useState(true);
 
   const handleSignUpSubmit: SubmitHandler<IRegState> = async data => {
-    if (getValues("password") !== getValues("passwordConfirmation")) {
-      setComparePasswords(false);
-      return;
-    }
-
     const formData = new FormData();
     formData.append("username", data.username);
     formData.append("password", data.password);
@@ -113,7 +106,7 @@ export const Registration: React.FC = () => {
               },
             })}
             placeholder="Username"
-            aria-invalid="false"
+            aria-invalid={errors.username ? true : false}
           />
 
           {errors.username ? (
@@ -136,7 +129,7 @@ export const Registration: React.FC = () => {
               },
             })}
             placeholder="Email"
-            aria-invalid="false"
+            aria-invalid={errors.email ? true : false}
           />
 
           {errors.email ? (
@@ -159,7 +152,7 @@ export const Registration: React.FC = () => {
               },
             })}
             placeholder="Password"
-            aria-invalid="false"
+            aria-invalid={errors.password ? true : false}
           />
 
           {errors.password ? (
@@ -175,26 +168,22 @@ export const Registration: React.FC = () => {
           <Input
             type="password"
             {...register("passwordConfirmation", {
-              required: "You did not enter a password",
+              required: "Password not confirmed",
               minLength: {
                 value: 6,
                 message: "Minimum 6 characters",
               },
+              validate: () =>
+                getValues("password") === getValues("passwordConfirmation"),
             })}
             placeholder="Password confirmation"
-            aria-invalid="false"
+            aria-invalid={errors.passwordConfirmation ? true : false}
           />
 
           {errors.passwordConfirmation ? (
-            <ErrorMessage role="alert">
-              {errors.passwordConfirmation.message || "Error!"}
-            </ErrorMessage>
+            <ErrorMessage>Password not confirmed</ErrorMessage>
           ) : (
             <ErrorReplacement />
-          )}
-
-          {!comparePasswords && (
-            <ErrorMessage>Password not confirmed</ErrorMessage>
           )}
         </Label>
 

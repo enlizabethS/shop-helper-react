@@ -45,6 +45,10 @@ export const Input = styled.input`
   border: none;
   border-radius: 7px;
   outline-color: #4f145e;
+
+  :invalid {
+    border: 2px solid red;
+  }
 `;
 
 export const ErrorMessage = styled.span`
