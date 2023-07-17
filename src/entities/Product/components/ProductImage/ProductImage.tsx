@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useFetchImageById } from "entities/Product";
+import { useEffect, useState } from "react";
 
 import { IMG } from "./ProductImage.styled";
 
@@ -8,15 +7,5 @@ interface IProductImage {
 }
 
 export const ProductImage: React.FC<IProductImage> = ({ imageId }) => {
-  const { imageUrl, handleFetchImage } = useFetchImageById();
-
-  useEffect(() => {
-    handleFetchImage(imageId);
-  }, [handleFetchImage, imageId]);
-
-  return (
-    <li>
-      <IMG src={imageUrl} alt="" />
-    </li>
-  );
+  return <li>{/* <IMG src={imageUrl} alt="" /> */}</li>;
 };

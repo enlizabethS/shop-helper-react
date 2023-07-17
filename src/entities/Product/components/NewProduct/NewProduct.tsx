@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAddProductMutation } from "entities/Product";
 import { Spinner } from "shared";
@@ -31,7 +30,6 @@ export const NewProduct: React.FC = () => {
     formState: { dirtyFields, errors },
     setValue,
     getValues,
-    resetField,
     reset,
   } = useForm<INewProductForm>({
     mode: "onBlur",
@@ -44,19 +42,6 @@ export const NewProduct: React.FC = () => {
       img3: undefined,
     },
   });
-
-  // useEffect(() => {
-  //   const { img1, img2, img3 } = dirtyFields;
-
-  //   if (img1 === undefined && img2 !== undefined) {
-  //     setValue("img1", getValues("img2"));
-  //     setValue("img2", undefined);
-  //   }
-  //   if (img2 === undefined && img3 !== undefined) {
-  //     setValue("img2", getValues("img3"));
-  //     setValue("img3", undefined);
-  //   }
-  // }, [dirtyFields, getValues, setValue]);
 
   const handleFormSubmit: SubmitHandler<INewProductForm> = data => {
     const formData = new FormData();
