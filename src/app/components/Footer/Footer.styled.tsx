@@ -6,33 +6,56 @@ import { ReactComponent as shopHelperTelega } from "icons/icon-telegram.svg";
 
 export const FooterContain = styled.div`
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
-  flex-direction: row;
-  margin-top: 40%;
+  flex-direction: column;
 
-  position: relative;
   width: 100%;
-  padding: 20px 50px;
+  /* padding: 40px 0; */
+`;
+
+export const FirstBlock = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  width: 100%;
+  padding: 30px 0;
+`;
+
+export const LogoBox = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const Logo = styled(shopHelperLogo)`
-  width: 150px;
-  height: 100px;
-  margin: 0;
-  fill: white;
+  width: 40px;
+  height: 40px;
+  margin-right: 24px;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h2`
   color: #4f145e;
   font-size: 25px;
+`;
+
+export const SocialLinksBox = styled.div`
+  display: flex;
+`;
+
+export const SocialLink = styled.a`
+  width: 50px;
+  height: 50px;
+  text-decoration: none;
+
+  :not(:last-child) {
+    margin-right: 24px;
+  }
 `;
 
 export const SVGGit = styled(shopHelperGit)`
   width: 50px;
   height: 50px;
-  padding: 8px;
-  margin: 0 5px 0 5px;
 
   border-radius: 7px;
 
@@ -45,8 +68,6 @@ export const SVGGit = styled(shopHelperGit)`
 export const SVGInst = styled(shopHelperInst)`
   width: 50px;
   height: 50px;
-  padding: 8px;
-  margin: 0 5px 0 5px;
 
   border-radius: 7px;
 
@@ -60,9 +81,6 @@ export const SVGTelega = styled(shopHelperTelega)`
   width: 50px;
   height: 50px;
 
-  padding: 8px;
-  margin: 0 5px 0 5px;
-
   border-radius: 7px;
 
   :hover {
@@ -71,22 +89,19 @@ export const SVGTelega = styled(shopHelperTelega)`
   }
 `;
 
-export const TextContain = styled.div`
-  position: relative;
-
+export const SecondBlock = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  align-self: flex-end;
+  /* align-items: center; */
+  /* align-self: flex-end; */
 `;
 
 export const TextFooter = styled.div`
-  text-align: center;
+  /* text-align: center; */
 
-  justify-content: center;
-  align-items: center;
-  align-self: flex-end;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* align-self: flex-end; */
 
-  margin-right: 250px;
   font-size: 10px;
 `;

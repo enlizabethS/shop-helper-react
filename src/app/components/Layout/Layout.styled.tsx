@@ -24,4 +24,6 @@ export const Main = styled.main`
 
 export const Footer = styled.footer`
   width: 100%;
+
+  background-color: #9a6089;
 `;
