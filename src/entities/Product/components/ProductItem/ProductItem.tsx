@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchImage, IProduct } from "entities/Product";
+import { PlaceHolder } from "shared";
 
 import { Card, PrewImage } from "./ProductItem.styled";
 
@@ -19,7 +20,11 @@ export const ProductItem: React.FC<IProductItem> = ({ product }) => {
       <span>{product.title}</span>
       <span>{product.quantity}</span>
       <span>{product.price}</span>
-      {product.previewImageId && <PrewImage src={img} alt="" />}
+      {product.previewImageId ? (
+        <PrewImage src={img} alt="" />
+      ) : (
+        <PlaceHolder size="preview" />
+      )}
     </Card>
   );
 };
