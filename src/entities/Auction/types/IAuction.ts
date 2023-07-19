@@ -1,9 +1,10 @@
 export interface IAuction {
-  id: number;
+  id?: number;
   productId: number;
-  createdDate: string;
+  createdDate?: string;
   startDate: string;
   expirationDate: string;
-  bidsId: number[];
-  status: string;
+  bidsId?: number[];
+  status?: string;
+  step: number;
 }

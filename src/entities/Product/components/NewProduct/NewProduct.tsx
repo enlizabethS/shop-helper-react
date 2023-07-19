@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useAddProductMutation } from "entities/Product";
-import { Spinner } from "shared";
+import { useAddProductMutation, saveCurrentProduct } from "entities/Product";
+import { useAppDispatch, Spinner } from "shared";
 
 import {
   CloseButton,
@@ -35,6 +35,7 @@ export const NewProduct: React.FC<INewProduct> = ({
   showProductModal,
   setShowProductModal,
 }) => {
+  const dispatch = useAppDispatch();
   const [addNewProduct, { isLoading }] = useAddProductMutation();
   const {
     register,
@@ -55,7 +56,7 @@ export const NewProduct: React.FC<INewProduct> = ({
     },
   });
 
-  const handleFormSubmit: SubmitHandler<INewProductForm> = data => {
+  const handleFormSubmit: SubmitHandler<INewProductForm> = async data => {
     const formData = new FormData();
     formData.append("productName", data.productName);
     formData.append("quantity", data.quantity.toString());
@@ -65,10 +66,15 @@ export const NewProduct: React.FC<INewProduct> = ({
     if (data.img2) formData.append("file2", data.img2[0]);
     if (data.img3) formData.append("file3", data.img3[0]);
 
-    addNewProduct(formData);
+    const addedProduct = await addNewProduct(formData).unwrap();
+    dispatch(saveCurrentProduct(addedProduct));
 
     reset();
   };
+
+  const handleSaveAndNewAuctionCreate: React.MouseEventHandler<
+    HTMLButtonElement
+  > = () => {};
 
   return (
     <Form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -82,7 +88,7 @@ export const NewProduct: React.FC<INewProduct> = ({
       <Label>
         Name of product:
         <Input
-          aria-invalid={errors.productName ? true : false}
+          aria-invalid={!!errors.productName}
           {...register("productName", {
             required: "Required field",
             minLength: {
@@ -107,7 +113,7 @@ export const NewProduct: React.FC<INewProduct> = ({
             min: 1,
             valueAsNumber: true,
           })}
-          aria-invalid={errors.quantity ? true : false}
+          aria-invalid={!!errors.quantity}
         />
       </Label>
       {errors.quantity && (
@@ -121,7 +127,7 @@ export const NewProduct: React.FC<INewProduct> = ({
             required: "Required field",
             min: 0,
           })}
-          aria-invalid={errors.price ? true : false}
+          aria-invalid={!!errors.price}
         />
       </Label>
       {errors.price && (
@@ -135,7 +141,7 @@ export const NewProduct: React.FC<INewProduct> = ({
             required: "Required field",
           })}
           rows={5}
-          aria-invalid={errors.price ? true : false}
+          aria-invalid={!!errors.description}
         />
       </Label>
       {errors.description && (
@@ -191,10 +197,7 @@ export const NewProduct: React.FC<INewProduct> = ({
           {isLoading ? <Spinner /> : "Save & Close"}
         </SubmitButton>
 
-        <SubmitButton
-          type="submit"
-          // onClick={() => setShowProductModal(!showProductModal)}
-        >
+        <SubmitButton type="submit" onClick={handleSaveAndNewAuctionCreate}>
           {isLoading ? <Spinner /> : "Save & Create new auction"}
         </SubmitButton>
       </ButtonsBox>

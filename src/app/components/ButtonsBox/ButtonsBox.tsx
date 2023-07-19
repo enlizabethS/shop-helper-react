@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useAppSelector, Modal } from "shared";
 import { NewProduct } from "entities/Product";
+import { NewAuction } from "entities/Auction";
 
 import { ButtonsBox, HomeButton, Button } from "./ButtonsBox.styled";
 
 export const ButtonsBoxEl: React.FC = () => {
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   const [showProductModal, setShowProductModal] = useState(false);
+  const [showAuctionModal, setShowAuctionModal] = useState(false);
 
   return (
     <ButtonsBox>
@@ -20,9 +22,13 @@ export const ButtonsBoxEl: React.FC = () => {
           >
             Add new product
           </Button>
-          {/* <Button  type="button" onClick={() => setShowAuctionModal(true)}>
+
+          <Button
+            type="button"
+            onClick={() => setShowAuctionModal(!showAuctionModal)}
+          >
             Create new auction
-          </Button> */}
+          </Button>
         </div>
       )}
 
@@ -34,6 +40,19 @@ export const ButtonsBoxEl: React.FC = () => {
           <NewProduct
             showProductModal={showProductModal}
             setShowProductModal={setShowProductModal}
+          />
+        </Modal>
+      )}
+
+      {showAuctionModal && (
+        <Modal
+          width="750px"
+          // height="700px"
+          onClose={() => setShowAuctionModal(!showAuctionModal)}
+        >
+          <NewAuction
+            showAuctionModal={showAuctionModal}
+            setShowAuctionModal={setShowAuctionModal}
           />
         </Modal>
       )}

@@ -1,5 +1,5 @@
 import { api } from "app/redux";
-import { IBid } from "entities/User";
+import { IBid } from "entities/Auction";
 
 const bidsApi = api.injectEndpoints({
   endpoints: builder => ({

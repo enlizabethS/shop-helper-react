@@ -1,5 +1,5 @@
 import { api } from "app/redux";
-import { IAuction } from "entities/User";
+import { IAuction } from "entities/Auction";
 
 interface INewBid {
   id: number;
@@ -24,14 +24,10 @@ const auctionApi = api.injectEndpoints({
       providesTags: ["Auction"],
     }),
     addAuction: builder.mutation<IAuction, IAuction>({
-      query: ({ productId, startDate, expirationDate }) => ({
+      query: newAuction => ({
         url: "/api/auctions",
         method: "POST",
-        body: {
-          productId,
-          startDate,
-          expirationDate,
-        },
+        body: newAuction,
       }),
       invalidatesTags: ["Auction"],
     }),
