@@ -19,7 +19,7 @@ import {
   ItemsBlock,
   MenuItem,
   LogOutButton,
-} from "./Header.styled";
+} from "./HeaderEl.styled";
 
 export const HeaderEl = () => {
   const dispatch = useAppDispatch();

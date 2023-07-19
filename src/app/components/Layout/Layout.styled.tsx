@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 
 export const Header = styled.header`
   width: 100%;
-  height: 100px;
 
   background-color: #9a6089;
 `;
@@ -19,7 +18,6 @@ export const Container = styled.section`
 
 export const Main = styled.main`
   width: 100%;
-  height: 1000px;
 `;
 
 export const Footer = styled.footer`

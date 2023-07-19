@@ -9,12 +9,12 @@ export const Layout: React.FC = () => {
       <Header>
         <Container>
           <HeaderEl />
-          <ButtonsBoxEl />
         </Container>
       </Header>
 
       <Main>
         <Container>
+          <ButtonsBoxEl />
           <Outlet />
         </Container>
       </Main>

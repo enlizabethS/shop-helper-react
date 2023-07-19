@@ -21,6 +21,7 @@ export const HederContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  padding: 30px 0;
 `;
 
 export const Logo = styled(shopHelperLogo)`
