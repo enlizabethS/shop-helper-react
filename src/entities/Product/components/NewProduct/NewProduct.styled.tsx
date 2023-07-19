@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
 
+export const CloseButton = styled.button`
+  width: 36px;
+  height: 36px;
+
+  margin-bottom: 24px;
+`;
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -26,6 +33,18 @@ export const Input = styled.input`
   }
 `;
 
+export const Description = styled.textarea`
+  width: 380px;
+
+  color: #4f145e;
+  background-color: rgba(226, 198, 198, 0.5);
+
+  padding: 0 8px;
+  border: none;
+  border-radius: 7px;
+  outline-color: #4f145e;
+`;
+
 export const ImageBox = styled.div``;
 
 export const ImagePicker = styled.input``;
@@ -37,16 +56,25 @@ export const ErrorMessage = styled.span`
   color: red;
 `;
 
-export const SubmitButton = styled.button`
-  width: 200px;
-  height: 30px;
+export const ButtonsBox = styled.div`
+  display: flex;
+
   margin-bottom: 16px;
+`;
+
+export const SubmitButton = styled.button`
+  height: 30px;
+  padding: 0 16px;
 
   background-color: rgba(226, 198, 198, 0.5);
   color: #4f145e;
 
   border-color: #4f145e;
   border-radius: 7px;
+
+  :not(:last-child) {
+    margin-right: 16px;
+  }
 
   :hover {
     color: white;

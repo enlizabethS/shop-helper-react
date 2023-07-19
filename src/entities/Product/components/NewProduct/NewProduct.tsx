@@ -3,33 +3,44 @@ import { useAddProductMutation } from "entities/Product";
 import { Spinner } from "shared";
 
 import {
+  CloseButton,
   Form,
   Label,
   Input,
+  Description,
   ImageBox,
   ImagePicker,
   DeleteImage,
   ErrorMessage,
+  ButtonsBox,
   SubmitButton,
 } from "./NewProduct.styled";
+
+interface INewProduct {
+  showProductModal: boolean;
+  setShowProductModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 interface INewProductForm {
   productName: string;
   quantity: number;
   price: string;
+  description: string;
   img1?: FileList;
   img2?: FileList;
   img3?: FileList;
 }
 
-export const NewProduct: React.FC = () => {
+export const NewProduct: React.FC<INewProduct> = ({
+  showProductModal,
+  setShowProductModal,
+}) => {
   const [addNewProduct, { isLoading }] = useAddProductMutation();
   const {
     register,
     handleSubmit,
     formState: { dirtyFields, errors },
-    setValue,
-    getValues,
+    resetField,
     reset,
   } = useForm<INewProductForm>({
     mode: "onBlur",
@@ -37,6 +48,7 @@ export const NewProduct: React.FC = () => {
       productName: "",
       quantity: 1,
       price: "",
+      description: "",
       img1: undefined,
       img2: undefined,
       img3: undefined,
@@ -48,6 +60,7 @@ export const NewProduct: React.FC = () => {
     formData.append("productName", data.productName);
     formData.append("quantity", data.quantity.toString());
     formData.append("price", data.price);
+    formData.append("description", data.description);
     if (data.img1) formData.append("file1", data.img1[0]);
     if (data.img2) formData.append("file2", data.img2[0]);
     if (data.img3) formData.append("file3", data.img3[0]);
@@ -57,29 +70,15 @@ export const NewProduct: React.FC = () => {
     reset();
   };
 
-  const handleDeleteImage = (event: string) => {
-    if (event === "img1") {
-      setValue("img1", getValues("img2"));
-      setValue("img2", getValues("img3"));
-      setValue("img3", undefined);
-      // resetField("img1");
-      return;
-    }
-    if (event === "img2") {
-      setValue("img2", getValues("img3"));
-      setValue("img3", undefined);
-      // resetField("img2");
-      return;
-    }
-    if (event === "img3") {
-      setValue("img3", undefined);
-      // resetField("img3");
-      return;
-    }
-  };
-
   return (
     <Form onSubmit={handleSubmit(handleFormSubmit)}>
+      <CloseButton
+        type="button"
+        onClick={() => setShowProductModal(!showProductModal)}
+      >
+        X
+      </CloseButton>
+
       <Label>
         Name of product:
         <Input
@@ -129,13 +128,27 @@ export const NewProduct: React.FC = () => {
         <ErrorMessage>{errors.price.message || "Error!"}</ErrorMessage>
       )}
 
+      <Label>
+        Description:
+        <Description
+          {...register("description", {
+            required: "Required field",
+          })}
+          rows={5}
+          aria-invalid={errors.price ? true : false}
+        />
+      </Label>
+      {errors.description && (
+        <ErrorMessage>{errors.description.message || "Error!"}</ErrorMessage>
+      )}
+
       <ImageBox>
         <Label>
           Image 1
           <ImagePicker {...register("img1")} type="file" />
         </Label>
 
-        <DeleteImage type="button" onClick={() => handleDeleteImage("img1")}>
+        <DeleteImage type="button" onClick={() => resetField("img1")}>
           Delete
         </DeleteImage>
       </ImageBox>
@@ -147,7 +160,7 @@ export const NewProduct: React.FC = () => {
             <ImagePicker {...register("img2")} type="file" />
           </Label>
 
-          <DeleteImage type="button" onClick={() => handleDeleteImage("img2")}>
+          <DeleteImage type="button" onClick={() => resetField("img2")}>
             Delete
           </DeleteImage>
         </ImageBox>
@@ -160,15 +173,31 @@ export const NewProduct: React.FC = () => {
             <ImagePicker {...register("img3")} type="file" />
           </Label>
 
-          <DeleteImage type="button" onClick={() => handleDeleteImage("img3")}>
+          <DeleteImage type="button" onClick={() => resetField("img3")}>
             Delete
           </DeleteImage>
         </ImageBox>
       )}
 
-      <SubmitButton type="submit">
-        {isLoading ? <Spinner /> : "Save"}
-      </SubmitButton>
+      <ButtonsBox>
+        <SubmitButton type="submit">
+          {isLoading ? <Spinner /> : "Save"}
+        </SubmitButton>
+
+        <SubmitButton
+          type="submit"
+          onClick={() => setShowProductModal(!showProductModal)}
+        >
+          {isLoading ? <Spinner /> : "Save & Close"}
+        </SubmitButton>
+
+        <SubmitButton
+          type="submit"
+          // onClick={() => setShowProductModal(!showProductModal)}
+        >
+          {isLoading ? <Spinner /> : "Save & Create new auction"}
+        </SubmitButton>
+      </ButtonsBox>
     </Form>
   );
 };

@@ -8,7 +8,7 @@ const modalRoot = document.querySelector("#modal-root") as HTMLElement;
 
 interface IModal {
   width: string;
-  height: string;
+  height?: string;
   children: ReactNode;
   onClose?: () => void;
 }
