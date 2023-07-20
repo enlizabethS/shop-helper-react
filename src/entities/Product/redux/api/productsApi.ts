@@ -1,6 +1,10 @@
 import { api } from "app/redux";
 import { IProduct } from "entities/Product";
 
+interface IFilterState {
+  title: string;
+}
+
 const productsApi = api.injectEndpoints({
   endpoints: builder => ({
     fetchProductById: builder.query<IProduct, number>({
@@ -25,21 +29,19 @@ const productsApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Product"],
     }),
-    addNewImg: builder.mutation({
-      query: formData => ({
-        url: "/api/images",
+    findProductByFilter: builder.mutation<IProduct[], IFilterState>({
+      query: filter => ({
+        url: "/api/products/find",
         method: "POST",
-        body: formData,
-        credentials: "include",
+        body: filter,
       }),
-      invalidatesTags: ["Image"],
     }),
   }),
 });
 
 export const {
   useLazyFetchProductByIdQuery,
-  useFetchProductsCurrentUserQuery,
+  useLazyFetchProductsCurrentUserQuery,
   useAddProductMutation,
-  useAddNewImgMutation,
+  useFindProductByFilterMutation,
 } = productsApi;

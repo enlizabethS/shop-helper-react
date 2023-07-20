@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useSignOutMutation, logoutSuccess } from "entities/Auth";
 import { resetCurrentUser, resetAddress } from "entities/User";
+import {
+  useLazyFetchProductsCurrentUserQuery,
+  saveProducts,
+} from "entities/Product";
 import { useAppDispatch, useAppSelector } from "shared";
 import icons from "icons/svgSprite.svg";
 
@@ -23,6 +27,7 @@ import {
 
 export const HeaderEl = () => {
   const dispatch = useAppDispatch();
+  const [findProducts] = useLazyFetchProductsCurrentUserQuery();
   const [signOut] = useSignOutMutation();
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
   const currentUser = useAppSelector(state => state.users.currentUser);
@@ -41,6 +46,15 @@ export const HeaderEl = () => {
 
     dispatch(resetCurrentUser());
     dispatch(resetAddress());
+  };
+
+  const handleMyProducts: React.MouseEventHandler<
+    HTMLAnchorElement
+  > = async () => {
+    const foundProducts = await findProducts(null).unwrap();
+    dispatch(saveProducts(foundProducts));
+
+    setShowMenuModal(!showMenuModal);
   };
 
   const toggleMenuModal = () => {
@@ -91,7 +105,7 @@ export const HeaderEl = () => {
                   My profile
                 </MenuItem>
 
-                <MenuItem to={"my-products"} onClick={toggleMenuModal}>
+                <MenuItem to={"products"} onClick={handleMyProducts}>
                   My products
                 </MenuItem>
 

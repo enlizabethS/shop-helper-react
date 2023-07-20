@@ -3,10 +3,11 @@ import HomePage from "pages/HomePage";
 import SingInPage from "pages/SignInPage";
 import SingUpPage from "pages/SignUpPage";
 import MyProfilePage from "pages/MyProfilePage";
-import MyProductsPage from "pages/MyProductsPage";
 import MyPurchasesPage from "pages/MyPurchasesPage";
 import MyAuctionsPage from "pages/MyAuctionsPage";
-import FindProductPage from "pages/FindProductPage";
+import ProductsPage from "pages/ProductsPage";
+import ProductCardPage from "pages/ProductCardPage";
+import NotFoundPage from "pages/NotFoundPage";
 import { Layout, PrivateRoute, PublicRoute } from "app";
 
 import { Container } from "./App.styled";
@@ -42,27 +43,20 @@ export const App: React.FC = () => {
             }
           />
           <Route
-            index
-            path="/fond-product"
+            path="/products"
             element={
               <PublicRoute>
-                <FindProductPage />
+                <ProductsPage />
               </PublicRoute>
             }
-          />
+          >
+            <Route path="/products/:productId" element={<ProductCardPage />} />
+          </Route>
           <Route
             path="/my-profile"
             element={
               <PrivateRoute redirectTo="/sign-in">
                 <MyProfilePage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/my-products"
-            element={
-              <PrivateRoute redirectTo="/sign-in">
-                <MyProductsPage />
               </PrivateRoute>
             }
           />
@@ -82,6 +76,7 @@ export const App: React.FC = () => {
               </PrivateRoute>
             }
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </Container>

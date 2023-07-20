@@ -5,5 +5,5 @@ export interface IProduct {
   price: number;
   imagesId: number[];
   previewImageId?: number;
-  createdDate: Date;
+  createdDate: "";
 }

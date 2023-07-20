@@ -70,6 +70,7 @@ export const NewAuction: React.FC<INewAuction> = ({
   const handleFormSubmit: SubmitHandler<INewAuctionForm> = async data => {
     await addNewAuction(data);
 
+    dispatch(resetCurrentProduct());
     reset();
   };
 
