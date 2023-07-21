@@ -72,10 +72,6 @@ export const NewProduct: React.FC<INewProduct> = ({
     reset();
   };
 
-  const handleSaveAndNewAuctionCreate: React.MouseEventHandler<
-    HTMLButtonElement
-  > = () => {};
-
   return (
     <Form onSubmit={handleSubmit(handleFormSubmit)}>
       <CloseButton
@@ -189,17 +185,6 @@ export const NewProduct: React.FC<INewProduct> = ({
         <SubmitButton type="submit">
           {isLoading ? <Spinner /> : "Save"}
         </SubmitButton>
-
-        {/* <SubmitButton
-          type="submit"
-          onClick={() => setShowProductModal(!showProductModal)}
-        >
-          {isLoading ? <Spinner /> : "Save & Close"}
-        </SubmitButton>
-
-        <SubmitButton type="submit" onClick={handleSaveAndNewAuctionCreate}>
-          {isLoading ? <Spinner /> : "Save & Create new auction"}
-        </SubmitButton> */}
       </ButtonsBox>
     </Form>
   );

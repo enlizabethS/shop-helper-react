@@ -106,7 +106,7 @@ export const Registration: React.FC = () => {
               },
             })}
             placeholder="Username"
-            aria-invalid={errors.username ? true : false}
+            aria-invalid={!!errors.username}
           />
 
           {errors.username ? (
@@ -129,7 +129,7 @@ export const Registration: React.FC = () => {
               },
             })}
             placeholder="Email"
-            aria-invalid={errors.email ? true : false}
+            aria-invalid={!!errors.email}
           />
 
           {errors.email ? (
@@ -152,7 +152,7 @@ export const Registration: React.FC = () => {
               },
             })}
             placeholder="Password"
-            aria-invalid={errors.password ? true : false}
+            aria-invalid={!!errors.password}
           />
 
           {errors.password ? (
@@ -177,7 +177,7 @@ export const Registration: React.FC = () => {
                 getValues("password") === getValues("passwordConfirmation"),
             })}
             placeholder="Password confirmation"
-            aria-invalid={errors.passwordConfirmation ? true : false}
+            aria-invalid={!!errors.passwordConfirmation}
           />
 
           {errors.passwordConfirmation ? (

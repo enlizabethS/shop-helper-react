@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "shared";
 import icons from "icons/svgSprite.svg";
 
 import {
-  HederContainer,
+  HeaderContainer,
   Logo,
   Title,
   AnimText,
@@ -62,7 +62,7 @@ export const HeaderEl = () => {
   };
 
   return (
-    <HederContainer>
+    <HeaderContainer>
       <Logo />
 
       {!isLoggedIn && (
@@ -127,6 +127,6 @@ export const HeaderEl = () => {
       )}
 
       <AnimText>{"Sale ".repeat(34)}</AnimText>
-    </HederContainer>
+    </HeaderContainer>
   );
 };

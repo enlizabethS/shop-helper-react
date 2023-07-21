@@ -14,7 +14,7 @@ const openingModal = keyframes`
   }
 `;
 
-export const HederContainer = styled.div`
+export const HeaderContainer = styled.div`
   position: relative;
 
   display: flex;
@@ -110,7 +110,7 @@ export const Button = styled.button`
 export const MenuModal = styled.div`
   position: absolute;
   z-index: 10;
-  top: 0px;
+  top: 0;
   right: 0;
 
   display: flex;
@@ -120,7 +120,7 @@ export const MenuModal = styled.div`
   padding: 30px;
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.06);
+  box-shadow: 0 8px 16px rgba(17, 17, 17, 0.06);
 
   animation: ${openingModal} 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
 

@@ -43,7 +43,7 @@ export const ProductsMenu = styled.div`
   height: 300px;
 
   background-color: #fff;
-  box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.3);
+  box-shadow: 0 8px 16px rgba(17, 17, 17, 0.3);
 
   overflow: auto;
   scroll-behavior: smooth;
@@ -92,24 +92,6 @@ export const Input = styled.input`
     outline-color: red;
   }
 `;
-
-export const Description = styled.textarea`
-  width: 380px;
-
-  color: #4f145e;
-  background-color: rgba(226, 198, 198, 0.5);
-
-  padding: 0 8px;
-  border: none;
-  border-radius: 7px;
-  outline-color: #4f145e;
-`;
-
-export const ImageBox = styled.div``;
-
-export const ImagePicker = styled.input``;
-
-export const DeleteImage = styled.button``;
 
 export const ErrorMessage = styled.span`
   font-size: 16px;

@@ -6,12 +6,10 @@ import { ReactComponent as shopHelperTelega } from "icons/icon-telegram.svg";
 
 export const FooterContain = styled.div`
   display: flex;
-  /* justify-content: space-around; */
   align-items: center;
   flex-direction: column;
 
   width: 100%;
-  /* padding: 40px 0; */
 `;
 
 export const FirstBlock = styled.div`
@@ -92,16 +90,8 @@ export const SVGTelega = styled(shopHelperTelega)`
 export const SecondBlock = styled.div`
   display: flex;
   justify-content: center;
-  /* align-items: center; */
-  /* align-self: flex-end; */
 `;
 
 export const TextFooter = styled.div`
-  /* text-align: center; */
-
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* align-self: flex-end; */
-
   font-size: 10px;
 `;

@@ -4,8 +4,6 @@ import { IUser, IAddress } from "entities/User";
 interface IUserState {
   currentUser: IUser;
   address: IAddress;
-  // auctions: IAuction[];
-  // bids: IBid[];
 }
 
 const initialState: IUserState = {
@@ -31,8 +29,6 @@ const initialState: IUserState = {
     country: "",
     createdDate: "",
   },
-  // auctions: [],
-  // bids: [],
 };
 
 const userSlice = createSlice({
@@ -51,18 +47,6 @@ const userSlice = createSlice({
     resetAddress: state => {
       state.address = initialState.address;
     },
-    // saveAuctions: (state, action) => {
-    //   state.auctions = action.payload;
-    // },
-    // resetAuctions: state => {
-    //   state.auctions = initialState.auctions;
-    // },
-    // saveBids: (state, action) => {
-    //   state.auctions = action.payload;
-    // },
-    // resetBids: state => {
-    //   state.bids = initialState.bids;
-    // },
   },
 });
 
@@ -71,10 +55,6 @@ export const {
   resetCurrentUser,
   saveAddress,
   resetAddress,
-  // saveAuctions,
-  // resetAuctions,
-  // saveBids,
-  // resetBids,
 } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -26,7 +26,6 @@ const signUpApi = api.injectEndpoints({
         },
       }),
       invalidatesTags: ["Auth"],
-      transformResponse: (response: IRegistrationResponse) => response,
     }),
   }),
 });

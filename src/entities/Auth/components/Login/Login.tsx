@@ -89,7 +89,7 @@ export const Login: React.FC = () => {
               },
             })}
             placeholder="Username"
-            aria-invalid={errors.username ? true : false}
+            aria-invalid={!!errors.username}
           />
 
           {errors.username ? (
@@ -112,7 +112,7 @@ export const Login: React.FC = () => {
               },
             })}
             placeholder="Password"
-            aria-invalid={errors.password ? true : false}
+            aria-invalid={!!errors.password}
           />
 
           {errors.password ? (
