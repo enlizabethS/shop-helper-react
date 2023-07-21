@@ -7,9 +7,9 @@ interface IFilterState {
 
 const productsApi = api.injectEndpoints({
   endpoints: builder => ({
-    fetchProductById: builder.query<IProduct, number>({
+    fetchProductById: builder.query<IProduct, string>({
       query: id => ({
-        url: `/api/product/${id}`,
+        url: `/api/products/${id}`,
         method: "GET",
       }),
       providesTags: ["Product"],
@@ -41,6 +41,7 @@ const productsApi = api.injectEndpoints({
 
 export const {
   useLazyFetchProductByIdQuery,
+  useFetchProductByIdQuery,
   useLazyFetchProductsCurrentUserQuery,
   useAddProductMutation,
   useFindProductByFilterMutation,

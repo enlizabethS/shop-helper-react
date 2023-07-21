@@ -2,7 +2,7 @@ import { api } from "app/redux";
 
 const imagesApi = api.injectEndpoints({
   endpoints: builder => ({
-    addNewImg: builder.mutation({
+    addNewImage: builder.mutation({
       query: formData => ({
         url: "/api/images",
         method: "POST",
@@ -14,4 +14,4 @@ const imagesApi = api.injectEndpoints({
   }),
 });
 
-export const { useAddNewImgMutation } = imagesApi;
+export const { useAddNewImageMutation } = imagesApi;

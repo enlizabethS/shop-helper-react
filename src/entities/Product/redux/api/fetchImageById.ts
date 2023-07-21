@@ -10,8 +10,4 @@ export const fetchImage = (
       let url = URL.createObjectURL(data);
       setImg(url);
     });
-  //   const res = await fetch(`http://localhost:8080/api/images/${imageId}`);
-  //   const imageBlob = await res.blob();
-  //   const imageObjectURL = URL.createObjectURL(imageBlob);
-  //   setImg(imageObjectURL);
 };

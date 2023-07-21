@@ -11,7 +11,7 @@ export const ProductList: React.FC<IProductsList> = ({ productsList }) => {
     <ProductsList>
       {productsList.map(product => (
         <li key={product.id}>
-          <ProductLink to={`${product.id}`}>
+          <ProductLink to={`/products/${product.id}`}>
             <ProductItem product={product} />
           </ProductLink>
         </li>

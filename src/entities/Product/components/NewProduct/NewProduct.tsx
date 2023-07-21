@@ -190,7 +190,7 @@ export const NewProduct: React.FC<INewProduct> = ({
           {isLoading ? <Spinner /> : "Save"}
         </SubmitButton>
 
-        <SubmitButton
+        {/* <SubmitButton
           type="submit"
           onClick={() => setShowProductModal(!showProductModal)}
         >
@@ -199,7 +199,7 @@ export const NewProduct: React.FC<INewProduct> = ({
 
         <SubmitButton type="submit" onClick={handleSaveAndNewAuctionCreate}>
           {isLoading ? <Spinner /> : "Save & Create new auction"}
-        </SubmitButton>
+        </SubmitButton> */}
       </ButtonsBox>
     </Form>
   );

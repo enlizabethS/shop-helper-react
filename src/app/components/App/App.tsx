@@ -16,9 +16,9 @@ export const App: React.FC = () => {
   return (
     <Container>
       <Routes>
-        <Route element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route
-            path="/sign-in"
+            path="sign-in"
             element={
               <PublicRoute restricted redirectTo="/">
                 <SingInPage />
@@ -26,7 +26,7 @@ export const App: React.FC = () => {
             }
           />
           <Route
-            path="/sign-up"
+            path="sign-up"
             element={
               <PublicRoute restricted redirectTo="/">
                 <SingUpPage />
@@ -35,25 +35,16 @@ export const App: React.FC = () => {
           />
           <Route
             index
-            path="/"
             element={
               <PublicRoute>
                 <HomePage />
               </PublicRoute>
             }
           />
+          <Route path="products" element={<ProductsPage />} />
+          <Route path="products/:productId" element={<ProductCardPage />} />
           <Route
-            path="/products"
-            element={
-              <PublicRoute>
-                <ProductsPage />
-              </PublicRoute>
-            }
-          >
-            <Route path="/products/:productId" element={<ProductCardPage />} />
-          </Route>
-          <Route
-            path="/my-profile"
+            path="my-profile"
             element={
               <PrivateRoute redirectTo="/sign-in">
                 <MyProfilePage />
@@ -61,7 +52,7 @@ export const App: React.FC = () => {
             }
           />
           <Route
-            path="/my-auctions"
+            path="my-auctions"
             element={
               <PrivateRoute redirectTo="/sign-in">
                 <MyAuctionsPage />
@@ -69,7 +60,7 @@ export const App: React.FC = () => {
             }
           />
           <Route
-            path="/my-purchases"
+            path="my-purchases"
             element={
               <PrivateRoute redirectTo="/sign-in">
                 <MyPurchasesPage />
