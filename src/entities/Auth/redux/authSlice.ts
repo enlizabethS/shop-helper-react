@@ -16,7 +16,7 @@ const authSlice = createSlice({
   reducers: {
     loginSuccess: (state, action) => {
       state.status = action.payload.status;
-      state.isLoggedIn = true;
+      if (action.payload.data.status === 200) state.isLoggedIn = true;
     },
     logoutSuccess: state => {
       state.status = initialState.status;

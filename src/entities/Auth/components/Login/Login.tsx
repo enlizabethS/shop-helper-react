@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch, useAppNavigate, Spinner } from "shared";
 import { useSignInMutation, loginSuccess } from "entities/Auth";
 import {
@@ -9,40 +9,53 @@ import {
 } from "entities/User";
 
 import {
+  Container,
   Title,
   TextLog,
-  LoginContainer,
+  TextErr,
+  Form,
   Label,
   Input,
-  SubmitButLog,
+  ErrorMessage,
+  ErrorReplacement,
+  SubmitButton,
 } from "./Login.styled";
 
-const initialLoginState = {
-  username: "",
-  password: "",
-};
+interface ILogState {
+  username: string;
+  password: string;
+}
 
 export const Login: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { dirtyFields, errors },
+    reset,
+  } = useForm<ILogState>({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
   const dispatch = useAppDispatch();
   const [navigate] = useAppNavigate();
   const [login, { isLoading, isError }] = useSignInMutation();
   const [getCurrentUser] = useLazyFetchCurrentUserQuery();
   const [getAddress] = useLazyFetchAddressByIdQuery();
-  const [formState, setFormState] = useState(initialLoginState);
 
-  const handleFormChange = ({
-    target: { name, value },
-  }: {
-    target: { name: string; value: string };
-  }) => setFormState(prev => ({ ...prev, [name]: value }));
+  const handleSubmitButtonDisabled =
+    dirtyFields.username === undefined || dirtyFields.password === undefined;
 
-  const handleSubmit = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
+  const handleSignInSubmit: SubmitHandler<ILogState> = async data => {
+    const formData = new FormData();
+    formData.append("username", data.username);
+    formData.append("password", data.password);
 
     try {
-      const loginRequest = await login(formState).unwrap();
+      const loginResponse = await login(formData);
       navigate("/");
-      dispatch(loginSuccess(loginRequest));
+      dispatch(loginSuccess(loginResponse));
 
       const user = await getCurrentUser(null).unwrap();
       dispatch(saveCurrentUser(user));
@@ -51,49 +64,75 @@ export const Login: React.FC = () => {
         const address = await getAddress(user.addressId).unwrap();
         dispatch(saveAddress(address));
       }
+
+      reset();
     } catch (error) {
       console.log("ERROR loginFormSubmit");
     }
   };
 
-  const handleSubmitButtonDisabled =
-    formState.username.length === 0 || formState.password.length === 0;
-
   return (
-    <form onSubmit={handleSubmit}>
+    <Container>
       <Title>LogIn</Title>
       <TextLog>Please, enter your username and password</TextLog>
-      <LoginContainer>
-        {isError && <div>`Username or password is not correct`</div>}
+
+      <Form onSubmit={handleSubmit(handleSignInSubmit)}>
+        {isError && <TextErr>`Username or password is not correct`</TextErr>}
 
         <Label>
           <Input
-            type="text"
-            name="username"
-            value={formState.username}
+            {...register("username", {
+              required: "You did not enter a username",
+              minLength: {
+                value: 3,
+                message: "Minimum 3 characters",
+              },
+            })}
             placeholder="Username"
-            onChange={handleFormChange}
+            aria-invalid={!!errors.username}
           />
+
+          {errors.username ? (
+            <ErrorMessage role="alert">
+              {errors.username.message || "Error!"}
+            </ErrorMessage>
+          ) : (
+            <ErrorReplacement />
+          )}
         </Label>
 
         <Label>
           <Input
             type="password"
-            name="password"
-            value={formState.password}
+            {...register("password", {
+              required: "You did not enter a password",
+              minLength: {
+                value: 6,
+                message: "Minimum 6 characters",
+              },
+            })}
             placeholder="Password"
-            onChange={handleFormChange}
+            aria-invalid={!!errors.password}
           />
+
+          {errors.password ? (
+            <ErrorMessage role="alert">
+              {errors.password.message || "Error!"}
+            </ErrorMessage>
+          ) : (
+            <ErrorReplacement />
+          )}
         </Label>
 
-        <SubmitButLog type="submit" disabled={handleSubmitButtonDisabled}>
+        <SubmitButton type="submit" disabled={handleSubmitButtonDisabled}>
           {isLoading ? <Spinner /> : "Login"}
-        </SubmitButLog>
-      </LoginContainer>
+        </SubmitButton>
+      </Form>
+
       <TextLog>
         If you haven't signed up yet, please don't miss out on this great
         bargain and join us.
       </TextLog>
-    </form>
+    </Container>
   );
 };

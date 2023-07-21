@@ -1,4 +1,5 @@
-import { useFetchBidsByAuctionQuery, IAuction } from "entities/User";
+import { useFetchBidsByAuctionQuery } from "entities/Auction";
+import { IAuction } from "entities/Auction";
 import { Spinner, showDate, showTime } from "shared";
 
 import { Card } from "./MyAuctionsCard.styled";
@@ -8,10 +9,10 @@ interface IMyAuctionsCard {
 }
 
 export const MyAuctionsCard: React.FC<IMyAuctionsCard> = ({ auction }) => {
-  const { data: bidsList, isLoading } = useFetchBidsByAuctionQuery(auction.id, {
+  // @ts-ignore
+    const { data: bidsList, isLoading } = useFetchBidsByAuctionQuery(auction.id, {
     skip: auction.id === undefined,
   });
-  console.log("bidsList:", bidsList);
 
   return (
     <Card>

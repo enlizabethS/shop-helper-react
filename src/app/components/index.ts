@@ -1,5 +1,6 @@
 export * from "./App";
 export * from "./Layout";
 export * from "./Routes";
-export * from "./Header";
+export * from "./HeaderEl";
+export * from "./ButtonsBox";
 export * from "./Footer";

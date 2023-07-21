@@ -3,6 +3,8 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import authReducer from "entities/Auth/redux/authSlice";
 import userReducer from "entities/User/redux/userSlice";
 import homeReducer from "entities/Home/redux/homeSlice";
+import productsReducer from "entities/Product/redux/productsSlice";
+import auctionsReducer from "entities/Auction/redux/auctionsSlice";
 import { api } from "./api";
 import {
   FLUSH,
@@ -19,6 +21,8 @@ export const store = configureStore({
     auth: authReducer,
     users: userReducer,
     home: homeReducer,
+    products: productsReducer,
+    auctions: auctionsReducer,
   },
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware({

@@ -41,7 +41,7 @@ export const Content = styled.div`
   transform: translate(-50%, -50%);
   background-color: #fff;
   border-radius: 16px;
-  box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.3);
+  box-shadow: 0 8px 16px rgba(17, 17, 17, 0.3);
 
   animation: ${openingModal} 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
 

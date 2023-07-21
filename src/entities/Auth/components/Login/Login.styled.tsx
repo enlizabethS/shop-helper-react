@@ -1,30 +1,37 @@
 import styled from "@emotion/styled";
 
+export const Container = styled.div`
+  padding-top: 40px;
+`;
+
 export const Title = styled.h2`
   font-size: 45px;
-  padding: 80px 0 0 0;
+  padding-bottom: 20px;
   text-align: center;
 `;
 
 export const TextLog = styled.p`
   font-size: 20px;
-  padding: 15px 0;
+  padding-bottom: 15px;
   text-align: center;
 `;
 
-export const LoginContainer = styled.div`
+export const TextErr = styled.div`
+  font-size: 20px;
+  padding-bottom: 15px;
+  text-align: left;
+`;
+
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-
-  overflow: hidden;
-  padding: 15px;
-  margin: 10px;
 `;
 
 export const Label = styled.label`
-  padding: 7px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
 `;
 
 export const Input = styled.input`
@@ -38,12 +45,25 @@ export const Input = styled.input`
   border: none;
   border-radius: 7px;
   outline-color: #4f145e;
+
+  :invalid {
+    outline-color: red;
+  }
 `;
 
-export const SubmitButLog = styled.button`
+export const ErrorMessage = styled.span`
+  font-size: 16px;
+  color: red;
+`;
+
+export const ErrorReplacement = styled.div`
+  height: 16px;
+`;
+
+export const SubmitButton = styled.button`
   width: 200px;
   height: 30px;
-  margin: 5px;
+  margin-bottom: 16px;
 
   background-color: rgba(226, 198, 198, 0.5);
   color: #4f145e;
@@ -51,10 +71,17 @@ export const SubmitButLog = styled.button`
   border-color: #4f145e;
   border-radius: 7px;
 
-  padding: 5px;
-
   :hover {
-    background-color: #4f145e;
     color: white;
+    background-color: #4f145e;
+  }
+
+  :disabled {
+    color: #be98c8;
+
+    background-color: rgba(205, 199, 199, 0.5);
+    border-color: #be98c8;
+
+    cursor: not-allowed;
   }
 `;

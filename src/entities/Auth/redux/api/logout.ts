@@ -8,7 +8,6 @@ const signOutApi = api.injectEndpoints({
         method: "POST",
       }),
       invalidatesTags: ["Auth"],
-      // transformResponse: response => response,
     }),
   }),
 });

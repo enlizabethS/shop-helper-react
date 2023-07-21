@@ -1,7 +1,5 @@
-import {
-  useFetchAuctionsCurrentUserQuery,
-  MyAuctionsCard,
-} from "entities/User";
+import { MyAuctionsCard } from "entities/User";
+import { useFetchAuctionsCurrentUserQuery } from "entities/Auction";
 import { useAppSelector, Spinner } from "shared";
 
 import { AuctionsList } from "./MyAuctions.styled";

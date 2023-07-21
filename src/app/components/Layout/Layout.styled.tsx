@@ -7,18 +7,21 @@ export const Header = styled.header`
 `;
 
 export const Container = styled.section`
-  position: relative;
   width: 1440px;
+  height: 100%;
 
-  padding: 0 30px;
+  padding-right: 30px;
+  padding-left: 30px;
   margin-right: auto;
   margin-left: auto;
 `;
 
-export const Body = styled.main`
+export const Main = styled.main`
   width: 100%;
 `;
 
 export const Footer = styled.footer`
   width: 100%;
+
+  background-color: #9a6089;
 `;

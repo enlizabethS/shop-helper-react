@@ -1,10 +1,5 @@
 import { api } from "app/redux";
 
-interface ILoginRequest {
-  username: string;
-  password: string;
-}
-
 interface ILoginResponse {
   message: string;
   status: number;
@@ -12,15 +7,11 @@ interface ILoginResponse {
 
 const signInApi = api.injectEndpoints({
   endpoints: builder => ({
-    signIn: builder.mutation<ILoginResponse, ILoginRequest>({
-      query: user => ({
+    signIn: builder.mutation<ILoginResponse, FormData>({
+      query: signInForm => ({
         url: "/api/auth/sign-in",
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          username: `${user.username}`,
-          password: `${user.password}`,
-        }),
+        body: signInForm,
       }),
       invalidatesTags: ["Auth"],
     }),

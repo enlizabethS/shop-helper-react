@@ -3,21 +3,22 @@ import HomePage from "pages/HomePage";
 import SingInPage from "pages/SignInPage";
 import SingUpPage from "pages/SignUpPage";
 import MyProfilePage from "pages/MyProfilePage";
-import MyProductsPage from "pages/MyProductsPage";
 import MyPurchasesPage from "pages/MyPurchasesPage";
 import MyAuctionsPage from "pages/MyAuctionsPage";
+import ProductsPage from "pages/ProductsPage";
+import ProductCardPage from "pages/ProductCardPage";
+import NotFoundPage from "pages/NotFoundPage";
 import { Layout, PrivateRoute, PublicRoute } from "app";
 
 import { Container } from "./App.styled";
-import ProductPage from "pages/ProductPage";
 
 export const App: React.FC = () => {
   return (
     <Container>
       <Routes>
-        <Route element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route
-            path="/sign-in"
+            path="sign-in"
             element={
               <PublicRoute restricted redirectTo="/">
                 <SingInPage />
@@ -25,7 +26,7 @@ export const App: React.FC = () => {
             }
           />
           <Route
-            path="/sign-up"
+            path="sign-up"
             element={
               <PublicRoute restricted redirectTo="/">
                 <SingUpPage />
@@ -34,24 +35,16 @@ export const App: React.FC = () => {
           />
           <Route
             index
-            path="/"
             element={
               <PublicRoute>
                 <HomePage />
               </PublicRoute>
             }
           />
+          <Route path="products" element={<ProductsPage />} />
+          <Route path="products/:productId" element={<ProductCardPage />} />
           <Route
-            index
-            path="/product"
-            element={
-              <PublicRoute>
-                <ProductPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/my-profile"
+            path="my-profile"
             element={
               <PrivateRoute redirectTo="/sign-in">
                 <MyProfilePage />
@@ -59,15 +52,7 @@ export const App: React.FC = () => {
             }
           />
           <Route
-            path="/my-products"
-            element={
-              <PrivateRoute redirectTo="/sign-in">
-                <MyProductsPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/my-auctions"
+            path="my-auctions"
             element={
               <PrivateRoute redirectTo="/sign-in">
                 <MyAuctionsPage />
@@ -75,13 +60,14 @@ export const App: React.FC = () => {
             }
           />
           <Route
-            path="/my-purchases"
+            path="my-purchases"
             element={
               <PrivateRoute redirectTo="/sign-in">
                 <MyPurchasesPage />
               </PrivateRoute>
             }
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </Container>
