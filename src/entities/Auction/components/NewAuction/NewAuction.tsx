@@ -88,12 +88,14 @@ export const NewAuction: React.FC<INewAuction> = ({
     setShowProductsMenu(!showProductsMenu);
   };
 
+  const handleAuctionModalClose = () => {
+    dispatch(resetCurrentProduct());
+    setShowAuctionModal(!showAuctionModal);
+  };
+
   return (
     <Form onSubmit={handleSubmit(handleFormSubmit)}>
-      <CloseButton
-        type="button"
-        onClick={() => setShowAuctionModal(!showAuctionModal)}
-      >
+      <CloseButton type="button" onClick={handleAuctionModalClose}>
         X
       </CloseButton>
 
